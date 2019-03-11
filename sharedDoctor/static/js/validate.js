@@ -14,8 +14,9 @@ Vue.use(VeeValidate, {
       messages: {
         email: () => '请输入正确的邮箱',
         phone: () => '请输入正确的手机号',
-        required: ( field )=> "请输入" + field
-
+        required: ( field )=> "请输入" + field,
+        max: (field, [length]) => ` ${field}不能大于${length}字符.`,
+        min: (field, [length]) => ` ${field}不能少于${length}字符.`,
       },
       attributes:{
         email:'邮箱',
