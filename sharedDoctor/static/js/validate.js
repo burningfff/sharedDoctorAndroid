@@ -12,8 +12,8 @@ Vue.use(VeeValidate, {
   dictionary: {
     zh_CN: {
       messages: {
-        email: () => '请输入正确的邮箱格式',
-        phone: () => '请输入正确的手机号格式',
+        email: () => '请输入正确的邮箱',
+        phone: () => '请输入正确的手机号',
         required: ( field )=> "请输入" + field
 
       },
