@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/testdemo'
 
 
 const login = resolve => require(['../components/Login/login.vue'], resolve)
 const testdemo = resolve => require(['../components/testdemo.vue'], resolve)
+const HelloWorld = resolve => require(['../components/HelloWorld.vue'], resolve)
 
 Vue.use(Router)
 
@@ -18,6 +18,11 @@ const routes = [
     path: '/testdemo',
     component: testdemo,
     name: 'testdemo'
+  },
+  {
+    path: '/HelloWorld',
+    component: HelloWorld,
+    name: 'HelloWorld'
   },
 
   // {
