@@ -16,7 +16,7 @@
   export default {
     data(){
       return {
-        selected: 'main',
+        selected:0,
       }
     },
     computed: {
@@ -28,13 +28,13 @@
       'selected': {
         handler(){
           if (this.selected == 0) {
-            this.$router.push('/HelloWorld');
+            this.$router.push('/main');
           }
           if (this.selected == 1) {
             this.$router.push('/testdemo');
           }
           if (this.selected == 2) {
-            this.$router.push('/')
+            this.$router.push('/my')
           }
         }
       }

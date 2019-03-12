@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!--<header-bar class="header-bar"></header-bar>-->
     <div class="content-div">
       <router-view/>
     </div>
@@ -9,10 +10,13 @@
 
 <script>
   import Footer from './components/FooterBar.vue'
+  // import Header from './components/Header.vue'
   export default {
     name: 'App',
     components: {
-      'footer-bar': Footer
+      'footer-bar': Footer,
+      // 'header-bar': Header
+
     },
     computed: {}
   }

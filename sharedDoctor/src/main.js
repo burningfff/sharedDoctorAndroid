@@ -7,8 +7,13 @@ import Vant from 'vant';
 import 'vant/lib/index.css';
 import '../static/js/validate.js';
 import $ from '../build/jquery-vendor';
+import store from './store/index.js'//引入
+import echarts from 'echarts'
+// import { Lazyload } from 'vant';
 
-
+// options 为可选参数，无则不传
+// Vue.use(Lazyload, options);
+Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 Vue.use(Vant);
 
@@ -16,6 +21,7 @@ Vue.use(Vant);
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
