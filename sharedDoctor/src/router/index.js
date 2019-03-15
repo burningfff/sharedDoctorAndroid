@@ -7,6 +7,8 @@ const testdemo = resolve => require(['../pages/testdemo.vue'], resolve)
 const HelloWorld = resolve => require(['../pages/HelloWorld.vue'], resolve)
 const main = resolve => require(['../pages/main.vue'], resolve)
 const my = resolve => require(['../pages/my.vue'], resolve)
+const findDoctor = resolve => require(['../pages/main/findDoctor.vue'], resolve)
+const findDoctorByDepart = resolve => require(['../pages/main/findDoctorByDepart.vue'], resolve)
 
 Vue.use(Router)
 
@@ -32,9 +34,24 @@ const routes = [
     name: 'main'
   },
   {
+    path: '/',
+    component: main,
+    name: 'home'
+  },
+  {
     path: '/my',
     component: my,
     name: 'my'
+  },
+  {
+    path: '/findDoctor',
+    component: findDoctor,
+    name: 'findDoctor'
+  },
+  {
+    path: '/findDoctorByDepart',
+    component: findDoctorByDepart,
+    name: 'findDoctorByDepart'
   },
 
   // {

@@ -8,7 +8,7 @@
             <img
               style="width: 80%"
               src="../assets/consult.png"/>
-            <span>医生咨询</span>
+            <span>问医生</span>
           </div>
         </van-col>
         <van-col  offset="1" span="5" style="">
@@ -40,7 +40,7 @@
       <div style="margin-top: 20px;height: 200px">
         <van-swipe :autoplay="3000" @change="onChange">
           <van-swipe-item v-for="image in images" :key="image">
-            <img :src="image">
+            <img :src="image" @click="swiperImgClick">
           </van-swipe-item>
         </van-swipe>
       </div>
@@ -50,6 +50,7 @@
 </template>
 <script>
   import Header from '../components/Header.vue'
+  import { ImagePreview } from 'vant';
 
   export default {
     components: {
@@ -61,7 +62,6 @@
           'http://img4.imgtn.bdimg.com/it/u=394763596,12413412&fm=26&gp=0.jpg',
           'http://img1.imgtn.bdimg.com/it/u=3424320861,24527564&fm=214&gp=0.jpg',
           'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg',
-          'http://i1.hdslb.com/bfs/archive/c3bbfc93516c974a08b01bab6ed5c81305af4ff6.jpg',
         ],
         value: '',
       };
@@ -76,6 +76,9 @@
       },
       onChange(index) {
         this.$toast('当前 Swipe 索引：' + index);
+      },
+      swiperImgClick(){
+        ImagePreview(this.images)
       },
     }
   };

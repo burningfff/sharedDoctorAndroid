@@ -16,12 +16,12 @@
   export default {
     data(){
       return {
-        selected:0,
+        selected:this.$store.state.selectedTab,
       }
     },
     computed: {
       isShow: function () {
-        return true;
+        return this.$store.state.footerVisible;
       }
     },
     watch: {

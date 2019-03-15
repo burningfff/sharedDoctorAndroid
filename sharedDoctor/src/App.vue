@@ -4,7 +4,7 @@
     <div class="content-div">
       <router-view/>
     </div>
-    <footer-bar class="footer"></footer-bar>
+    <footer-bar></footer-bar>
   </div>
 </template>
 
@@ -18,7 +18,18 @@
       // 'header-bar': Header
 
     },
-    computed: {}
+    computed: {},
+    watch: {
+      '$route': function(to, from) {
+        let footerExcludes = ['main', 'consult', 'my', 'home']
+        if (footerExcludes.indexOf(to.name) < 0) {
+          this.$store.commit('SELECT_FOOTER_TAB')
+        } else {
+          console.log(footerExcludes.indexOf(to.name))
+          this.$store.commit('SELECT_FOOTER_TAB', footerExcludes.indexOf(to.name))
+        }
+      }
+    }
   }
 </script>
 

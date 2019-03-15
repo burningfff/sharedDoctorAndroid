@@ -16,10 +16,13 @@ const store = new Vuex.Store({
     //   state.chartType = param
     // },
     [types.SELECT_FOOTER_TAB] (state, tabName) {
-      if (tabName) {
+      console.log("tabName"+tabName)
+      if (tabName>=0) {
         state.selectedTab = tabName
+        console.log("footerVisible true")
         state.footerVisible = true
       } else {
+        console.log("footerVisible false")
         state.footerVisible = false
       }
     }

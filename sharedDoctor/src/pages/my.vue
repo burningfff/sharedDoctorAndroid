@@ -7,8 +7,7 @@
       @click-right="onClickRight"
     >
     </van-nav-bar>
-    <div class="content" style="margin-top: 1000px;height: 200px">
-
+    <div class="content" style="margin-top: 46px;height: 200px">
       <van-field
         v-model="value"
         placeholder="搜索"
@@ -16,12 +15,6 @@
         left-icon="search"
         @click="onClickSearchBtn"
       />
-
-      <van-swipe :autoplay="3000" @change="onChange">
-        <van-swipe-item v-for="image in images" :key="image">
-          <img :src="image">
-        </van-swipe-item>
-      </van-swipe>
     </div>
   </div>
 </template>
@@ -29,6 +22,8 @@
   export default {
     components: {
 
+    },
+    created(){
     },
     data() {
       return {
