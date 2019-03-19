@@ -49,7 +49,38 @@
         </van-row>
       </van-collapse>
       <div class="doctor">
-
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+        >
+          <van-card
+            v-for="doctor in doctorTable"
+            :key="doctor.doctorId"
+            :desc="doctor.introduction"
+            :title="doctor.doctorName+doctor.doctorId"
+            thumb="https://img.yzcdn.cn/upload_files/2017/07/02/af5b9f44deaeb68000d7e4a711160c53.jpg"
+            style="text-align: left "
+          >
+            <div slot="footer">
+              <van-button size="mini">按钮</van-button>
+              <van-button size="mini">按钮</van-button>
+            </div>
+            <div slot="tags">
+              <van-button size="mini">按钮</van-button>
+              <van-button size="mini">按钮</van-button>
+            </div>
+          </van-card>
+          <!--<van-row>-->
+          <!--<van-col span="24"-->
+          <!--v-for="doctor in doctorTable"-->
+          <!--key="doctor.doctorId"-->
+          <!--title="doctor.doctorName">-->
+          <!---->
+          <!--</van-col>-->
+          <!--</van-row>-->
+        </van-list>
       </div>
     </div>
   </div>
@@ -61,21 +92,25 @@
 
   export default {
     created() {
-      // let _footer = this.$store.state.footerVisible;
-      // if (!_footer) {
-      //   this.$store.commit('TOGGLE_FOOTER');
-      // }
-      // this.$store.commit('SELECT_TAB', 0)
+      this.initpage()
     },
     data() {
       return {
-        activeName: '1',
+        activeName: '',
         userName: '',
         password: '',
-        departName:'',
+        departId: LOCWIN.Cache.get('departId'),
+        departName: LOCWIN.Cache.get('departName'),
+        doctorTable: [],
+        doctorList: [],
+        loading: false,
+        finished: false,
       };
     },
     methods: {
+      initpage() {
+        this.getDoctorTable()
+      },
       login() {
         this.$toast.success("登录成功！")
         this.$router.push('/testdemo')
@@ -113,12 +148,41 @@
         //   }
         // })
       },
+      getDoctorTable() {
+        var params = {
+          departId: this.departId
+        }
+        allService.findAllDoctorByDepartId(params, (isOk, data) => {
+          if (isOk) {
+            this.doctorTable = data.data
+            console.log(this.doctorTable)
+
+          }
+        })
+      },
       onClickLeft() {
         this.$toast('返回');
         this.$router.push('/findDoctor')
       },
       onClickSearchBtn() {
         this.$router.push('/search');
+      },
+      onLoad() {
+        var k = 1;
+        // 异步更新数据
+        setTimeout(() => {
+          for (let i = 1 * k; i <= 10 * k; i++) {
+            this.doctorList.push(this.doctorTable[i - 1]);
+          }
+          k++
+          // 加载状态结束
+          this.loading = false;
+
+          // 数据全部加载完成
+          if (this.doctorList.length >= this.doctorTable.length) {
+            this.finished = true;
+          }
+        }, 500);
       },
     },
   };

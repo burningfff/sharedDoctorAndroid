@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 
 const login = resolve => require(['../pages/my/login.vue'], resolve)
+const register = resolve => require(['../pages/my/register.vue'], resolve)
 const testdemo = resolve => require(['../pages/testdemo.vue'], resolve)
 const HelloWorld = resolve => require(['../pages/HelloWorld.vue'], resolve)
 const main = resolve => require(['../pages/main.vue'], resolve)
@@ -17,6 +18,11 @@ const routes = [
     path: '/login',
     component: login,
     name: 'login'
+  },
+  {
+    path: '/register',
+    component: register,
+    name: 'register'
   },
   {
     path: '/testdemo',

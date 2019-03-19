@@ -1,11 +1,13 @@
 <template>
   <div>
     <van-nav-bar
-      title="登录"
+      title="用户登录"
       left-text="返回"
       left-arrow
+      right-text="注册"
       fixed
-      @click-left="onClickLeft"
+      @click-left="goBack"
+      @click-right="register"
     />
     <div>
       <van-cell-group style="margin-top: 46px">
@@ -45,11 +47,7 @@
 
   export default {
     created(){
-      // let _footer = this.$store.state.footerVisible;
-      // if (!_footer) {
-      //   this.$store.commit('TOGGLE_FOOTER');
-      // }
-      // this.$store.commit('SELECT_TAB', 2)
+
     },
     data() {
       return {
@@ -75,10 +73,6 @@
         //       // LOCWIN.Cache.set("userName", params.userName);
         //       // LOCWIN.Cache.set("userInfo", data.data);
         //       // LOCWIN.Cache.set("userPass", params.password);
-        //       if (data.data === 'root') {
-        //         this.$toast.success("登录成功！")
-        //         // this.$router.push('/SU/index');
-        //       }
         //       if ("patientId" in data.data) {
         //         this.$toast.success("登录成功！")
         //         this.$router.push('/testdemo')
@@ -95,9 +89,12 @@
         //   }
         // })
       },
-      onClickLeft() {
-        this.$toast('返回');
-        this.$router.push('/main')
+      goBack() {
+        // this.$toast('返回');
+        this.$router.go(-1);
+      },
+      register(){
+        this.$router.push('/register');
       },
     },
   };

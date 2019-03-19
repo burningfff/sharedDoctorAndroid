@@ -31,7 +31,7 @@
         </van-row>
         <van-row style="margin-top: 5px;margin-bottom: 5px;height: 60px;">
           <van-col style="width: 32%;background-color: #f0f2f5">
-            <div style="text-align: center"  @click="login">
+            <div style="text-align: center"  @click="findDoctorByDepart(30)">
               <van-row>
                 <img
                   style="width: 50%"
@@ -43,7 +43,7 @@
             </div>
           </van-col>
           <van-col style="margin-left:2%;margin-right: 2%;width: 32%;background-color: #f0f2f5">
-            <div style="text-align: center">
+            <div style="text-align: center" @click="findDoctorByDepart(2)">
               <van-row>
                 <img
                   style="width: 50%"
@@ -55,14 +55,14 @@
             </div>
           </van-col>
           <van-col style="width: 32%;background-color: #f0f2f5">
-            <div style="text-align: center">
+            <div style="text-align: center" @click="findDoctorByDepart(19)">
               <van-row>
                 <img
                   style="width: 50%"
                   src="../../assets/ENT.png"/>
               </van-row>
               <van-row>
-                <span>眼耳鼻喉科</span>
+                <span>耳鼻喉科</span>
               </van-row>
             </div>
           </van-col>
@@ -71,7 +71,7 @@
         </van-row>
         <van-row style="margin-top: 5px;margin-bottom: 5px;height: 60px;">
           <van-col style="width: 32%;background-color: #f0f2f5">
-            <div style="text-align: center">
+            <div style="text-align: center" @click="findDoctorByDepart(8)">
               <van-row>
                 <img
                   style="width: 50%"
@@ -83,7 +83,7 @@
             </div>
           </van-col>
           <van-col style="margin-left:2%;margin-right: 2%;width: 32%;background-color: #f0f2f5">
-            <div style="text-align: center">
+            <div style="text-align: center" @click="findDoctorByDepart(11)">
               <van-row>
                 <img
                   style="width: 50%"
@@ -96,14 +96,14 @@
           </van-col>
 
           <van-col style="width: 32%;background-color: #f0f2f5">
-            <div style="text-align: center">
+            <div style="text-align: center" @click="findDoctorByDepart(20)">
               <van-row>
                 <img
                   style="width: 50%"
                   src="../../assets/tooth.png"/>
               </van-row>
               <van-row>
-                <span>牙科</span>
+                <span>口腔科</span>
               </van-row>
             </div>
           </van-col>
@@ -119,55 +119,33 @@
 
   export default {
     created() {
-      // let _footer = this.$store.state.footerVisible;
-      // if (!_footer) {
-      //   this.$store.commit('TOGGLE_FOOTER');
-      // }
-      // this.$store.commit('SELECT_TAB', 0)
+
     },
     data() {
       return {
         userName: '',
         password: '',
+        departId: '',
+        departName: ''
       };
     },
     methods: {
-      login() {
-        this.$toast.success("登录成功！")
-        this.$router.push('/testdemo')
-        // var params = {
-        //   userName: this.userName,
-        //   password: this.password
-        // }
-        // allService.signIn(params, (isOk, data) => {
-        //   if (isOk) {
-        //     if (data.status == "false") {
-        //       console.log(data.data);
-        //       this.$toast.fail(data.data);
-        //     } else {
-        //       console.log(data.data);
-        //       // LOCWIN.Cache.set("userName", params.userName);
-        //       // LOCWIN.Cache.set("userInfo", data.data);
-        //       // LOCWIN.Cache.set("userPass", params.password);
-        //       if (data.data === 'root') {
-        //         this.$toast.success("登录成功！")
-        //         // this.$router.push('/SU/index');
-        //       }
-        //       if ("patientId" in data.data) {
-        //         this.$toast.success("登录成功！")
-        //         this.$router.push('/testdemo')
-        //         // this.$router.push('/student/index');
-        //       }
-        //       if ("doctorId" in data.data) {
-        //         this.$toast.success("登录成功！")
-        //         // this.$router.push('/teacher/index');
-        //       }
-        //       this.$toast.success("登录成功！");
-        //     }
-        //   } else {
-        //     this.$toast.fail("登录失败！")
-        //   }
-        // })
+      findDoctorByDepart(departId) {
+        // this.$toast.success("登录成功！")
+        LOCWIN.Cache.set('departId',departId);
+        this.findDepartByDepartId(departId);
+        LOCWIN.Cache.set('departName',this.departName);
+        this.$router.push('/findDoctorByDepart')
+      },
+      findDepartByDepartId(departId){
+        var params={
+          departId: departId
+        }
+        allService.findDepartByDepartId(params, (isOk, data) => {
+          if (isOk) {
+            this.departName = data.data.departName
+          }
+        })
       },
       onClickLeft() {
         this.$toast('返回');

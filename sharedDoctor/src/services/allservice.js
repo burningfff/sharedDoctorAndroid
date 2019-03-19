@@ -30,7 +30,7 @@ export default class AllService {
       // getPatientDetailById: '/patient/findPatientById',
       // getDoctorDetailById: '/doctor/findDoctorById',
       // blurSearchDoctor: '/doctor/findDoctorVague',
-      searchDoctorByDepart: '/doctor/findDoctorByDepart',
+      findAllDoctorByDepartId: '/doctor/findAllDoctorByDepartId',
       // checkUserName: '/user/checkUserName',
       getAllPatient: '/patient/findAllPatient',
       // deletePatientByDepart: '/patient/deleteByDepart',
@@ -51,6 +51,8 @@ export default class AllService {
       // updateOrderDetail: '/order/update',
       //
       // addDepart: '/depart/addDepart'
+
+      findDepartByDepartId:'/depart/findDepartByDepartId',
 
       updateLocationByLocationId:'/location/updateLocationByLocationId',
 
@@ -315,8 +317,8 @@ export default class AllService {
 //     }, "application/json");
 //   }
 
-  searchDoctorByDepart(params,callback){
-    var url = this.host + this.method.searchDoctorByDepart;
+  findAllDoctorByDepartId(params,callback){
+    var url = this.host + this.method.findAllDoctorByDepartId;
     var type = 'post';
     return this.bizRequest(url, params, type, function(isOk, data) {
       if (callback) {
@@ -460,6 +462,16 @@ export default class AllService {
     }, "application/json");
   }
 
+  getAllDoctor(params,callback){
+    var url = this.host + this.method.getAllDoctor;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function(isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
   deleteAllDoctor(params,callback){
     var url = this.host + this.method.deleteAllDoctor;
     var type = 'post';
@@ -544,6 +556,17 @@ export default class AllService {
 //       }
 //     }, "application/json");
 //   }
+
+  // 查找科室
+  findDepartByDepartId(params,callback){
+    var url = this.host + this.method.findDepartByDepartId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function(isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
 
   //更新地址
   updateLocationByLocationId(params,callback){
