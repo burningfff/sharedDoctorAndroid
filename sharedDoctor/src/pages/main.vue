@@ -4,7 +4,7 @@
     <div class="content" style="margin-left: 2%;width: 96%">
       <van-row>
         <van-col  span="5" style="margin-left:2%">
-          <div @click="go('/login')" style="text-align: center">
+          <div @click="go('/findDoctor')" style="text-align: center">
             <img
               style="width: 80%"
               src="../assets/consult.png"/>

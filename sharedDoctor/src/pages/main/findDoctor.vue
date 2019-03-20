@@ -31,7 +31,7 @@
         </van-row>
         <van-row style="margin-top: 5px;margin-bottom: 5px;height: 60px;">
           <van-col style="width: 32%;background-color: #f0f2f5">
-            <div style="text-align: center"  @click="findDoctorByDepart(30)">
+            <div style="text-align: center"  @click="findDoctorByDepart(30,'骨科')">
               <van-row>
                 <img
                   style="width: 50%"
@@ -43,7 +43,7 @@
             </div>
           </van-col>
           <van-col style="margin-left:2%;margin-right: 2%;width: 32%;background-color: #f0f2f5">
-            <div style="text-align: center" @click="findDoctorByDepart(2)">
+            <div style="text-align: center" @click="findDoctorByDepart(2,'消化内科')">
               <van-row>
                 <img
                   style="width: 50%"
@@ -55,7 +55,7 @@
             </div>
           </van-col>
           <van-col style="width: 32%;background-color: #f0f2f5">
-            <div style="text-align: center" @click="findDoctorByDepart(19)">
+            <div style="text-align: center" @click="findDoctorByDepart(19,'耳鼻喉科')">
               <van-row>
                 <img
                   style="width: 50%"
@@ -71,7 +71,7 @@
         </van-row>
         <van-row style="margin-top: 5px;margin-bottom: 5px;height: 60px;">
           <van-col style="width: 32%;background-color: #f0f2f5">
-            <div style="text-align: center" @click="findDoctorByDepart(8)">
+            <div style="text-align: center" @click="findDoctorByDepart(8,'心血管内科')">
               <van-row>
                 <img
                   style="width: 50%"
@@ -83,7 +83,7 @@
             </div>
           </van-col>
           <van-col style="margin-left:2%;margin-right: 2%;width: 32%;background-color: #f0f2f5">
-            <div style="text-align: center" @click="findDoctorByDepart(11)">
+            <div style="text-align: center" @click="findDoctorByDepart(11,'儿科')">
               <van-row>
                 <img
                   style="width: 50%"
@@ -96,7 +96,7 @@
           </van-col>
 
           <van-col style="width: 32%;background-color: #f0f2f5">
-            <div style="text-align: center" @click="findDoctorByDepart(20)">
+            <div style="text-align: center" @click="findDoctorByDepart(20,'口腔科')">
               <van-row>
                 <img
                   style="width: 50%"
@@ -130,23 +130,22 @@
       };
     },
     methods: {
-      findDoctorByDepart(departId) {
+      findDoctorByDepart(departId,departName) {
         // this.$toast.success("登录成功！")
         LOCWIN.Cache.set('departId',departId);
-        this.findDepartByDepartId(departId);
-        LOCWIN.Cache.set('departName',this.departName);
+        LOCWIN.Cache.set('departName',departName);
         this.$router.push('/findDoctorByDepart')
       },
-      findDepartByDepartId(departId){
-        var params={
-          departId: departId
-        }
-        allService.findDepartByDepartId(params, (isOk, data) => {
-          if (isOk) {
-            this.departName = data.data.departName
-          }
-        })
-      },
+      // findDepartByDepartId(departId){
+      //   var params={
+      //     departId: departId
+      //   }
+      //   allService.findDepartByDepartId(params, (isOk, data) => {
+      //     if (isOk) {
+      //       this.departName = data.data.departName
+      //     }
+      //   })
+      // },
       onClickLeft() {
         this.$toast('返回');
         this.$router.push('/main')
