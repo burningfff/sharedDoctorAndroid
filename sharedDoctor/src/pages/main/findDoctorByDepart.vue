@@ -21,40 +21,84 @@
         @click="onClickSearchBtn"
       />
     </div>
-    <div style="width: 100%" @click="show = !show">
+
+    <div style="width: 100%">
       <van-row style="height: 10px;background-color: #f0f2f5"></van-row>
     </div>
 
-    <div class="menu">
-      <div class="main" v-clickoutside="handleClose">
-        <van-collapse v-model="activeName" accordion>
-          <van-row style="align-content: center">
-            <van-col span="6" >
-              <van-collapse-item title="有赞商城" name="1" />
-              <!--<button @click="show = !show">点击</button>-->
-            </van-col>
-            <van-col span="6" @click="show = !show">
-              <van-collapse-item title="有赞零售" name="2" />
-              <!--<button @click="show = !show">显示</button>-->
-            </van-col>
-            <van-col span="6" @click="show = !show">
-              <van-collapse-item title="有赞零售" name="3" />
-              <!--<button @click="show = !show">下拉菜单</button>-->
-            </van-col>
-            <van-col span="6" @click="show = !show">
-              <van-collapse-item title="有赞零售" name="4" />
+    <div class="menu" v-clickoutside="handleClose">
+      <van-collapse v-model="activeName" accordion>
+        <van-row style="align-content: center; ">
+          <van-col span="6">
+            <van-collapse-item :title="sort" name="1">
+              <div slot="title">{{sort|ellipsis}}</div>
+            </van-collapse-item>
+          </van-col>
+          <van-col span="6">
+            <van-collapse-item :title="city" name="2">
+              <div slot="title">{{city|ellipsis}}</div>
+            </van-collapse-item>
+          </van-col>
+          <van-col span="6">
+            <van-collapse-item title="有赞零售" name="3"/>
+          </van-col>
+          <van-col span="6">
+            <van-collapse-item title="有赞零售" name="4"/>
+          </van-col>
+        </van-row>
 
-              <!--<button @click="show = !show">点击菜单</button>-->
-            </van-col>
-          </van-row>
+      </van-collapse>
+      <div class="sortDoctor">
+        <transition name="my-trans">
+          <div class="dropdownSort" v-show="showSort">
 
-        </van-collapse>
-        <transition name="van-slide-down">
-          <div class="dropdown" v-show="show">
-            <p>下拉框的内容,点击外面区域可以关闭</p>
+            <van-cell-group>
+              <van-button size="large" @click="clickSort(1)">综合排序</van-button>
+              <van-button size="large" @click="clickSort(2)">星级评分</van-button>
+              <!--<van-button size="large">响应时间</van-button>-->
+              <van-button size="large" @click="clickSort(3)">价格从高到低</van-button>
+              <van-button size="large" @click="clickSort(4)">价格从低到高</van-button>
+            </van-cell-group>
+
+          </div>
+          </van-panel>
+        </transition>
+      </div>
+      <div class="chooseCity">
+        <transition name="my-trans">
+          <div class="dropdownCity" v-show="showCity">
+
+            <v-distpicker type="mobile" @selected="onSelected" hide-area></v-distpicker>
+
           </div>
         </transition>
       </div>
+      <div class="chooseIllness">
+        <transition name="my-trans">
+          <div class="dropdownIllness" v-show="showIllness">
+            <van-cell-group>
+              <van-button size="large" @click="clickIllness(1)">综合排序</van-button>
+              <van-button size="large" @click="clickIllness(2)">星级评分</van-button>
+              <!--<van-button size="large">响应时间</van-button>-->
+              <van-button size="large" @click="clickIllness(3)">价格从高到低</van-button>
+              <van-button size="large" @click="clickIllness(4)">价格从低到高</van-button>
+            </van-cell-group>
+          </div>
+        </transition>
+      </div>
+      <!--<div class="sortDoctor">-->
+      <!--<transition name="my-trans">-->
+      <!--<div class="dropdown" v-show="showSort">-->
+      <!--<van-cell-group>-->
+      <!--<van-button size="large" @click="clickSort(1)">综合排序</van-button>-->
+      <!--<van-button size="large" @click="clickSort(2)">星级评分</van-button>-->
+      <!--&lt;!&ndash;<van-button size="large">响应时间</van-button>&ndash;&gt;-->
+      <!--<van-button size="large" @click="clickSort(3)">价格从高到低</van-button>-->
+      <!--<van-button size="large" @click="clickSort(4)">价格从低到高</van-button>-->
+      <!--</van-cell-group>-->
+      <!--</div>-->
+      <!--</transition>-->
+      <!--</div>-->
     </div>
     <div class="doctor" style="margin-top: 10px">
       <van-list
@@ -88,6 +132,7 @@
 <script>
   import AllService from '../../services/allservice.js'
   import AreaList from '../../common/AreaList.js'
+  import clickoutside from '../../utils/clickoutside.js'
 
   var allService = new AllService()
 
@@ -98,6 +143,9 @@
     data() {
       return {
         activeName: '',
+        sort: '综合排序',
+        city: '全国',
+        illness: '',
         userName: '',
         password: '',
         departId: LOCWIN.Cache.get('departId'),
@@ -108,18 +156,33 @@
         doctorList: [],
         loading: false,
         finished: false,
-        show: false,
+        showSort: false,
+        showCity: false,
         searchKey: '',
         areaList: AreaList,
       };
     },
-    watch:{
+    filters: {
+      ellipsis(value) {
+        if (!value) return ''
+        if (value.length > 4) {
+          return value.slice(0, 4) + '...'
+        }
+        return value
+      },
+    },
+    watch: {
       activeName(val) {
-        console.log("this.activeName"+this.activeName)
-        if (this.activeName==1||this.activeName==3){
-          this.show=true;
-        }else {
-          this.show=false;
+        console.log("this.activeName" + this.activeName)
+        if (this.activeName == 1 || this.activeName == 3) {
+          this.showCity = false;
+          this.showSort = true;
+        } else if (this.activeName == 2) {
+          // this.handleClose()
+          this.showSort = false;
+          this.showCity = true;
+        } else {
+          this.handleClose();
         }
 
       }
@@ -127,6 +190,30 @@
     methods: {
       initpage() {
         this.getDoctorTable()
+      },
+      clickSort(val) {
+        if (val == 1) {
+          this.sort = "综合排序"
+        } else if (val == 2) {
+          this.sort = "星级评分"
+        } else if (val == 3) {
+          this.sort = "价格从高到低"
+        } else if (val == 4) {
+          this.sort = "价格从低到高"
+        }
+        this.handleClose()
+      },
+      clickIllness(val) {
+        if (val == 1) {
+          this.sort = "综合排序"
+        } else if (val == 2) {
+          this.sort = "星级评分"
+        } else if (val == 3) {
+          this.sort = "价格从高..."
+        } else if (val == 4) {
+          this.sort = "价格从低..."
+        }
+        this.handleClose()
       },
       login() {
         this.$toast.success("登录成功！")
@@ -166,8 +253,10 @@
         // })
       },
       handleClose() {
-        this.show = false;
-        this.activeName=''
+        this.showSort = false;
+        this.showCity = false;
+
+        this.activeName = ''
       },
       getDoctorTable() {
         var params = {
@@ -188,6 +277,13 @@
       onClickSearchBtn() {
         this.$router.push('/search');
       },
+      onSelected(data) {
+        this.$toast(data.province.value + ' | ' + data.city.value);
+        this.city = data.city.value;
+        console.log(data)
+        this.showCity = false;
+        this.activeName = ''
+      },
       onLoad() {
         var k = 1;
         // 异步更新数据
@@ -207,25 +303,34 @@
       },
     },
     directives: {
-      clickoutside: {
-        bind: function (el, binding, vnode) {
-          function documentHandler(e) {
-            if (el.contains(e.target)) {
-              return false;
-            }
-            if (binding.expression) {
-              binding.value(e)
-            }
-          }
-
-          el._vueClickOutside_ = documentHandler;
-          document.addEventListener('click', documentHandler);
-        },
-        unbind: function (el, binding) {
-          document.removeEventListener('click', el._vueClickOutside_);
-          delete el._vueClickOutside_;
-        }
-      }
+      clickoutside,
+      // : {
+      //   // 初始化指令
+      //   bind(el, binding, vnode) {
+      //     function documentHandler(e) {
+      //       // 这里判断点击的元素是否是本身，是本身，则返回
+      //       if (el.contains(e.target)) {
+      //         return false;
+      //       }
+      //       // 判断指令中是否绑定了函数
+      //       if (binding.expression) {
+      //         // 如果绑定了函数 则调用那个函数，此处binding.value就是handleClose方法
+      //         binding.value(e);
+      //       }
+      //     }
+      //
+      //     // 给当前元素绑定个私有变量，方便在unbind中可以解除事件监听
+      //     el.__vueClickOutside__ = documentHandler;
+      //     document.addEventListener('click', documentHandler);
+      //   },
+      //   update() {
+      //   },
+      //   unbind(el, binding) {
+      //     // 解除事件监听
+      //     document.removeEventListener('click', el.__vueClickOutside__);
+      //     delete el.__vueClickOutside__;
+      //   },
+      // }
     },
   };
 </script>
@@ -259,6 +364,21 @@
 
   .menu {
     border: 1px solid #ccc;
+  }
+</style>
+
+<style>
+  .my-trans-enter-active, .my-trans-leave-active {
+    transition: all .2s ease-out;
+  }
+
+  .my-trans-enter {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+
+  .my-trans-leave-active {
+    transform: translateY(100px);
   }
 </style>
 

@@ -11,6 +11,8 @@ import $ from '../build/jquery-vendor';
 import store from './store/index.js'//引入
 import echarts from 'echarts'
 // import { Lazyload } from 'vant';
+import VDistpicker from 'v-distpicker'
+
 
 require("./common/locwin");
 
@@ -19,7 +21,7 @@ require("./common/locwin");
 Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 Vue.use(Vant);
-
+Vue.component('v-distpicker', VDistpicker)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
