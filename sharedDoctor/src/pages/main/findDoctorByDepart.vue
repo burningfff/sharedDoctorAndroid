@@ -40,10 +40,12 @@
             </van-collapse-item>
           </van-col>
           <van-col span="6">
-            <van-collapse-item title="有赞零售" name="3"/>
+            <van-collapse-item :title="illness" name="3">
+              <div slot="title">{{illness|ellipsis}}</div>
+            </van-collapse-item>
           </van-col>
           <van-col span="6">
-            <van-collapse-item title="有赞零售" name="4"/>
+            <van-collapse-item title="筛选" name="4"/>
           </van-col>
         </van-row>
 
@@ -51,7 +53,6 @@
       <div class="sortDoctor">
         <transition name="my-trans">
           <div class="dropdownSort" v-show="showSort">
-
             <van-cell-group>
               <van-button size="large" @click="clickSort(1)">综合排序</van-button>
               <van-button size="large" @click="clickSort(2)">星级评分</van-button>
@@ -67,22 +68,77 @@
       <div class="chooseCity">
         <transition name="my-trans">
           <div class="dropdownCity" v-show="showCity">
-
             <v-distpicker type="mobile" @selected="onSelected" hide-area></v-distpicker>
-
           </div>
         </transition>
       </div>
       <div class="chooseIllness">
         <transition name="my-trans">
-          <div class="dropdownIllness" v-show="showIllness">
-            <van-cell-group>
-              <van-button size="large" @click="clickIllness(1)">综合排序</van-button>
-              <van-button size="large" @click="clickIllness(2)">星级评分</van-button>
-              <!--<van-button size="large">响应时间</van-button>-->
-              <van-button size="large" @click="clickIllness(3)">价格从高到低</van-button>
-              <van-button size="large" @click="clickIllness(4)">价格从低到高</van-button>
-            </van-cell-group>
+          <div class="dropdownIllness" v-show="showIllness"
+          style="margin: 5px 5px;text-align:left">
+            <van-row>
+              <van-col>
+                <van-button
+                  v-for="(doctor,index) in doctorTable"
+                  :key="doctor.doctorId"
+                  v-if="index==index_illness"
+                  style="align-items: flex-start;margin: 3px 3px;
+                  background-color: #35a95d;color: white;border-radius: 6px;"
+                  size="small"
+                  @click="output(index)"
+                  >
+                  {{doctor.doctorName}}
+                </van-button>
+                <van-button
+                  v-else
+                  style="align-items: flex-start;margin: 2px 3px;
+                  background-color: #e4e5e8;color: #7d7e80;border-radius: 6px;"
+                  size="small"
+                  @click="output(index)"
+                >
+                  {{doctor.doctorName}}
+                </van-button>
+              </van-col>
+              <!--<van-radio-group v-model="radio">-->
+              <!--<van-radio-->
+              <!--v-for="(doctor,index) in doctorTable"-->
+              <!--:key="doctor.doctorId"-->
+              <!--style="text-align: left;align-content: center;margin-right: 10px;margin-top: 5px;margin-bottom: 5px"-->
+              <!--@click="output(index)"-->
+              <!--:name="index">{{doctor.doctorName}}-->
+              <!--</van-radio>-->
+
+              <!--</van-radio-group>-->
+            </van-row>
+
+            <!--<van-col span="6">-->
+            <!--<van-radio-->
+            <!--v-for="(doctor,index) in doctorTable"-->
+            <!--:key="doctor.doctorId"-->
+            <!--style="text-align: left;align-content: center;margin-right: 10px;margin-top: 5px;margin-bottom: 5px"-->
+            <!--@click="output(index)"-->
+            <!--:name="index">{{doctor.doctorName}}-->
+            <!--</van-radio>-->
+            <!--</van-col>-->
+            <!--<van-col span="6">-->
+            <!--<van-radio-->
+            <!--v-for="(doctor,index) in doctorTable"-->
+            <!--:key="doctor.doctorId"-->
+            <!--style="text-align: left;align-content: center;margin-right: 10px;margin-top: 5px;margin-bottom: 5px"-->
+            <!--@click="output(index)"-->
+            <!--:name="index">{{doctor.doctorName}}-->
+            <!--</van-radio>-->
+            <!--</van-col>-->
+            <!--<van-col span="6">-->
+            <!--<van-radio-->
+            <!--v-for="(doctor,index) in doctorTable"-->
+            <!--:key="doctor.doctorId"-->
+            <!--style="text-align: left;align-content: center;margin-right: 10px;margin-top: 5px;margin-bottom: 5px"-->
+            <!--@click="output(index)"-->
+            <!--:name="index">{{doctor.doctorName}}-->
+            <!--</van-radio>-->
+            <!--</van-col>-->
+
           </div>
         </transition>
       </div>
@@ -142,22 +198,53 @@
     },
     data() {
       return {
+        index_illness: '0',
         activeName: '',
         sort: '综合排序',
         city: '全国',
-        illness: '',
+        illness: '常见疾病',
+        // illness: '',
         userName: '',
         password: '',
         departId: LOCWIN.Cache.get('departId'),
         departName: LOCWIN.Cache.get('departName'),
         doctorTable: [{
           doctorId: '123456',
-        }],
+          doctorName: '我服了',
+        }, {
+          doctorId: '1234567',
+          doctorName: '我服了7',
+        },{
+          doctorId: '1234569',
+          doctorName: '我服了45',
+        }, {
+          doctorId: '12345',
+          doctorName: '我服了712',
+        },{
+          doctorId: '123',
+          doctorName: '我服了32',
+        }, {
+          doctorId: '1234',
+          doctorName: '我服了7545',
+        },{
+          doctorId: '12',
+          doctorName: '我服了56',
+        }, {
+          doctorId: '1',
+          doctorName: '我服了7gsd',
+        },{
+          doctorId: '1234568',
+          doctorName: '我服了',
+        }, {
+          doctorId: '12345678',
+          doctorName: '我服了7',
+        },],
         doctorList: [],
         loading: false,
         finished: false,
         showSort: false,
         showCity: false,
+        showIllness: false,
         searchKey: '',
         areaList: AreaList,
       };
@@ -174,13 +261,20 @@
     watch: {
       activeName(val) {
         console.log("this.activeName" + this.activeName)
-        if (this.activeName == 1 || this.activeName == 3) {
+        if (this.activeName == 1) {
           this.showCity = false;
+          this.showIllness = false;
           this.showSort = true;
         } else if (this.activeName == 2) {
           // this.handleClose()
           this.showSort = false;
+          this.showIllness = false;
           this.showCity = true;
+        } else if (this.activeName == 3) {
+          // this.handleClose()
+          this.showSort = false;
+          this.showCity = false;
+          this.showIllness = true;
         } else {
           this.handleClose();
         }
@@ -214,6 +308,11 @@
           this.sort = "价格从低..."
         }
         this.handleClose()
+      },
+      output(val) {
+        this.index_illness=val
+        this.illness=this.doctorTable[val].doctorName
+        console.log("index:" + val)
       },
       login() {
         this.$toast.success("登录成功！")
@@ -255,7 +354,7 @@
       handleClose() {
         this.showSort = false;
         this.showCity = false;
-
+        this.showIllness = false;
         this.activeName = ''
       },
       getDoctorTable() {
