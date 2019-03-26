@@ -148,7 +148,7 @@
       // },
       onClickLeft() {
         this.$toast('返回');
-        this.$router.push('/main')
+        this.$router.go(-1);
       },
       onClickSearchBtn() {
         this.$router.push('/search');

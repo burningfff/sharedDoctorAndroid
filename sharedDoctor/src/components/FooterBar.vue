@@ -31,7 +31,7 @@
             this.$router.push('/main');
           }
           if (this.selected == 1) {
-            this.$router.push('/testdemo');
+            this.$router.push('/consult');
           }
           if (this.selected == 2) {
             this.$router.push('/my')
