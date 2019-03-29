@@ -5,6 +5,7 @@ import VueI18n from 'vue-i18n';
 Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'zh_CN',
+  // silentTranslationWarn: true
 })
 Vue.use(VeeValidate, {
   i18n,
@@ -14,6 +15,7 @@ Vue.use(VeeValidate, {
       messages: {
         email: () => '请输入正确的邮箱',
         phone: () => '请输入正确的手机号',
+        confirmed: ()=>'两次输入不一致',
         required: ( field )=> "请输入" + field,
         max: (field, [length]) => ` ${field}不能大于${length}字符.`,
         min: (field, [length]) => ` ${field}不能少于${length}字符.`,
@@ -22,7 +24,8 @@ Vue.use(VeeValidate, {
         email:'邮箱',
         password:'密码',
         name: '账号',
-        phone: '手机号'
+        phone: '手机号',
+        checkPassword:'确认密码'
       }
     }
   }
@@ -35,3 +38,6 @@ Validator.extend('phone', {
     return value.length === 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)
   }
 })
+
+
+

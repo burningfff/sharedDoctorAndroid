@@ -9,6 +9,15 @@
   "installed_plugins": {
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.graduationproject.shareddoctor"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.graduationproject.shareddoctor"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.graduationproject.shareddoctor"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.graduationproject.shareddoctor"
     }
   },
   "dependent_plugins": {}

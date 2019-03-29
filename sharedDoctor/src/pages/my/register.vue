@@ -44,15 +44,6 @@
           :error="errors.has('checkPassword')"
           :error-message="errors.first('checkPassword')"
         />
-        <!--<div style="height: 44px;align-content: center">-->
-        <!--<van-row>-->
-        <!--<van-col span="8"></van-col>-->
-        <!--<van-col span="8">-->
-        <!---->
-        <!--</van-col>-->
-        <!--</van-row>-->
-        <!--</div>-->
-
         <van-radio-group v-model="identity">
           <van-row style="width: 100%;
                    display: -webkit-box;

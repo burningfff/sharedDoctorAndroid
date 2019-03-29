@@ -9,6 +9,7 @@ const HelloWorld = resolve => require(['../pages/HelloWorld.vue'], resolve)
 const main = resolve => require(['../pages/main.vue'], resolve)
 const my = resolve => require(['../pages/my.vue'], resolve)
 const consult = resolve => require(['../pages/consult.vue'], resolve)
+const graphicConsult = resolve => require(['../pages/consult/graphicConsult.vue'], resolve)
 const findDoctor = resolve => require(['../pages/main/findDoctor.vue'], resolve)
 const findDoctorByDepart = resolve => require(['../pages/main/findDoctorByDepart.vue'], resolve)
 
@@ -54,6 +55,11 @@ const routes = [
     path: '/consult',
     component: consult,
     name: 'consult'
+  },
+  {
+    path: '/graphicConsult',
+    component: graphicConsult,
+    name: 'graphicConsult'
   },
   {
     path: '/findDoctor',

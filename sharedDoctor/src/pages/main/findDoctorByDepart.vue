@@ -371,7 +371,7 @@
       },
       onClickLeft() {
         this.$toast('返回');
-        this.$router.push('/findDoctor')
+        this.$router.go(-1)
       },
       onClickSearchBtn() {
         this.$router.push('/search');

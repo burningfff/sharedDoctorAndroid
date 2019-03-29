@@ -9,7 +9,7 @@
     </div>
     <div class="content" style="margin-top: 20px">
       <div style="border:1px solid rgba(205,205,205,0.46);box-shadow: 1px 1px  1px  #a6a6a6;border-radius: 3px"
-           @click="go('/reserveDoctor')">
+           @click="go('/graphicConsult')">
         <van-row style="height: 40px; padding: 15px 0px">
           <van-col span="4" style="height: 40px;">
             <van-icon style="width: 100%;height: 100%;font-size: 40px;color: #4B946A" name="service-o"/>
@@ -77,15 +77,7 @@
     },
     data() {
       return {
-        show4: false,
-        show5: false,
-        images: [
-          'http://img4.imgtn.bdimg.com/it/u=394763596,12413412&fm=26&gp=0.jpg',
-          'http://img1.imgtn.bdimg.com/it/u=3424320861,24527564&fm=214&gp=0.jpg',
-          'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg',
-          'http://i1.hdslb.com/bfs/archive/c3bbfc93516c974a08b01bab6ed5c81305af4ff6.jpg',
-        ],
-        value: '',
+
       };
     },
     methods: {

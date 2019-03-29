@@ -74,5 +74,9 @@
     {
         "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_icon.png.flat",
         "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\mipmap-mdpi\\icon.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_camera_provider_paths.xml.flat",
+        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\xml\\camera_provider_paths.xml"
     }
 ]
