@@ -18,7 +18,7 @@
             <van-row style="font-size: 16px;font-weight: bolder">
               图文咨询
             </van-row>
-            <van-row style="font-size: 10px;margin-top: 5px;">
+            <van-row style="font-size: 12px;margin-top: 5px;">
               快速匹配医生
             </van-row>
           </van-col>
@@ -38,7 +38,7 @@
             <van-row style="font-size: 16px;font-weight: bolder">
               医生上门
             </van-row>
-            <van-row style="font-size: 10px;margin-top: 5px;">
+            <van-row style="font-size: 12px;margin-top: 5px;">
               预约医生上门诊治
             </van-row>
           </van-col>
@@ -48,7 +48,7 @@
         </van-row>
       </div>
       <div
-        style="border:1px solid rgba(205,205,205,0.46);box-shadow: 1px 1px  1px  #a6a6a6;border-radius: 3px;margin-top: 10px;"
+        style="border:1px solid rgba(205,205,205,0.46);box-shadow: 1px 1px  1px  #a6a6a6;border-radius: 3px;margin-top: 12px;"
         @click="go('/findDoctor')">
         <van-row style="height: 40px; padding: 15px 0px">
           <van-col span="4" style="height: 40px;">
@@ -58,7 +58,7 @@
             <van-row style="font-size: 16px;font-weight: bolder">
               找医生
             </van-row>
-            <van-row style="font-size: 10px;margin-top: 5px;">
+            <van-row style="font-size: 12px;margin-top: 5px;">
               按科室挑选合适的医生
             </van-row>
           </van-col>

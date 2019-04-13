@@ -35,7 +35,7 @@
         this.$toast('点击图标');
       },
       onClickSearchBtn() {
-        this.$router.push('/search');
+        this.$router.push('/findDoctorByKeyWord');
       },
     },
     computed: {

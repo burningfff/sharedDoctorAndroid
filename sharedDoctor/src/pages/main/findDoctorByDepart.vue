@@ -17,13 +17,13 @@
         center
         border
         left-icon="search"
-        style="border:1px solid #e8e8e8;border-radius: 6px;background-color:#f0f2f5;margin-top: 10px;margin-bottom: 10px"
+        style="border:1px solid #e8e8e8;border-radius: 6px;background-color:#f9f3f0;margin-top: 10px;margin-bottom: 10px"
         @click="onClickSearchBtn"
       />
     </div>
 
     <div style="width: 100%">
-      <van-row style="height: 10px;background-color: #f0f2f5"></van-row>
+      <van-row style="height: 10px;background-color: #f9f3f0"></van-row>
     </div>
 
     <div class="menu" v-clickoutside="handleClose">
@@ -56,11 +56,9 @@
             <van-cell-group>
               <van-button size="large" @click="clickSort(1)">综合排序</van-button>
               <van-button size="large" @click="clickSort(2)">星级评分</van-button>
-              <!--<van-button size="large">响应时间</van-button>-->
               <van-button size="large" @click="clickSort(3)">价格从高到低</van-button>
               <van-button size="large" @click="clickSort(4)">价格从低到高</van-button>
             </van-cell-group>
-
           </div>
           </van-panel>
         </transition>
@@ -75,7 +73,7 @@
       <div class="chooseIllness">
         <transition name="my-trans">
           <div class="dropdownIllness" v-show="showIllness"
-          style="margin: 5px 5px;text-align:left">
+               style="margin: 5px 5px;text-align:left">
             <van-row>
               <van-col>
                 <van-button
@@ -85,8 +83,8 @@
                   style="align-items: flex-start;margin: 3px 3px;
                   background-color: #35a95d;color: white;border-radius: 6px;"
                   size="small"
-                  @click="output(index)"
-                  >
+                  @click="clickIllness(index)"
+                >
                   {{doctor.doctorName}}
                 </van-button>
                 <van-button
@@ -94,67 +92,15 @@
                   style="align-items: flex-start;margin: 2px 3px;
                   background-color: #e4e5e8;color: #7d7e80;border-radius: 6px;"
                   size="small"
-                  @click="output(index)"
+                  @click="clickIllness(index)"
                 >
                   {{doctor.doctorName}}
                 </van-button>
               </van-col>
-              <!--<van-radio-group v-model="radio">-->
-              <!--<van-radio-->
-              <!--v-for="(doctor,index) in doctorTable"-->
-              <!--:key="doctor.doctorId"-->
-              <!--style="text-align: left;align-content: center;margin-right: 10px;margin-top: 5px;margin-bottom: 5px"-->
-              <!--@click="output(index)"-->
-              <!--:name="index">{{doctor.doctorName}}-->
-              <!--</van-radio>-->
-
-              <!--</van-radio-group>-->
             </van-row>
-
-            <!--<van-col span="6">-->
-            <!--<van-radio-->
-            <!--v-for="(doctor,index) in doctorTable"-->
-            <!--:key="doctor.doctorId"-->
-            <!--style="text-align: left;align-content: center;margin-right: 10px;margin-top: 5px;margin-bottom: 5px"-->
-            <!--@click="output(index)"-->
-            <!--:name="index">{{doctor.doctorName}}-->
-            <!--</van-radio>-->
-            <!--</van-col>-->
-            <!--<van-col span="6">-->
-            <!--<van-radio-->
-            <!--v-for="(doctor,index) in doctorTable"-->
-            <!--:key="doctor.doctorId"-->
-            <!--style="text-align: left;align-content: center;margin-right: 10px;margin-top: 5px;margin-bottom: 5px"-->
-            <!--@click="output(index)"-->
-            <!--:name="index">{{doctor.doctorName}}-->
-            <!--</van-radio>-->
-            <!--</van-col>-->
-            <!--<van-col span="6">-->
-            <!--<van-radio-->
-            <!--v-for="(doctor,index) in doctorTable"-->
-            <!--:key="doctor.doctorId"-->
-            <!--style="text-align: left;align-content: center;margin-right: 10px;margin-top: 5px;margin-bottom: 5px"-->
-            <!--@click="output(index)"-->
-            <!--:name="index">{{doctor.doctorName}}-->
-            <!--</van-radio>-->
-            <!--</van-col>-->
-
           </div>
         </transition>
       </div>
-      <!--<div class="sortDoctor">-->
-      <!--<transition name="my-trans">-->
-      <!--<div class="dropdown" v-show="showSort">-->
-      <!--<van-cell-group>-->
-      <!--<van-button size="large" @click="clickSort(1)">综合排序</van-button>-->
-      <!--<van-button size="large" @click="clickSort(2)">星级评分</van-button>-->
-      <!--&lt;!&ndash;<van-button size="large">响应时间</van-button>&ndash;&gt;-->
-      <!--<van-button size="large" @click="clickSort(3)">价格从高到低</van-button>-->
-      <!--<van-button size="large" @click="clickSort(4)">价格从低到高</van-button>-->
-      <!--</van-cell-group>-->
-      <!--</div>-->
-      <!--</transition>-->
-      <!--</div>-->
     </div>
     <div class="doctor" style="margin-top: 10px">
       <van-list
@@ -172,13 +118,12 @@
           style="text-align: left "
         >
           <div slot="footer">
-            <van-button size="mini">按钮</van-button>
-            <van-button size="mini">按钮</van-button>
+            <van-button round size="small">问医生</van-button>
           </div>
-          <div slot="tags">
-            <van-button size="mini">按钮</van-button>
-            <van-button size="mini">按钮</van-button>
-          </div>
+          <!--<div slot="tags">-->
+            <!--<van-button size="mini">按钮</van-button>-->
+            <!--<van-button size="mini">按钮</van-button>-->
+          <!--</div>-->
         </van-card>
       </van-list>
     </div>
@@ -203,42 +148,11 @@
         sort: '综合排序',
         city: '全国',
         illness: '常见疾病',
-        // illness: '',
         userName: '',
         password: '',
         departId: LOCWIN.Cache.get('departId'),
         departName: LOCWIN.Cache.get('departName'),
-        doctorTable: [{
-          doctorId: '123456',
-          doctorName: '我服了',
-        }, {
-          doctorId: '1234567',
-          doctorName: '我服了7',
-        },{
-          doctorId: '1234569',
-          doctorName: '我服了45',
-        }, {
-          doctorId: '12345',
-          doctorName: '我服了712',
-        },{
-          doctorId: '123',
-          doctorName: '我服了32',
-        }, {
-          doctorId: '1234',
-          doctorName: '我服了7545',
-        },{
-          doctorId: '12',
-          doctorName: '我服了56',
-        }, {
-          doctorId: '1',
-          doctorName: '我服了7gsd',
-        },{
-          doctorId: '1234568',
-          doctorName: '我服了',
-        }, {
-          doctorId: '12345678',
-          doctorName: '我服了7',
-        },],
+        doctorTable: [],
         doctorList: [],
         loading: false,
         finished: false,
@@ -253,7 +167,7 @@
       ellipsis(value) {
         if (!value) return ''
         if (value.length > 4) {
-          return value.slice(0, 4) + '...'
+          return value.slice(0, 4) + '..'
         }
         return value
       },
@@ -298,58 +212,10 @@
         this.handleClose()
       },
       clickIllness(val) {
-        if (val == 1) {
-          this.sort = "综合排序"
-        } else if (val == 2) {
-          this.sort = "星级评分"
-        } else if (val == 3) {
-          this.sort = "价格从高..."
-        } else if (val == 4) {
-          this.sort = "价格从低..."
-        }
-        this.handleClose()
-      },
-      output(val) {
-        this.index_illness=val
-        this.illness=this.doctorTable[val].doctorName
+        this.index_illness = val
+        this.illness = this.doctorTable[val].doctorName
         console.log("index:" + val)
-      },
-      login() {
-        this.$toast.success("登录成功！")
-        this.$router.push('/testdemo')
-        // var params = {
-        //   userName: this.userName,
-        //   password: this.password
-        // }
-        // allService.signIn(params, (isOk, data) => {
-        //   if (isOk) {
-        //     if (data.status == "false") {
-        //       console.log(data.data);
-        //       this.$toast.fail(data.data);
-        //     } else {
-        //       console.log(data.data);
-        //       // LOCWIN.Cache.set("userName", params.userName);
-        //       // LOCWIN.Cache.set("userInfo", data.data);
-        //       // LOCWIN.Cache.set("userPass", params.password);
-        //       if (data.data === 'root') {
-        //         this.$toast.success("登录成功！")
-        //         // this.$router.push('/SU/index');
-        //       }
-        //       if ("patientId" in data.data) {
-        //         this.$toast.success("登录成功！")
-        //         this.$router.push('/testdemo')
-        //         // this.$router.push('/student/index');
-        //       }
-        //       if ("doctorId" in data.data) {
-        //         this.$toast.success("登录成功！")
-        //         // this.$router.push('/teacher/index');
-        //       }
-        //       this.$toast.success("登录成功！");
-        //     }
-        //   } else {
-        //     this.$toast.fail("登录失败！")
-        //   }
-        // })
+        this.handleClose()
       },
       handleClose() {
         this.showSort = false;
@@ -370,6 +236,8 @@
         })
       },
       onClickLeft() {
+        LOCWIN.Cache.remove('departId')
+        LOCWIN.Cache.remove('departName')
         this.$toast('返回');
         this.$router.go(-1)
       },
@@ -403,33 +271,6 @@
     },
     directives: {
       clickoutside,
-      // : {
-      //   // 初始化指令
-      //   bind(el, binding, vnode) {
-      //     function documentHandler(e) {
-      //       // 这里判断点击的元素是否是本身，是本身，则返回
-      //       if (el.contains(e.target)) {
-      //         return false;
-      //       }
-      //       // 判断指令中是否绑定了函数
-      //       if (binding.expression) {
-      //         // 如果绑定了函数 则调用那个函数，此处binding.value就是handleClose方法
-      //         binding.value(e);
-      //       }
-      //     }
-      //
-      //     // 给当前元素绑定个私有变量，方便在unbind中可以解除事件监听
-      //     el.__vueClickOutside__ = documentHandler;
-      //     document.addEventListener('click', documentHandler);
-      //   },
-      //   update() {
-      //   },
-      //   unbind(el, binding) {
-      //     // 解除事件监听
-      //     document.removeEventListener('click', el.__vueClickOutside__);
-      //     delete el.__vueClickOutside__;
-      //   },
-      // }
     },
   };
 </script>
@@ -461,9 +302,9 @@
     white-space: nowrap;
   }
 
-  .menu {
-    border: 1px solid #ccc;
-  }
+  /*.menu {*/
+  /*border: 1px solid #ccc;*/
+  /*}*/
 </style>
 
 <style>

@@ -4,6 +4,8 @@ import Router from 'vue-router'
 
 const login = resolve => require(['../pages/my/login.vue'], resolve)
 const register = resolve => require(['../pages/my/register.vue'], resolve)
+const patientInfo = resolve => require(['../pages/my/patientInfo.vue'], resolve)
+const patientSetting = resolve => require(['../pages/my/patientSetting.vue'], resolve)
 const testdemo = resolve => require(['../pages/testdemo.vue'], resolve)
 const HelloWorld = resolve => require(['../pages/HelloWorld.vue'], resolve)
 const main = resolve => require(['../pages/main.vue'], resolve)
@@ -12,6 +14,8 @@ const consult = resolve => require(['../pages/consult.vue'], resolve)
 const graphicConsult = resolve => require(['../pages/consult/graphicConsult.vue'], resolve)
 const findDoctor = resolve => require(['../pages/main/findDoctor.vue'], resolve)
 const findDoctorByDepart = resolve => require(['../pages/main/findDoctorByDepart.vue'], resolve)
+const findDoctorByKeyWord = resolve => require(['../pages/main/findDoctorByKeyWord.vue'], resolve)
+const reportExplanation = resolve => require(['../pages/main/reportExplanation.vue'], resolve)
 
 Vue.use(Router)
 
@@ -25,6 +29,16 @@ const routes = [
     path: '/register',
     component: register,
     name: 'register'
+  },
+  {
+    path: '/patientInfo',
+    component: patientInfo,
+    name: 'patientInfo'
+  },
+  {
+    path: '/patientSetting',
+    component: patientSetting,
+    name: 'patientSetting'
   },
   {
     path: '/testdemo',
@@ -70,6 +84,16 @@ const routes = [
     path: '/findDoctorByDepart',
     component: findDoctorByDepart,
     name: 'findDoctorByDepart'
+  },
+  {
+    path: '/findDoctorByKeyWord',
+    component: findDoctorByKeyWord,
+    name: 'findDoctorByKeyWord'
+  },
+  {
+    path: '/reportExplanation',
+    component: reportExplanation,
+    name: 'reportExplanation'
   },
 
   // {

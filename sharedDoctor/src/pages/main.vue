@@ -3,38 +3,59 @@
     <header-bar class="header-bar"></header-bar>
     <div class="content" style="margin-left: 2%;width: 96%">
       <van-row>
-        <van-col  span="5" style="margin-left:2%">
+        <van-col  span="8">
           <div @click="go('/findDoctor')" style="text-align: center">
-            <img
-              style="width: 80%"
-              src="../assets/consult.png"/>
-            <span>问医生</span>
+            <van-row>
+              <img
+                style="width: 50%"
+                src="../assets/consult.png"/>
+            </van-row>
+            <van-row style="margin-top: 2px;margin-bottom: 2px">
+              <span style="font-size: 18px;font-weight: bolder">问医生</span>
+            </van-row>
+            <van-row>
+              <span style="color: #414244;font-size: 13px">按科室找医生</span>
+            </van-row>
           </div>
         </van-col>
-        <van-col  offset="1" span="5" style="">
-          <div @click="go('/login')" style="text-align: center">
-            <img
-              style="width: 80%"
-              src="../assets/consult.png"/>
-            <span>医生咨询</span>
+        <van-col  span="8">
+          <div @click="go('/graphicConsult')" style="text-align: center">
+            <van-row>
+              <img
+                style="width: 50%"
+                src="../assets/consult.png"/>
+            </van-row>
+            <van-row style="margin-top: 2px;margin-bottom: 2px">
+              <span style="font-size: 18px;font-weight: bolder">图文咨询</span>
+            </van-row>
+            <van-row>
+              <span style="color: #414244;font-size: 13px">按图文咨询医生</span>
+            </van-row>
           </div>
         </van-col>
-        <van-col  offset="1" span="5" style="">
-          <div @click="go('/login')" style="text-align: center">
-            <img
-              style="width: 80%"
-              src="../assets/consult.png"/>
-            <span>医生咨询</span>
+        <van-col  span="8">
+          <div @click="go('/reportExplanation')" style="text-align: center">
+            <van-row>
+              <img
+                style="width: 50%"
+                src="../assets/consult.png"/>
+            </van-row>
+            <van-row style="margin-top: 2px;margin-bottom: 2px">
+              <span style="font-size: 18px;font-weight: bolder;">报告解读</span>
+            </van-row>
+            <van-row>
+              <span style="color: #414244;font-size: 13px">在线解读报告</span>
+            </van-row>
           </div>
         </van-col>
-        <van-col  offset="1" span="5" style="">
-          <div @click="go('/login')" style="text-align: center">
-            <img
-              style="width: 80%"
-              src="../assets/consult.png"/>
-            <span>医生咨询</span>
-          </div>
-        </van-col>
+        <!--<van-col  offset="1" span="5" style="">-->
+          <!--<div @click="go('/login')" style="text-align: center">-->
+            <!--<img-->
+              <!--style="width: 80%"-->
+              <!--src="../assets/consult.png"/>-->
+            <!--<span>医生咨询</span>-->
+          <!--</div>-->
+        <!--</van-col>-->
       </van-row>
 
       <div style="margin-top: 20px;height: 200px">

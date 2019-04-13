@@ -57,37 +57,37 @@
     },
     methods: {
       login() {
-        this.$toast.success("登录成功！")
-        this.$router.push('/testdemo')
-        // var params = {
-        //   userName: this.userName,
-        //   password: this.password
-        // }
-        // allService.signIn(params, (isOk, data) => {
-        //   if (isOk) {
-        //     if (data.status == "false") {
-        //       console.log(data.data);
-        //       this.$toast.fail(data.data);
-        //     } else {
-        //       console.log(data.data);
-        //       // LOCWIN.Cache.set("userName", params.userName);
-        //       // LOCWIN.Cache.set("userInfo", data.data);
-        //       // LOCWIN.Cache.set("userPass", params.password);
-        //       if ("patientId" in data.data) {
-        //         this.$toast.success("登录成功！")
-        //         this.$router.push('/testdemo')
-        //         // this.$router.push('/student/index');
-        //       }
-        //       if ("doctorId" in data.data) {
-        //         this.$toast.success("登录成功！")
-        //         // this.$router.push('/teacher/index');
-        //       }
-        //       this.$toast.success("登录成功！");
-        //     }
-        //   } else {
-        //     this.$toast.fail("登录失败！")
-        //   }
-        // })
+        // this.$toast.success("登录成功！")
+        // this.$router.push('/testdemo')
+        var params = {
+          userName: this.userName,
+          password: this.password
+        }
+        allService.signIn(params, (isOk, data) => {
+          if (isOk) {
+            if (data.status == "false") {
+              console.log(data.data);
+              this.$toast.fail(data.data);
+            } else {
+              console.log(data.data);
+              LOCWIN.Cache.set("userName", params.userName);
+              LOCWIN.Cache.set("userInfo", data.data);
+              LOCWIN.Cache.set("userPass", params.password);
+              if ("patientId" in data.data) {
+                this.$toast.success("登录成功！")
+                this.$router.push('/my')
+                // this.$router.push('/student/index');
+              }
+              if ("doctorId" in data.data) {
+                this.$toast.success("登录成功！")
+                // this.$router.push('/teacher/index');
+              }
+              this.$toast.success("登录成功！");
+            }
+          } else {
+            this.$toast.fail("登录失败！")
+          }
+        })
       },
       goBack() {
         // this.$toast('返回');

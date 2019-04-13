@@ -19,7 +19,7 @@
               导诊医生
             </van-row>
             <van-row
-              style="font-size: 14px;margin-top: 10px;background-color: #f8f8f8;color: #3f3f3f;border-radius: 3px">
+              style="font-size: 14px;margin-top: 10px;background-color: #f9f3f0;color: #3f3f3f;border-radius: 3px">
               请描述您的性别年龄、症状、就诊经历，我将推荐优秀的医生为您解答，并保证您的隐私安全
             </van-row>
           </van-col>
@@ -61,7 +61,7 @@
               <van-col span="8">
                 <div v-show="isAddImg">
                   <van-uploader class="img-add" :after-read="onRead" accept="image/*"
-                                style="background-color: #f8f8f8;border-radius: 3px"
+                                style="background-color: #f9f3f0;border-radius: 3px"
                                 type="file"
                                 capture="camera">
                     <img style="width: 24vw;height: 21vw" src="../../assets/addPicture.png"/>

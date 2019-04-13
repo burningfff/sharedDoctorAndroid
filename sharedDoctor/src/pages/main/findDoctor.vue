@@ -17,11 +17,11 @@
         center
         border
         left-icon="search"
-        style="border:1px solid #e8e8e8;border-radius: 6px;background-color:#f0f2f5;margin-top: 10px;margin-bottom: 10px"
+        style="border:1px solid #e8e8e8;border-radius: 6px;background-color:#f5efec;margin-top: 10px;margin-bottom: 10px"
         @click="onClickSearchBtn"
       />
       <div style="width: 100%">
-        <van-row style="height: 10px;background-color: #f0f2f5"></van-row>
+        <van-row style="height: 10px;background-color: #f5efec"></van-row>
       </div>
       <div class="depart">
         <van-row style="margin-top: 5px;margin-bottom: 5px">
@@ -30,8 +30,8 @@
           </van-col>
         </van-row>
         <van-row style="margin-top: 5px;margin-bottom: 5px;height: 60px;">
-          <van-col style="width: 32%;background-color: #f0f2f5">
-            <div style="text-align: center"  @click="findDoctorByDepart(30,'骨科')">
+          <van-col style="width: 32%;background-color: #f5efec">
+            <div style="text-align: center" @click="findDoctorByDepart(30,'骨科')">
               <van-row>
                 <img
                   style="width: 50%"
@@ -42,7 +42,7 @@
               </van-row>
             </div>
           </van-col>
-          <van-col style="margin-left:2%;margin-right: 2%;width: 32%;background-color: #f0f2f5">
+          <van-col style="margin-left:2%;margin-right: 2%;width: 32%;background-color: #f5efec">
             <div style="text-align: center" @click="findDoctorByDepart(2,'消化内科')">
               <van-row>
                 <img
@@ -54,7 +54,7 @@
               </van-row>
             </div>
           </van-col>
-          <van-col style="width: 32%;background-color: #f0f2f5">
+          <van-col style="width: 32%;background-color: #f5efec">
             <div style="text-align: center" @click="findDoctorByDepart(19,'耳鼻喉科')">
               <van-row>
                 <img
@@ -70,7 +70,7 @@
         <van-row style="height:2%;background-color: #FFFFFF">
         </van-row>
         <van-row style="margin-top: 5px;margin-bottom: 5px;height: 60px;">
-          <van-col style="width: 32%;background-color: #f0f2f5">
+          <van-col style="width: 32%;background-color: #f5efec">
             <div style="text-align: center" @click="findDoctorByDepart(8,'心血管内科')">
               <van-row>
                 <img
@@ -82,7 +82,7 @@
               </van-row>
             </div>
           </van-col>
-          <van-col style="margin-left:2%;margin-right: 2%;width: 32%;background-color: #f0f2f5">
+          <van-col style="margin-left:2%;margin-right: 2%;width: 32%;background-color: #f5efec">
             <div style="text-align: center" @click="findDoctorByDepart(11,'儿科')">
               <van-row>
                 <img
@@ -91,11 +91,11 @@
               </van-row>
               <van-row>
                 <span>儿科</span>
-            </van-row>
+              </van-row>
             </div>
           </van-col>
 
-          <van-col style="width: 32%;background-color: #f0f2f5">
+          <van-col style="width: 32%;background-color: #f5efec">
             <div style="text-align: center" @click="findDoctorByDepart(20,'口腔科')">
               <van-row>
                 <img
@@ -130,11 +130,14 @@
       };
     },
     methods: {
-      findDoctorByDepart(departId,departName) {
+      findDoctorByDepart(departId, departName) {
         // this.$toast.success("登录成功！")
-        LOCWIN.Cache.set('departId',departId);
-        LOCWIN.Cache.set('departName',departName);
+        LOCWIN.Cache.set('departId', departId);
+        LOCWIN.Cache.set('departName', departName);
         this.$router.push('/findDoctorByDepart')
+      },
+      go(index) {
+        this.$router.push(index);
       },
       // findDepartByDepartId(departId){
       //   var params={
@@ -151,7 +154,7 @@
         this.$router.go(-1);
       },
       onClickSearchBtn() {
-        this.$router.push('/search');
+        this.$router.push('/findDoctorByKeyWord');
       },
     },
   };
