@@ -20,7 +20,16 @@
           </span>
         </van-col>
         <van-col span="19">
-          <van-field style="padding: 10px 0px" v-model="patientName" placeholder="请填写你的姓名"/>
+          <van-field
+            name="name"
+            style="padding: 10px 0px"
+            v-model="patientName"
+            v-validate="'required|min:2|max:6'"
+            clearable
+            placeholder="请输入姓名"
+            :error="errors.has('name')"
+            :error-message="errors.first('name')"
+          />
         </van-col>
       </van-row>
 
@@ -144,11 +153,18 @@
         this.$router.go(-1)
       },
       saveInfo() {
+        var tempGender=''
+        if (this.gender=="1")
+        {
+          tempGender='男'
+        }else if(this.gender=="2"){
+          tempGender='女'
+        }
         var params = {
           patientId:LOCWIN.Cache.get('userInfo').patientId,
           patientName: this.patientName,
           age:this.age,
-          gender: this.gender,
+          gender: tempGender,
           weight: this.weight,
           illness: this.information,
         }

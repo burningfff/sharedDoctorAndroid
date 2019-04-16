@@ -11,15 +11,16 @@ INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\Android
 	android:name
 		ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:12:127-180
 manifest
-ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:2:1-18:12
-INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:2:1-18:12
-INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:2:1-18:12
-INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:2:1-18:12
+ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:2:1-19:12
 MERGED from [com.android.support:support-v4:24.1.1] C:\Users\user\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\3481b5d4c92d765db4d82ec5b2bb57ca\AndroidManifest.xml:17:1-27:12
+MERGED from [com.soundcloud.android:android-crop:1.0.0] C:\Users\user\.gradle\caches\transforms-1\files-1.1\android-crop-1.0.0.aar\2f30412300f225ccc3c31aa6cfad94b4\AndroidManifest.xml:2:1-10:12
 MERGED from [:CordovaLib] E:\Java\sharedDoctorAndroid\platforms\android\CordovaLib\build\intermediates\manifests\full\debug\AndroidManifest.xml:20:1-27:12
-INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:2:1-18:12
-INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:2:1-18:12
-INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:2:1-18:12
+INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:2:1-19:12
 	package
 		ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:2:102-146
 		INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml
@@ -55,7 +56,7 @@ ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidMan
 	android:name
 		ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:4:22-64
 application
-ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:5:5-15:19
+ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:5:5-16:19
 MERGED from [com.android.support:support-v4:24.1.1] C:\Users\user\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\3481b5d4c92d765db4d82ec5b2bb57ca\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:support-v4:24.1.1] C:\Users\user\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\3481b5d4c92d765db4d82ec5b2bb57ca\AndroidManifest.xml:25:5-20
 	android:supportsRtl
@@ -92,26 +93,32 @@ category#android.intent.category.LAUNCHER
 ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:9:17-77
 	android:name
 		ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:9:27-74
+activity#com.soundcloud.android.crop.CropImageActivity
+ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:15:9-82
+	android:name
+		ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:15:19-79
 uses-sdk
-ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:16:5-74
-INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:16:5-74
+ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:17:5-74
+INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:17:5-74
 MERGED from [com.android.support:support-v4:24.1.1] C:\Users\user\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\3481b5d4c92d765db4d82ec5b2bb57ca\AndroidManifest.xml:21:5-23:54
 MERGED from [com.android.support:support-v4:24.1.1] C:\Users\user\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\3481b5d4c92d765db4d82ec5b2bb57ca\AndroidManifest.xml:21:5-23:54
+MERGED from [com.soundcloud.android:android-crop:1.0.0] C:\Users\user\.gradle\caches\transforms-1\files-1.1\android-crop-1.0.0.aar\2f30412300f225ccc3c31aa6cfad94b4\AndroidManifest.xml:6:5-8:41
+MERGED from [com.soundcloud.android:android-crop:1.0.0] C:\Users\user\.gradle\caches\transforms-1\files-1.1\android-crop-1.0.0.aar\2f30412300f225ccc3c31aa6cfad94b4\AndroidManifest.xml:6:5-8:41
 MERGED from [:CordovaLib] E:\Java\sharedDoctorAndroid\platforms\android\CordovaLib\build\intermediates\manifests\full\debug\AndroidManifest.xml:25:5-44
 MERGED from [:CordovaLib] E:\Java\sharedDoctorAndroid\platforms\android\CordovaLib\build\intermediates\manifests\full\debug\AndroidManifest.xml:25:5-44
-INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:16:5-74
+INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:17:5-74
 	tools:overrideLibrary
 		ADDED from [com.android.support:support-v4:24.1.1] C:\Users\user\.gradle\caches\transforms-1\files-1.1\support-v4-24.1.1.aar\3481b5d4c92d765db4d82ec5b2bb57ca\AndroidManifest.xml:23:9-51
 	android:targetSdkVersion
-		ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:16:42-71
+		ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:17:42-71
 	android:minSdkVersion
-		ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:16:15-41
+		ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:17:15-41
 		INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml
 		INJECTED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:17:5-81
+ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:18:5-81
 	android:name
-		ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:17:22-78
+		ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:18:22-78
 meta-data#android.support.FILE_PROVIDER_PATHS
 ADDED from E:\Java\sharedDoctorAndroid\platforms\android\app\src\main\AndroidManifest.xml:13:13-123
 	android:resource

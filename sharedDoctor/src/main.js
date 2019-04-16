@@ -23,11 +23,15 @@ Vue.config.productionTip = false
 Vue.use(Vant);
 Vue.component('v-distpicker', VDistpicker)
 /* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  storage,
-  components: { App },
-  template: '<App/>'
-})
+
+// document.addEventListener('deviceready',function () {
+  new Vue({
+    el: '#app',
+    router,
+    store,
+    storage,
+    components: { App },
+    template: '<App/>'
+  })
+// },false);
+

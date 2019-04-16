@@ -8,19 +8,177 @@
 package com.graduationproject.shareddoctor;
 
 public final class R {
+  public static final class attr {
+    /**
+     * <p>May be a reference to another resource, in the form
+     * "<code>@[+][<i>package</i>:]<i>type</i>/<i>name</i></code>" or a theme
+     * attribute in the form
+     * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
+     */
+    public static final int cropImageStyle=0x7f010000;
+    /**
+     * <p>May be a reference to another resource, in the form
+     * "<code>@[+][<i>package</i>:]<i>type</i>/<i>name</i></code>" or a theme
+     * attribute in the form
+     * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
+     * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
+     * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
+     * "<code>#<i>aarrggbb</i></code>".
+     */
+    public static final int highlightColor=0x7f010001;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int showCircle=0x7f010002;
+    /**
+     * <p>Must be one of the following constant values.</p>
+     * <table>
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+     * <tr><td>always</td><td>1</td><td></td></tr>
+     * <tr><td>changing</td><td>0</td><td></td></tr>
+     * <tr><td>never</td><td>2</td><td></td></tr>
+     * </table>
+     */
+    public static final int showHandles=0x7f010003;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int showThirds=0x7f010004;
+  }
+  public static final class color {
+    public static final int crop__button_bar=0x7f020000;
+    public static final int crop__button_text=0x7f020001;
+    public static final int crop__selector_focused=0x7f020002;
+    public static final int crop__selector_pressed=0x7f020003;
+  }
+  public static final class dimen {
+    public static final int crop__bar_height=0x7f030000;
+  }
   public static final class drawable {
-    public static final int screen=0x7f010000;
+    public static final int crop__divider=0x7f040000;
+    public static final int crop__ic_cancel=0x7f040001;
+    public static final int crop__ic_done=0x7f040002;
+    public static final int crop__selectable_background=0x7f040003;
+    public static final int crop__texture=0x7f040004;
+    public static final int crop__tile=0x7f040005;
+    public static final int screen=0x7f040006;
+  }
+  public static final class id {
+    public static final int always=0x7f050000;
+    public static final int btn_cancel=0x7f050001;
+    public static final int btn_done=0x7f050002;
+    public static final int changing=0x7f050003;
+    public static final int crop_image=0x7f050004;
+    public static final int done_cancel_bar=0x7f050005;
+    public static final int never=0x7f050006;
+  }
+  public static final class layout {
+    public static final int crop__activity_crop=0x7f060000;
+    public static final int crop__layout_done_cancel=0x7f060001;
   }
   public static final class mipmap {
-    public static final int icon=0x7f020000;
+    public static final int icon=0x7f070000;
   }
   public static final class string {
-    public static final int activity_name=0x7f030000;
-    public static final int app_name=0x7f030001;
-    public static final int launcher_name=0x7f030002;
+    public static final int activity_name=0x7f080000;
+    public static final int app_name=0x7f080001;
+    public static final int crop__cancel=0x7f080002;
+    public static final int crop__done=0x7f080003;
+    public static final int crop__pick_error=0x7f080004;
+    public static final int crop__saving=0x7f080005;
+    public static final int crop__wait=0x7f080006;
+    public static final int launcher_name=0x7f080007;
+  }
+  public static final class style {
+    public static final int Crop=0x7f090000;
+    public static final int Crop_ActionButton=0x7f090001;
+    public static final int Crop_ActionButtonText=0x7f090002;
+    public static final int Crop_ActionButtonText_Cancel=0x7f090003;
+    public static final int Crop_ActionButtonText_Done=0x7f090004;
+    public static final int Crop_DoneCancelBar=0x7f090005;
+  }
+  public static final class styleable {
+    /**
+     * Attributes that can be used with a CropImageView.
+     * <p>Includes the following attributes:</p>
+     * <table>
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <tr><th>Attribute</th><th>Description</th></tr>
+     * <tr><td><code>{@link #CropImageView_highlightColor com.graduationproject.shareddoctor:highlightColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CropImageView_showCircle com.graduationproject.shareddoctor:showCircle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CropImageView_showHandles com.graduationproject.shareddoctor:showHandles}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CropImageView_showThirds com.graduationproject.shareddoctor:showThirds}</code></td><td></td></tr>
+     * </table>
+     * @see #CropImageView_highlightColor
+     * @see #CropImageView_showCircle
+     * @see #CropImageView_showHandles
+     * @see #CropImageView_showThirds
+     */
+    public static final int[] CropImageView={
+      0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004
+    };
+    /**
+     * <p>This symbol is the offset where the {@link com.graduationproject.shareddoctor.R.attr#highlightColor}
+     * attribute's value can be found in the {@link #CropImageView} array.
+     *
+     * <p>May be a reference to another resource, in the form
+     * "<code>@[+][<i>package</i>:]<i>type</i>/<i>name</i></code>" or a theme
+     * attribute in the form
+     * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
+     * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
+     * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
+     * "<code>#<i>aarrggbb</i></code>".
+     *
+     * @attr name com.graduationproject.shareddoctor:highlightColor
+     */
+    public static final int CropImageView_highlightColor=0;
+    /**
+     * <p>This symbol is the offset where the {@link com.graduationproject.shareddoctor.R.attr#showCircle}
+     * attribute's value can be found in the {@link #CropImageView} array.
+     *
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     *
+     * @attr name com.graduationproject.shareddoctor:showCircle
+     */
+    public static final int CropImageView_showCircle=1;
+    /**
+     * <p>This symbol is the offset where the {@link com.graduationproject.shareddoctor.R.attr#showHandles}
+     * attribute's value can be found in the {@link #CropImageView} array.
+     *
+     * <p>Must be one of the following constant values.</p>
+     * <table>
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+     * <tr><td>always</td><td>1</td><td></td></tr>
+     * <tr><td>changing</td><td>0</td><td></td></tr>
+     * <tr><td>never</td><td>2</td><td></td></tr>
+     * </table>
+     *
+     * @attr name com.graduationproject.shareddoctor:showHandles
+     */
+    public static final int CropImageView_showHandles=2;
+    /**
+     * <p>This symbol is the offset where the {@link com.graduationproject.shareddoctor.R.attr#showThirds}
+     * attribute's value can be found in the {@link #CropImageView} array.
+     *
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     *
+     * @attr name com.graduationproject.shareddoctor:showThirds
+     */
+    public static final int CropImageView_showThirds=3;
   }
   public static final class xml {
-    public static final int camera_provider_paths=0x7f040000;
-    public static final int config=0x7f040001;
+    public static final int camera_provider_paths=0x7f0b0000;
+    public static final int config=0x7f0b0001;
   }
 }

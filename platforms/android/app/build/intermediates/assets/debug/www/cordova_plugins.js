@@ -220,6 +220,14 @@ module.exports = [
     "clobbers": [
       "window.FileTransfer"
     ]
+  },
+  {
+    "id": "cordova-plugin-crop.CropPlugin",
+    "file": "plugins/cordova-plugin-crop/www/crop.js",
+    "pluginId": "cordova-plugin-crop",
+    "clobbers": [
+      "plugins.crop"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -228,7 +236,8 @@ module.exports.metadata =
   "cordova-plugin-whitelist": "1.3.3",
   "cordova-plugin-camera": "4.0.3",
   "cordova-plugin-file": "6.0.1",
-  "cordova-plugin-file-transfer": "1.7.1"
+  "cordova-plugin-file-transfer": "1.7.1",
+  "cordova-plugin-crop": "0.3.1"
 };
 // BOTTOM OF METADATA
 });

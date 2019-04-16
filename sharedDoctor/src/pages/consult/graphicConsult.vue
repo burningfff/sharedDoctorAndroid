@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-nav-bar fixed >
+    <van-nav-bar fixed>
       <span slot="left" style="font-size: 25px">
         <van-icon name="arrow-left" style="color:rgb(94,94,94);" @click="onClickLeft"></van-icon>
       </span>
@@ -54,19 +54,15 @@
                 <van-icon
                   size="4vw"
                   name="clear"
-                  @click="onClickLeft"/>
+                  @click="deleteImg(index)"/>
               </div>
             </div>
             <van-row>
               <van-col span="8">
-                <div v-show="isAddImg">
-                  <van-uploader class="img-add" :after-read="onRead" accept="image/*"
-                                style="background-color: #f9f3f0;border-radius: 3px"
-                                type="file"
-                                capture="camera">
-                    <img style="width: 24vw;height: 21vw" src="../../assets/addPicture.png"/>
-                    <span>添加图片</span>
-                  </van-uploader>
+                <div v-show="isAddImg" @click="showUploader"
+                     style="background-color: #f9f3f0;border-radius: 3px;width: 24vw;height: 21vw">
+                  <img style="width: 24vw;height: 21vw" src="../../assets/addPicture.png"/>
+                  <span>添加图片</span>
                 </div>
               </van-col>
               <van-col span="16">
@@ -78,7 +74,22 @@
             </van-row>
           </div>
         </div>
-
+        <van-popup v-model="showUpload" style="width: 85vw;border-radius: 6px">
+          <div>
+            <van-cell-group>
+              <van-cell @click="camera">
+                拍照
+              </van-cell>
+              <van-cell @click="photo">
+                <van-uploader class="img-add" :after-read="onRead" accept="image/*"
+                              type="file"
+                              capture="camera">
+                  <span>上传图片</span>
+                </van-uploader>
+              </van-cell>
+            </van-cell-group>
+          </div>
+        </van-popup>
       </div>
     </div>
   </div>
@@ -103,6 +114,7 @@
         length: 0,
         dynamicPics: [],
         viewImg: [],
+        showUpload: false,
       };
     },
     watch: {
@@ -131,11 +143,32 @@
       }
     },
     methods: {
+      showUploader() {
+        this.showUpload = true;
+      },
+      cameraTakePicture() {
+        navigator.camera.getPicture(this.onSuccess, this.onFail, {
+          quality: 50,
+          destinationType: Camera.DestinationType.DATA_URL
+        });
+      },
+      onSuccess(imageData) {
+        return this.dynamicPics.push("data:image/jpeg;base64,"+imageData);
+      },
+
+      onFail(message) {
+        alert('Failed because: ' + message);
+      },
+      camera() {
+        this.cameraTakePicture();
+        this.showUpload = false;
+      },
       onRead(file) {
         // console.log(file.content);
         //将原图片显示为选择的图片
         this.dynamicPics.push(file.content);
         console.log("this.dynamicPics" + this.dynamicPics.length)
+        this.showUpload = false
       },
       clickImg(url) {
         // console.log(url);
@@ -147,6 +180,13 @@
       onClickLeft() {
         this.$toast('返回');
         this.$router.go(-1);
+      },
+      deleteImg(index) {
+        // this.$toast(index)
+        this.dynamicPics.splice(index, 1)
+        // console.log(this.dynamicPics)
+        this.$toast('删除');
+        // this.$router.go(-1);
       },
     },
   };
@@ -162,29 +202,34 @@
     background: #ffffff;
     font-size: 14px;
     overflow-x: hidden;
+
   .dynamic-imgs {
     box-sizing: border-box;
     min-height: 152px;
     width: 100%;
     background-color: #ffffff;
-    padding: 12px;
+    padding: 12px 0px;
     margin-bottom: 6.5px;
+
   .img-title {
     margin-bottom: 12px;
     font-size: 14px;
     color: #666666;
     letter-spacing: 0.16px;
   }
+
   .table-list {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+
   .img-add {
     width: 26vw;
     height: 26vw;
     margin-right: 2vw;
     margin-bottom: 2vw;
   }
+
   }
   }
   }

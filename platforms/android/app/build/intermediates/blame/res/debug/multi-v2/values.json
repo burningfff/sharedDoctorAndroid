@@ -4,20 +4,39 @@
             "outputFile": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
-                    "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\values\\strings.xml",
+                    "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\values\\values.xml",
                     "from": {
-                        "startLines": "-1,2,-1",
-                        "startColumns": "-1,4,-1",
-                        "startOffsets": "-1,55,-1",
-                        "endColumns": "-1,41,-1",
-                        "endOffsets": "-1,92,-1"
+                        "startLines": "4,7,8,9,10,14,17,18,19,20,21,24,25,31,42,46,50",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "210,374,425,477,536,1035,1195,1267,1311,1383,1440,1603,1628,1931,2541,2739,2931",
+                        "endLines": "4,7,8,9,10,14,17,18,19,20,21,24,30,41,45,49,58",
+                        "endColumns": "52,50,51,58,58,47,71,43,71,56,51,24,12,12,12,12,12",
+                        "endOffsets": "258,420,472,531,590,1078,1262,1306,1378,1435,1487,1623,1926,2536,2734,2926,3463"
                     },
                     "to": {
-                        "startLines": "2,3,4",
+                        "startLines": "2,3,4,5,6,8,11,12,13,14,15,17,18,24,35,39,43",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "100,153,204,256,315,703,857,929,973,1045,1102,1213,1238,1541,2151,2349,2541",
+                        "endLines": "2,3,4,5,6,8,11,12,13,14,15,17,23,34,38,42,51",
+                        "endColumns": "52,50,51,58,58,47,71,43,71,56,51,24,12,12,12,12,12",
+                        "endOffsets": "148,199,251,310,369,746,924,968,1040,1097,1149,1233,1536,2146,2344,2536,3073"
+                    }
+                },
+                {
+                    "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "4,2,3",
                         "startColumns": "4,4,4",
-                        "startOffsets": "55,119,161",
+                        "startOffsets": "156,55,97",
                         "endColumns": "63,41,58",
-                        "endOffsets": "114,156,215"
+                        "endOffsets": "215,92,151"
+                    },
+                    "to": {
+                        "startLines": "9,10,16",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "751,815,1154",
+                        "endColumns": "63,41,58",
+                        "endOffsets": "810,852,1208"
                     }
                 }
             ]

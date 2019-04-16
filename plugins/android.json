@@ -18,6 +18,9 @@
     },
     "cordova-plugin-file-transfer": {
       "PACKAGE_NAME": "com.graduationproject.shareddoctor"
+    },
+    "cordova-plugin-crop": {
+      "PACKAGE_NAME": "com.graduationproject.shareddoctor"
     }
   },
   "dependent_plugins": {}

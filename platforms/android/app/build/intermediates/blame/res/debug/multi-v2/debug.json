@@ -1,23 +1,306 @@
 {
     "logs": [
         {
+            "outputFile": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-fr_values-fr.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\values-fr\\values-fr.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "215,288,336,405,474",
+                        "endColumns": "72,47,68,68,58",
+                        "endOffsets": "283,331,400,469,528"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "100,173,221,290,359",
+                        "endColumns": "72,47,68,68,58",
+                        "endOffsets": "168,216,285,354,413"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-ar_values-ar.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\values-ar\\values-ar.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "215,286,328,390,449",
+                        "endColumns": "70,41,61,58,54",
+                        "endOffsets": "281,323,385,444,499"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "100,171,213,275,334",
+                        "endColumns": "70,41,61,58,54",
+                        "endOffsets": "166,208,270,329,384"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-es_values-es.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\values-es\\values-es.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "215,289,336,409,468",
+                        "endColumns": "73,46,72,58,56",
+                        "endOffsets": "284,331,404,463,520"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "100,174,221,294,353",
+                        "endColumns": "73,46,72,58,56",
+                        "endOffsets": "169,216,289,348,405"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values_values.arsc.flat",
             "map": [
                 {
-                    "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\values\\strings.xml",
+                    "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\values\\values.xml",
                     "from": {
-                        "startLines": "-1,2,-1",
-                        "startColumns": "-1,4,-1",
-                        "startOffsets": "-1,55,-1",
-                        "endColumns": "-1,41,-1",
-                        "endOffsets": "-1,92,-1"
+                        "startLines": "4,7,8,9,10,14,17,18,19,20,21,24,25,31,42,46,50",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "210,374,425,477,536,1035,1195,1267,1311,1383,1440,1603,1628,1931,2541,2739,2931",
+                        "endLines": "4,7,8,9,10,14,17,18,19,20,21,24,30,41,45,49,58",
+                        "endColumns": "52,50,51,58,58,47,71,43,71,56,51,24,12,12,12,12,12",
+                        "endOffsets": "258,420,472,531,590,1078,1262,1306,1378,1435,1487,1623,1926,2536,2734,2926,3463"
                     },
                     "to": {
-                        "startLines": "2,3,4",
+                        "startLines": "2,3,4,5,6,8,11,12,13,14,15,17,18,24,35,39,43",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "100,153,204,256,315,703,857,929,973,1045,1102,1213,1238,1541,2151,2349,2541",
+                        "endLines": "2,3,4,5,6,8,11,12,13,14,15,17,23,34,38,42,51",
+                        "endColumns": "52,50,51,58,58,47,71,43,71,56,51,24,12,12,12,12,12",
+                        "endOffsets": "148,199,251,310,369,746,924,968,1040,1097,1149,1233,1536,2146,2344,2536,3073"
+                    }
+                },
+                {
+                    "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "4,2,3",
                         "startColumns": "4,4,4",
-                        "startOffsets": "55,119,161",
+                        "startOffsets": "156,55,97",
                         "endColumns": "63,41,58",
-                        "endOffsets": "114,156,215"
+                        "endOffsets": "215,92,151"
+                    },
+                    "to": {
+                        "startLines": "9,10,16",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "751,815,1154",
+                        "endColumns": "63,41,58",
+                        "endOffsets": "810,852,1208"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-v21_values-v21.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\values-v21\\values-v21.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "4",
+                        "startOffsets": "170",
+                        "endColumns": "56",
+                        "endOffsets": "222"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "56",
+                        "endOffsets": "107"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-land_values-land.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\values-land\\values-land.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "4",
+                        "startOffsets": "171",
+                        "endColumns": "47",
+                        "endOffsets": "214"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "47",
+                        "endOffsets": "98"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-ru_values-ru.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\values-ru\\values-ru.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "215,287,333,404,470",
+                        "endColumns": "71,45,70,65,61",
+                        "endOffsets": "282,328,399,465,527"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "100,172,218,289,355",
+                        "endColumns": "71,45,70,65,61",
+                        "endOffsets": "167,213,284,350,412"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-ja_values-ja.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\values-ja\\values-ja.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "215,286,328,384,430",
+                        "endColumns": "70,41,55,45,47",
+                        "endOffsets": "281,323,379,425,473"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "100,171,213,269,315",
+                        "endColumns": "70,41,55,45,47",
+                        "endOffsets": "166,208,264,310,358"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-ko_values-ko.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\values-ko\\values-ko.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "215,283,325,386,439",
+                        "endColumns": "67,41,60,52,50",
+                        "endOffsets": "278,320,381,434,485"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "100,168,210,271,324",
+                        "endColumns": "67,41,60,52,50",
+                        "endOffsets": "163,205,266,319,370"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-large-v4_values-large-v4.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\values-large\\values-large.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "4",
+                        "startOffsets": "172",
+                        "endColumns": "47",
+                        "endOffsets": "215"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "47",
+                        "endOffsets": "98"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-id_values-id.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\values-id\\values-id.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "215,286,333,416,475",
+                        "endColumns": "70,46,82,58,54",
+                        "endOffsets": "281,328,411,470,525"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "100,171,218,301,360",
+                        "endColumns": "70,46,82,58,54",
+                        "endOffsets": "166,213,296,355,410"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-zh_values-zh.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\values-zh\\values-zh.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "215,283,325,376,425",
+                        "endColumns": "67,41,50,48,43",
+                        "endOffsets": "278,320,371,420,464"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "100,168,210,261,310",
+                        "endColumns": "67,41,50,48,43",
+                        "endOffsets": "163,205,256,305,349"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values-pt_values-pt.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\values-pt\\values-pt.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "215,289,339,417,475",
+                        "endColumns": "73,49,77,57,58",
+                        "endOffsets": "284,334,412,470,529"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "100,174,224,302,360",
+                        "endColumns": "73,49,77,57,58",
+                        "endOffsets": "169,219,297,355,414"
                     }
                 }
             ]

@@ -12,6 +12,7 @@
     </van-nav-bar>
     <div class="content" style="margin-left: 4%;width: 92%;margin-top: 46px">
       <van-field
+        id='inputId'
         v-model="searchKey"
         placeholder="疾病、医院、科室、医生名"
         center
@@ -102,6 +103,15 @@
     created() {
 
     },
+    directives: {
+      focus: {
+        inserted: function (el, {value}) {
+          if (value) {
+            el.focus()
+          }
+        }
+      }
+    },
     data() {
       return {
         index_illness: '0',
@@ -123,6 +133,9 @@
         areaList: AreaList,
         showDoctor: false,
       };
+    },
+    mounted () {
+      document.getElementById('inputId').focus()
     },
     filters: {
       ellipsis(value) {

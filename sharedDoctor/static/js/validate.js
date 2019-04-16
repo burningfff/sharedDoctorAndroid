@@ -23,7 +23,8 @@ Vue.use(VeeValidate, {
       attributes:{
         email:'邮箱',
         password:'密码',
-        name: '账号',
+        userName: '账号',
+        name: '姓名',
         phone: '手机号',
         checkPassword:'确认密码'
       }

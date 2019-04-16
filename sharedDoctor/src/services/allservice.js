@@ -21,6 +21,7 @@ export default class AllService {
       // getAllMessage: '/message/findAll',
       updatePatientAllData: '/patient/updatePatientAllData',
       updatePatientBasicData: '/patient/updatePatientBasicData',
+      updatePatientContact: '/patient/updatePatientContact',
       updateDoctorAllData: '/doctor/updateDoctorAllData',
       // updatePassword:'/user/changePassword',
       // getUserInfo:'/user/findByUserId',
@@ -59,6 +60,7 @@ export default class AllService {
 
       findDepartByDepartId: '/depart/findDepartByDepartId',
 
+      findLocationByLocationId: '/location/findLocationByLocationId',
       updateLocationByLocationId: '/location/updateLocationByLocationId',
 
 
@@ -279,6 +281,16 @@ export default class AllService {
 
   updatePatientBasicData(params, callback) {
     var url = this.host + this.method.updatePatientBasicData;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  updatePatientContact(params, callback) {
+    var url = this.host + this.method.updatePatientContact;
     var type = 'post';
     return this.bizRequest(url, params, type, function (isOk, data) {
       if (callback) {
@@ -609,6 +621,17 @@ export default class AllService {
   // 查找科室
   findDepartByDepartId(params, callback) {
     var url = this.host + this.method.findDepartByDepartId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  //查找地址
+  findLocationByLocationId(params, callback) {
+    var url = this.host + this.method.findLocationByLocationId;
     var type = 'post';
     return this.bizRequest(url, params, type, function (isOk, data) {
       if (callback) {

@@ -1,19 +1,15 @@
 [
     {
-        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_icon.png.flat",
-        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\mipmap-xhdpi\\icon.png"
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_crop__selectable_background.xml.flat",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\drawable\\crop__selectable_background.xml"
     },
     {
         "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-ldpi_icon.png.flat",
         "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\mipmap-ldpi\\icon.png"
     },
     {
-        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-hdpi_screen.png.flat",
-        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\drawable-land-hdpi\\screen.png"
-    },
-    {
-        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-ldpi_screen.png.flat",
-        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\drawable-port-ldpi\\screen.png"
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21_crop__selectable_background.xml.flat",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\drawable-v21\\crop__selectable_background.xml"
     },
     {
         "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-hdpi_screen.png.flat",
@@ -24,36 +20,28 @@
         "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\drawable-land-xhdpi\\screen.png"
     },
     {
-        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-xxxhdpi_screen.png.flat",
-        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\drawable-land-xxxhdpi\\screen.png"
-    },
-    {
-        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-mdpi_screen.png.flat",
-        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\drawable-land-mdpi\\screen.png"
-    },
-    {
         "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-xxhdpi_screen.png.flat",
         "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\drawable-port-xxhdpi\\screen.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_crop__ic_done.png.flat",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\drawable-hdpi\\crop__ic_done.png"
     },
     {
         "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-ldpi_screen.png.flat",
         "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\drawable-land-ldpi\\screen.png"
     },
     {
-        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-mdpi_screen.png.flat",
-        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\drawable-port-mdpi\\screen.png"
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_crop__ic_cancel.png.flat",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\drawable-hdpi\\crop__ic_cancel.png"
     },
     {
-        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_icon.png.flat",
-        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\icon.png"
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_crop__texture.xml.flat",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\drawable\\crop__texture.xml"
     },
     {
-        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-xhdpi_screen.png.flat",
-        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\drawable-port-xhdpi\\screen.png"
-    },
-    {
-        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_icon.png.flat",
-        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\mipmap-hdpi\\icon.png"
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_crop__ic_cancel.png.flat",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\drawable-xhdpi\\crop__ic_cancel.png"
     },
     {
         "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-xxhdpi_screen.png.flat",
@@ -62,6 +50,10 @@
     {
         "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_icon.png.flat",
         "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\icon.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_crop__layout_done_cancel.xml.flat",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\layout\\crop__layout_done_cancel.xml"
     },
     {
         "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-xxxhdpi_screen.png.flat",
@@ -78,5 +70,73 @@
     {
         "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_camera_provider_paths.xml.flat",
         "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\xml\\camera_provider_paths.xml"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_icon.png.flat",
+        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\mipmap-xhdpi\\icon.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-hdpi_screen.png.flat",
+        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\drawable-land-hdpi\\screen.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-ldpi_screen.png.flat",
+        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\drawable-port-ldpi\\screen.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_crop__ic_cancel.png.flat",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\drawable-mdpi\\crop__ic_cancel.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-xxxhdpi_screen.png.flat",
+        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\drawable-land-xxxhdpi\\screen.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-mdpi_screen.png.flat",
+        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\drawable-land-mdpi\\screen.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_crop__ic_done.png.flat",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\drawable-xhdpi\\crop__ic_done.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_crop__divider.9.png.flat",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\drawable-mdpi\\crop__divider.9.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_crop__tile.png.flat",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\drawable-xhdpi\\crop__tile.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_crop__ic_done.png.flat",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\drawable-mdpi\\crop__ic_done.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-mdpi_screen.png.flat",
+        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\drawable-port-mdpi\\screen.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_crop__divider.9.png.flat",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\drawable-xhdpi\\crop__divider.9.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_icon.png.flat",
+        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\icon.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-xhdpi_screen.png.flat",
+        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\drawable-port-xhdpi\\screen.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_icon.png.flat",
+        "source": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\src\\main\\res\\mipmap-hdpi\\icon.png"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_crop__activity_crop.xml.flat",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\layout\\crop__activity_crop.xml"
+    },
+    {
+        "merged": "E:\\Java\\sharedDoctorAndroid\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_crop__divider.9.png.flat",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-1\\files-1.1\\android-crop-1.0.0.aar\\2f30412300f225ccc3c31aa6cfad94b4\\res\\drawable-hdpi\\crop__divider.9.png"
     }
 ]

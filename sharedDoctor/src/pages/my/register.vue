@@ -12,14 +12,14 @@
     <div>
       <van-cell-group style="margin-top: 46px">
         <van-field
-          name="name"
+          name="userName"
           v-model="userName"
           v-validate="'required|min:6|max:16'"
           clearable
           label="用户名"
           placeholder="请输入用户名"
-          :error="errors.has('name')"
-          :error-message="errors.first('name')"
+          :error="errors.has('userName')"
+          :error-message="errors.first('userName')"
         />
         <van-field
           name="password"
