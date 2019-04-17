@@ -26,10 +26,10 @@
                 src="../assets/consult.png"/>
             </van-row>
             <van-row style="margin-top: 2px;margin-bottom: 2px">
-              <span style="font-size: 18px;font-weight: bolder">图文咨询</span>
+              <span style="font-size: 18px;font-weight: bolder">预约上门</span>
             </van-row>
             <van-row>
-              <span style="color: #414244;font-size: 13px">按图文咨询医生</span>
+              <span style="color: #414244;font-size: 13px">医生上门诊治</span>
             </van-row>
           </div>
         </van-col>
@@ -74,13 +74,54 @@
                 <van-card
                   v-for="doctor in doctorTable"
                   :key="doctor.doctorId"
-                  :desc="doctor.introduction"
-                  :title="doctor.doctorName+doctor.doctorId"
-                  thumb="https://img.yzcdn.cn/upload_files/2017/07/02/af5b9f44deaeb68000d7e4a711160c53.jpg"
-                  style="text-align: left "
+                  style="text-align: left"
                 >
+                  <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
+                    <img :src="image" />
+                  </div>
+                  <div slot="title" @click="doctorInfo(doctor.doctorId)">
+                    <van-row>
+                      <van-col>
+                <span style="font-size: 16px;font-weight: bolder">
+                  {{doctor.doctorName}}
+                </span>
+                        <span>
+                  {{doctor.qualification.position.positionName}}
+                </span>
+                      </van-col>
+                    </van-row>
+                  </div>
+                  <div slot="desc" style="margin-top: 5px" @click="doctorInfo(doctor.doctorId)">
+                    <van-row style="margin-top: 5px">
+                      {{doctor.depart.departName}} {{doctor.qualification.hospital.hospitalName}}
+                    </van-row>
+                    <van-row style="margin-top: 5px">
+              <span>
+              擅长：{{doctor.introduction|ellipsis14}}
+            </span>
+                    </van-row>
+                    <van-row style="margin-top: 5px">
+                      <van-col span="2">
+                        <van-rate v-model="doctor.evaluation" allow-half
+                                  void-icon="star"
+                                  void-color="#eee"
+                                  readonly
+                                  :count="1"
+                                  :size="10">
+                        </van-rate>
+                      </van-col>
+                      <van-col span="3">
+                <span style="color:#fdd11e;">
+                  {{doctor.evaluation}}
+                </span>
+                      </van-col>
+                      <van-col span="8" style="text-align: left">
+                        <span>{{doctor.replyTimes}}次回复</span>
+                      </van-col>
+                    </van-row>
+                  </div>
                   <div slot="footer">
-                    <van-button round size="small">问医生</van-button>
+                    <van-button round size="small" @click="graphicConsult">问医生</van-button>
                   </div>
                 </van-card>
               </van-list>
@@ -97,13 +138,54 @@
                 <van-card
                   v-for="doctor in doctorTable"
                   :key="doctor.doctorId"
-                  :desc="doctor.introduction"
-                  :title="doctor.doctorName+doctor.doctorId"
-                  thumb="https://img.yzcdn.cn/upload_files/2017/07/02/af5b9f44deaeb68000d7e4a711160c53.jpg"
-                  style="text-align: left "
+                  style="text-align: left"
                 >
+                  <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
+                    <img :src="image" />
+                  </div>
+                  <div slot="title" @click="doctorInfo(doctor.doctorId)">
+                    <van-row>
+                      <van-col>
+                <span style="font-size: 16px;font-weight: bolder">
+                  {{doctor.doctorName}}
+                </span>
+                        <span>
+                  {{doctor.qualification.position.positionName}}
+                </span>
+                      </van-col>
+                    </van-row>
+                  </div>
+                  <div slot="desc" style="margin-top: 5px" @click="doctorInfo(doctor.doctorId)">
+                    <van-row style="margin-top: 5px">
+                      {{doctor.depart.departName}} {{doctor.qualification.hospital.hospitalName}}
+                    </van-row>
+                    <van-row style="margin-top: 5px">
+              <span>
+              擅长：{{doctor.introduction|ellipsis14}}
+            </span>
+                    </van-row>
+                    <van-row style="margin-top: 5px">
+                      <van-col span="2">
+                        <van-rate v-model="doctor.evaluation" allow-half
+                                  void-icon="star"
+                                  void-color="#eee"
+                                  readonly
+                                  :count="1"
+                                  :size="10">
+                        </van-rate>
+                      </van-col>
+                      <van-col span="3">
+                <span style="color:#fdd11e;">
+                  {{doctor.evaluation}}
+                </span>
+                      </van-col>
+                      <van-col span="8" style="text-align: left">
+                        <span>{{doctor.replyTimes}}次回复</span>
+                      </van-col>
+                    </van-row>
+                  </div>
                   <div slot="footer">
-                    <van-button round size="small">问医生</van-button>
+                    <van-button round size="small" @click="graphicConsult">问医生</van-button>
                   </div>
                 </van-card>
               </van-list>
@@ -120,13 +202,54 @@
                 <van-card
                   v-for="doctor in doctorTable"
                   :key="doctor.doctorId"
-                  :desc="doctor.introduction"
-                  :title="doctor.doctorName+doctor.doctorId"
-                  thumb="https://img.yzcdn.cn/upload_files/2017/07/02/af5b9f44deaeb68000d7e4a711160c53.jpg"
-                  style="text-align: left "
+                  style="text-align: left"
                 >
+                  <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
+                    <img :src="image" />
+                  </div>
+                  <div slot="title" @click="doctorInfo(doctor.doctorId)">
+                    <van-row>
+                      <van-col>
+                <span style="font-size: 16px;font-weight: bolder">
+                  {{doctor.doctorName}}
+                </span>
+                        <span>
+                  {{doctor.qualification.position.positionName}}
+                </span>
+                      </van-col>
+                    </van-row>
+                  </div>
+                  <div slot="desc" style="margin-top: 5px" @click="doctorInfo(doctor.doctorId)">
+                    <van-row style="margin-top: 5px">
+                      {{doctor.depart.departName}} {{doctor.qualification.hospital.hospitalName}}
+                    </van-row>
+                    <van-row style="margin-top: 5px">
+              <span>
+              擅长：{{doctor.introduction|ellipsis14}}
+            </span>
+                    </van-row>
+                    <van-row style="margin-top: 5px">
+                      <van-col span="2">
+                        <van-rate v-model="doctor.evaluation" allow-half
+                                  void-icon="star"
+                                  void-color="#eee"
+                                  readonly
+                                  :count="1"
+                                  :size="10">
+                        </van-rate>
+                      </van-col>
+                      <van-col span="3">
+                <span style="color:#fdd11e;">
+                  {{doctor.evaluation}}
+                </span>
+                      </van-col>
+                      <van-col span="8" style="text-align: left">
+                        <span>{{doctor.replyTimes}}次回复</span>
+                      </van-col>
+                    </van-row>
+                  </div>
                   <div slot="footer">
-                    <van-button round size="small">问医生</van-button>
+                    <van-button round size="small" @click="graphicConsult">问医生</van-button>
                   </div>
                 </van-card>
               </van-list>
@@ -143,13 +266,54 @@
                 <van-card
                   v-for="doctor in doctorTable"
                   :key="doctor.doctorId"
-                  :desc="doctor.introduction"
-                  :title="doctor.doctorName+doctor.doctorId"
-                  thumb="https://img.yzcdn.cn/upload_files/2017/07/02/af5b9f44deaeb68000d7e4a711160c53.jpg"
-                  style="text-align: left "
+                  style="text-align: left"
                 >
+                  <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
+                    <img :src="image" />
+                  </div>
+                  <div slot="title" @click="doctorInfo(doctor.doctorId)">
+                    <van-row>
+                      <van-col>
+                <span style="font-size: 16px;font-weight: bolder">
+                  {{doctor.doctorName}}
+                </span>
+                        <span>
+                  {{doctor.qualification.position.positionName}}
+                </span>
+                      </van-col>
+                    </van-row>
+                  </div>
+                  <div slot="desc" style="margin-top: 5px" @click="doctorInfo(doctor.doctorId)">
+                    <van-row style="margin-top: 5px">
+                      {{doctor.depart.departName}} {{doctor.qualification.hospital.hospitalName}}
+                    </van-row>
+                    <van-row style="margin-top: 5px">
+              <span>
+              擅长：{{doctor.introduction|ellipsis14}}
+            </span>
+                    </van-row>
+                    <van-row style="margin-top: 5px">
+                      <van-col span="2">
+                        <van-rate v-model="doctor.evaluation" allow-half
+                                  void-icon="star"
+                                  void-color="#eee"
+                                  readonly
+                                  :count="1"
+                                  :size="10">
+                        </van-rate>
+                      </van-col>
+                      <van-col span="3">
+                <span style="color:#fdd11e;">
+                  {{doctor.evaluation}}
+                </span>
+                      </van-col>
+                      <van-col span="8" style="text-align: left">
+                        <span>{{doctor.replyTimes}}次回复</span>
+                      </van-col>
+                    </van-row>
+                  </div>
                   <div slot="footer">
-                    <van-button round size="small">问医生</van-button>
+                    <van-button round size="small" @click="graphicConsult">问医生</van-button>
                   </div>
                 </van-card>
               </van-list>
@@ -166,13 +330,54 @@
                 <van-card
                   v-for="doctor in doctorTable"
                   :key="doctor.doctorId"
-                  :desc="doctor.introduction"
-                  :title="doctor.doctorName+doctor.doctorId"
-                  thumb="https://img.yzcdn.cn/upload_files/2017/07/02/af5b9f44deaeb68000d7e4a711160c53.jpg"
-                  style="text-align: left "
+                  style="text-align: left"
                 >
+                  <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
+                    <img :src="image" />
+                  </div>
+                  <div slot="title" @click="doctorInfo(doctor.doctorId)">
+                    <van-row>
+                      <van-col>
+                <span style="font-size: 16px;font-weight: bolder">
+                  {{doctor.doctorName}}
+                </span>
+                        <span>
+                  {{doctor.qualification.position.positionName}}
+                </span>
+                      </van-col>
+                    </van-row>
+                  </div>
+                  <div slot="desc" style="margin-top: 5px" @click="doctorInfo(doctor.doctorId)">
+                    <van-row style="margin-top: 5px">
+                      {{doctor.depart.departName}} {{doctor.qualification.hospital.hospitalName}}
+                    </van-row>
+                    <van-row style="margin-top: 5px">
+              <span>
+              擅长：{{doctor.introduction|ellipsis14}}
+            </span>
+                    </van-row>
+                    <van-row style="margin-top: 5px">
+                      <van-col span="2">
+                        <van-rate v-model="doctor.evaluation" allow-half
+                                  void-icon="star"
+                                  void-color="#eee"
+                                  readonly
+                                  :count="1"
+                                  :size="10">
+                        </van-rate>
+                      </van-col>
+                      <van-col span="3">
+                <span style="color:#fdd11e;">
+                  {{doctor.evaluation}}
+                </span>
+                      </van-col>
+                      <van-col span="8" style="text-align: left">
+                        <span>{{doctor.replyTimes}}次回复</span>
+                      </van-col>
+                    </van-row>
+                  </div>
                   <div slot="footer">
-                    <van-button round size="small">问医生</van-button>
+                    <van-button round size="small" @click="graphicConsult">问医生</van-button>
                   </div>
                 </van-card>
               </van-list>
@@ -189,13 +394,54 @@
                 <van-card
                   v-for="doctor in doctorTable"
                   :key="doctor.doctorId"
-                  :desc="doctor.introduction"
-                  :title="doctor.doctorName+doctor.doctorId"
-                  thumb="https://img.yzcdn.cn/upload_files/2017/07/02/af5b9f44deaeb68000d7e4a711160c53.jpg"
-                  style="text-align: left "
+                  style="text-align: left"
                 >
+                  <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
+                    <img :src="image" />
+                  </div>
+                  <div slot="title" @click="doctorInfo(doctor.doctorId)">
+                    <van-row>
+                      <van-col>
+                <span style="font-size: 16px;font-weight: bolder">
+                  {{doctor.doctorName}}
+                </span>
+                        <span>
+                  {{doctor.qualification.position.positionName}}
+                </span>
+                      </van-col>
+                    </van-row>
+                  </div>
+                  <div slot="desc" style="margin-top: 5px" @click="doctorInfo(doctor.doctorId)">
+                    <van-row style="margin-top: 5px">
+                      {{doctor.depart.departName}} {{doctor.qualification.hospital.hospitalName}}
+                    </van-row>
+                    <van-row style="margin-top: 5px">
+              <span>
+              擅长：{{doctor.introduction|ellipsis14}}
+            </span>
+                    </van-row>
+                    <van-row style="margin-top: 5px">
+                      <van-col span="2">
+                        <van-rate v-model="doctor.evaluation" allow-half
+                                  void-icon="star"
+                                  void-color="#eee"
+                                  readonly
+                                  :count="1"
+                                  :size="10">
+                        </van-rate>
+                      </van-col>
+                      <van-col span="3">
+                <span style="color:#fdd11e;">
+                  {{doctor.evaluation}}
+                </span>
+                      </van-col>
+                      <van-col span="8" style="text-align: left">
+                        <span>{{doctor.replyTimes}}次回复</span>
+                      </van-col>
+                    </van-row>
+                  </div>
                   <div slot="footer">
-                    <van-button round size="small">问医生</van-button>
+                    <van-button round size="small" @click="graphicConsult">问医生</van-button>
                   </div>
                 </van-card>
               </van-list>
@@ -230,7 +476,39 @@
         finished: false,
       };
     },
+    filters: {
+      ellipsis(value) {
+        if (!value) return ''
+        if (value.length > 4) {
+          return value.slice(0, 4) + '..'
+        }
+        return value
+      },
+      ellipsis14(value) {
+        if (!value) return ''
+        if (value.length > 14) {
+          return value.slice(0, 14) + '..'
+        }
+        return value
+      },
+    },
     methods: {
+      doctorInfo(doctorId) {
+        var params = {
+          doctorId: doctorId
+        }
+        allService.findDoctorByDoctorId(params, (isOk, data) => {
+          if (isOk) {
+            LOCWIN.Cache.set('doctorInfo',data.data)
+          }
+        })
+        this.$router.push('/doctorInfo')
+        console.log(doctorId)
+      },
+      graphicConsult(){
+        this.$router.push('/graphicConsult')
+
+      },
       go(index) {
         this.$router.push(index);
       },

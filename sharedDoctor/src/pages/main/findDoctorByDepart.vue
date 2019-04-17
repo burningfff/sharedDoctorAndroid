@@ -112,18 +112,55 @@
         <van-card
           v-for="doctor in doctorTable"
           :key="doctor.doctorId"
-          :desc="doctor.introduction"
-          :title="doctor.doctorName+doctor.doctorId"
-          thumb="https://img.yzcdn.cn/upload_files/2017/07/02/af5b9f44deaeb68000d7e4a711160c53.jpg"
-          style="text-align: left "
+          style="text-align: left"
         >
-          <div slot="footer">
-            <van-button round size="small">问医生</van-button>
+          <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
+            <img :src="image" />
           </div>
-          <!--<div slot="tags">-->
-            <!--<van-button size="mini">按钮</van-button>-->
-            <!--<van-button size="mini">按钮</van-button>-->
-          <!--</div>-->
+          <div slot="title" @click="doctorInfo(doctor.doctorId)">
+            <van-row>
+              <van-col>
+                <span style="font-size: 16px;font-weight: bolder">
+                  {{doctor.doctorName}}
+                </span>
+                <span>
+                  {{doctor.qualification.position.positionName}}
+                </span>
+              </van-col>
+            </van-row>
+          </div>
+          <div slot="desc" style="margin-top: 5px" @click="doctorInfo(doctor.doctorId)">
+            <van-row style="margin-top: 5px">
+              {{doctor.depart.departName}} {{doctor.qualification.hospital.hospitalName}}
+            </van-row>
+            <van-row style="margin-top: 5px">
+              <span>
+              擅长：{{doctor.introduction|ellipsis14}}
+            </span>
+            </van-row>
+            <van-row style="margin-top: 5px">
+              <van-col span="2">
+                <van-rate v-model="doctor.evaluation" allow-half
+                          void-icon="star"
+                          void-color="#eee"
+                          readonly
+                          :count="1"
+                          :size="10">
+                </van-rate>
+              </van-col>
+              <van-col span="3">
+                <span style="color:#fdd11e;">
+                  {{doctor.evaluation}}
+                </span>
+              </van-col>
+              <van-col span="8" style="text-align: left">
+                <span>{{doctor.replyTimes}}次回复</span>
+              </van-col>
+            </van-row>
+          </div>
+          <div slot="footer">
+            <van-button round size="small" @click="graphicConsult(doctor.doctorId)">问医生</van-button>
+          </div>
         </van-card>
       </van-list>
     </div>
@@ -161,6 +198,8 @@
         showIllness: false,
         searchKey: '',
         areaList: AreaList,
+        image:"https://img.yzcdn.cn/upload_files/2017/07/02/af5b9f44deaeb68000d7e4a711160c53.jpg"
+
       };
     },
     filters: {
@@ -168,6 +207,13 @@
         if (!value) return ''
         if (value.length > 4) {
           return value.slice(0, 4) + '..'
+        }
+        return value
+      },
+      ellipsis14(value) {
+        if (!value) return ''
+        if (value.length > 14) {
+          return value.slice(0, 14) + '..'
         }
         return value
       },
@@ -198,6 +244,30 @@
     methods: {
       initpage() {
         this.getDoctorTable()
+      },
+      doctorInfo(doctorId) {
+        var params = {
+          doctorId: doctorId
+        }
+        allService.findDoctorByDoctorId(params, (isOk, data) => {
+          if (isOk) {
+            LOCWIN.Cache.set('doctorInfo',data.data)
+            this.$router.push('/doctorInfo')
+            console.log(doctorId)
+          }
+        })
+      },
+      graphicConsult(doctorId){
+        var params = {
+          doctorId: doctorId
+        }
+        allService.findDoctorByDoctorId(params, (isOk, data) => {
+          if (isOk) {
+            LOCWIN.Cache.set('doctorInfo',data.data)
+            this.$router.push('/graphicConsult')
+            console.log(doctorId)
+          }
+        })
       },
       clickSort(val) {
         if (val == 1) {

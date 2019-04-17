@@ -48,7 +48,7 @@ export default class AllService {
       deleteAllDoctor: '/doctor/deleteAll',
       addDoctor: '/doctor/addDoctor',
       deleteDoctorById: '/doctor/deleteDoctor',
-      //
+      findDoctorByDoctorId: '/doctor/findDoctorByDoctorId',
       // getAllOrder: '/order/findAllOrder',
       // // deleteAllOrder: '',
       // deleteOrderList: '/order/deleteByList',
@@ -554,6 +554,16 @@ export default class AllService {
 
   deleteDoctorById(params, callback) {
     var url = this.host + this.method.deleteDoctorById;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  findDoctorByDoctorId(params, callback) {
+    var url = this.host + this.method.findDoctorByDoctorId;
     var type = 'post';
     return this.bizRequest(url, params, type, function (isOk, data) {
       if (callback) {

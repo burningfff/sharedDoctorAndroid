@@ -80,7 +80,7 @@
               }
               if ("doctorId" in data.data) {
                 this.$toast.success("登录成功！")
-                // this.$router.push('/teacher/index');
+                this.$router.push('/doctorMainPage');
               }
               this.$toast.success("登录成功！");
             }

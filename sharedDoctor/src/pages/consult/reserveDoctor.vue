@@ -1,18 +1,43 @@
 <template>
   <div>
-    <van-nav-bar fixed>
+    <van-nav-bar fixed style="height: 60px">
       <span slot="left" style="font-size: 25px">
-        <van-icon name="arrow-left" style="color:rgb(94,94,94);" @click="onClickLeft"></van-icon>
+        <van-icon name="cross" style="color:rgb(94,94,94);" @click="onClickLeft"></van-icon>
       </span>
-      <span slot="right" style="font-size: 25px">
-        <van-button type="primary" @click="onClickRight" size="small">下一步</van-button>
-      </span>
-      <span slot="left" style="margin-left: 2px; font-size: 20px;font-weight: bold">
-        图文问诊
-      </span>
+      <div slot="title">
+        <van-row style="height: 40px">
+          <span style="font-size: 20px;font-weight: bolder">
+            选择预约时间
+          </span>
+        </van-row>
+        <van-row style="line-height: 20px">
+          <span style="font-size: 10px;color: #7d7e80">
+            仅可预约未来七天 医生会在预约时间联系你
+          </span>
+        </van-row>
+      </div>
     </van-nav-bar>
-    <div class="content" style="margin-left: 4%;width: 92%;margin-top: 46px">
-      <div style="margin-top: 10px;margin-bottom: 10px;">
+    <div class="content" style="margin-left: 4%;width: 92%;margin-top: 60px">
+      <van-row style="text-align: left;padding-top: 10px">
+        <span>
+          {{this.information}}
+        </span>
+      </van-row>
+      <van-row v-if="dynamicPics!=null"
+               style="border-top: 1px solid rgba(205,205,205,0.46);padding-top: 10px;margin-top: 10px;text-align:left">
+        <div style="width:100%;
+             height: 60px;
+             overflow-x: scroll;
+             overflow-y: hidden;
+             white-space: nowrap;">
+          <img v-for="(img,index) in dynamicPics"
+               class="img-add" :src="img" style="padding: 0px 5px;height: 50px;width: 50px"/>
+        </div>
+      </van-row>
+      <div style="width: 100%;margin-top: 5px;">
+        <van-row style="height: 5px;background-color: #f5efec"></van-row>
+      </div>
+      <div style="margin-top: 5px">
         <van-row style="padding: 10px 0px">
           <van-col span="4" style="height: 40px;">
             <div style="height: 40px">
@@ -20,91 +45,53 @@
                    :src="myImage"/>
             </div>
           </van-col>
-          <van-col span="20" style="text-align: left">
+          <van-col span="12" style="text-align: left">
             <van-row>
               <van-col>
-                <span style="font-size: 16px;font-weight: bolder">
+                <span style="font-size: 18px;font-weight: bolder">
                   {{this.doctorName}}
                 </span>
-                <span style="font-size: 12px;">
+                <span style="font-size: 14px;font-weight: bolder">
                   {{this.positionName}}
                 </span>
               </van-col>
             </van-row>
             <van-row
-              style="font-size: 14px;margin-top: 10px;background-color: #f9f3f0;color: #3f3f3f;border-radius: 3px">
-              请描述您的性别年龄、症状、就诊经历，我将竭诚为您治疗，并保证您的隐私安全
+              style="font-size: 12px;margin-top: 5px;color: #3f3f3f;border-radius: 3px">
+                <span>
+                {{this.hospitalName}}  {{this.departName}}
+              </span>
             </van-row>
+          </van-col>
+          <van-col span="8">
+                <span
+                  style="color: #4B946A;text-align: right;display:inline-block;vertical-align:middle;line-height: 40px;">
+                  ￥{{this.phonePrice}}
+                </span>
+          </van-col>
+        </van-row>
+        <van-row
+          style="border-top: 1px solid rgba(205,205,205,0.46);padding-top: 10px;margin-top: 10px;text-align:left">
+          <van-col span="6">
+            <span>回复时间</span>
+          </van-col>
+          <van-col span="18" style="text-align: right;">
+            <span style="color: #7d7e80;font-size: 12px">预计3小时内回复，超过24小时自动退款</span>
           </van-col>
         </van-row>
       </div>
-      <div style="border-bottom: 1px solid #ebedf0;">
-        <van-field
-          style="border-color:#ffffff;"
-          v-model="information"
-          type="textarea"
-          placeholder="请在此描述"
-          rows="4"
-          autosize
-          maxlength="200"
-        />
-        <van-cell style="text-align: right;margin-left: 75%;width:25%;color: #969799;"
-                  :value="length+'/200'"/>
-      </div>
-
-      <div class="imgUpload">
-        <div class="dynamic-imgs ">
-          <div class="table-list">
-            <div v-for="(img,index) in dynamicPics">
-              <img class="img-add" :src="img" @click="clickImg(img)"/>
-              <div style="cursor: pointer;
-		                position: absolute;
-		                width: 4vw;
-		                height: 4vw;
-		                margin-left: 24vw;
-		                margin-top: -30vw;
-                    color: #ed6a0c">
-                <van-icon
-                  size="4vw"
-                  name="clear"
-                  @click="deleteImg(index)"/>
-              </div>
-            </div>
-            <van-row>
-              <van-col span="8">
-                <div v-show="isAddImg" @click="showUploader"
-                     style="background-color: #f9f3f0;border-radius: 3px;width: 24vw;height: 21vw">
-                  <img style="width: 24vw;height: 21vw" src="../../assets/addPicture.png"/>
-                  <span>添加图片</span>
-                </div>
-              </van-col>
-              <van-col span="16">
-                <div v-show="isAddIntro" style="text-align: left;margin-top: 30px">
-                  <van-row>你上传的附件仅对解答问题的医生可见</van-row>
-                  <van-row>可上传9张</van-row>
-                </div>
-              </van-col>
-            </van-row>
-          </div>
-        </div>
-        <van-popup v-model="showUpload" style="width: 85vw;border-radius: 6px">
-          <div>
-            <van-cell-group>
-              <van-cell @click="camera">
-                拍照
-              </van-cell>
-              <van-cell @click="photo">
-                <van-uploader class="img-add" :after-read="onRead" accept="image/*"
-                              type="file"
-                              capture="camera">
-                  <span>上传图片</span>
-                </van-uploader>
-              </van-cell>
-            </van-cell-group>
-          </div>
-        </van-popup>
-      </div>
     </div>
+    <van-submit-bar
+      :price="this.phonePrice*100"
+      button-text="立即支付"
+      @submit="onSubmit"
+    />
+    <van-datetime-picker
+      v-model="currentDate"
+      type="datetime"
+      :min-date="minDate"
+      :max-date="maxDate"
+    />
   </div>
 </template>
 <script>
@@ -123,9 +110,12 @@
         doctorName: LOCWIN.Cache.get('doctorInfo').doctorName,
         departName: LOCWIN.Cache.get('doctorInfo').depart.departName,
         positionName: LOCWIN.Cache.get('doctorInfo').qualification.position.positionName,
-        information: '',
+        hospitalName: LOCWIN.Cache.get('doctorInfo').qualification.hospital.hospitalName,
+        hospitalLevel: LOCWIN.Cache.get('doctorInfo').qualification.hospital.hospitalLevel,
+        information: LOCWIN.Cache.get('information'),
+        phonePrice: '199.00',
         length: 0,
-        dynamicPics: [],
+        dynamicPics: LOCWIN.Cache.get('dynamicPics'),
         viewImg: [],
         showUpload: false,
         myImage: 'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg',
@@ -196,14 +186,13 @@
         this.$router.go(-1);
       },
       onClickRight() {
-        if(this.length<10){
+        if (this.length < 10) {
           this.$toast('请至少用十个字描述你的症状')
-        }else{
-          LOCWIN.Cache.set('information',this.information)
-          LOCWIN.Cache.set('dynamicPics',this.dynamicPics)
+        } else {
+          LOCWIN.Cache.set('information', this.information)
+          LOCWIN.Cache.set('dynamicPics', this.dynamicPics)
           console.log(LOCWIN.Cache.get('information'))
           console.log(LOCWIN.Cache.get('dynamicPics'))
-          this.$router.push('/payConsult');
         }
       },
       deleteImg(index) {

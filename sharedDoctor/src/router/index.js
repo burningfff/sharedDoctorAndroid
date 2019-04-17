@@ -13,10 +13,14 @@ const main = resolve => require(['../pages/main.vue'], resolve)
 const my = resolve => require(['../pages/my.vue'], resolve)
 const consult = resolve => require(['../pages/consult.vue'], resolve)
 const graphicConsult = resolve => require(['../pages/consult/graphicConsult.vue'], resolve)
+const payConsult = resolve => require(['../pages/consult/payConsult.vue'], resolve)
+const reserveDoctor = resolve => require(['../pages/consult/reserveDoctor.vue'], resolve)
 const findDoctor = resolve => require(['../pages/main/findDoctor.vue'], resolve)
 const findDoctorByDepart = resolve => require(['../pages/main/findDoctorByDepart.vue'], resolve)
 const findDoctorByKeyWord = resolve => require(['../pages/main/findDoctorByKeyWord.vue'], resolve)
+const doctorInfo = resolve => require(['../pages/main/doctorInfo.vue'], resolve)
 const reportExplanation = resolve => require(['../pages/main/reportExplanation.vue'], resolve)
+const doctorMainPage = resolve => require(['../pages/doctor/doctorMainPage.vue'], resolve)
 
 Vue.use(Router)
 
@@ -82,6 +86,16 @@ const routes = [
     name: 'graphicConsult'
   },
   {
+    path: '/payConsult',
+    component: payConsult,
+    name: 'payConsult'
+  },
+  {
+    path: '/reserveDoctor',
+    component: reserveDoctor,
+    name: 'reserveDoctor'
+  },
+  {
     path: '/findDoctor',
     component: findDoctor,
     name: 'findDoctor'
@@ -97,9 +111,19 @@ const routes = [
     name: 'findDoctorByKeyWord'
   },
   {
+    path: '/doctorInfo',
+    component: doctorInfo,
+    name: 'doctorInfo'
+  },
+  {
     path: '/reportExplanation',
     component: reportExplanation,
     name: 'reportExplanation'
+  },
+  {
+    path: '/doctorMainPage',
+    component: doctorMainPage,
+    name: 'doctorMainPage'
   },
 
   // {
