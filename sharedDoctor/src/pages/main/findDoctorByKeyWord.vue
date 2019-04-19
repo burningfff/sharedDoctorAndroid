@@ -73,6 +73,7 @@
         >
           <van-card
             v-for="doctor in doctorTable"
+            v-if="doctor.qualification.isConfirmed==1"
             :key="doctor.doctorId"
             style="text-align: left"
           >
@@ -223,7 +224,7 @@
         allService.findDoctorByDoctorId(params, (isOk, data) => {
           if (isOk) {
             LOCWIN.Cache.set('doctorInfo',data.data)
-            this.$router.push('/doctorInfo')
+            this.$router.push('/doctorDetail')
             console.log(doctorId)
           }
         })

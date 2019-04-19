@@ -12,7 +12,8 @@ import store from './store/index.js'//引入
 import echarts from 'echarts'
 // import { Lazyload } from 'vant';
 import VDistpicker from 'v-distpicker'
-
+import Mint from 'mint-ui';
+Vue.use(Mint);
 
 require("./common/locwin");
 

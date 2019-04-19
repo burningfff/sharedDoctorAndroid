@@ -12,7 +12,6 @@
     </van-nav-bar>
     <div class="content" style="margin-left: 4%;width: 92%;margin-top: 46px">
       <van-field
-        v-model="value"
         placeholder="疾病、医院、科室、医生名"
         center
         border

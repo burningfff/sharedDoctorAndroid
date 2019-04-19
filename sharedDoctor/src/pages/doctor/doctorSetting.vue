@@ -27,10 +27,10 @@
             name="arrow">
           </van-icon>
         </van-cell>
-        <van-cell title="姓名" is-link :value="patientName" @click="showUpdateName=true"/>
+        <van-cell title="姓名" is-link :value="doctorName" @click="showUpdateName=true"/>
         <van-cell title="手机号码" is-link :value="phone" @click="showUpdatePhone=true"/>
         <van-cell title="邮箱账号" is-link :value="email" @click="showUpdateEmail=true"/>
-        <van-cell title="我的地址" is-link :value="location" to="updatePatientLocation"/>
+        <van-cell title="我的地址" is-link :value="location" to="updateDoctorLocation"/>
       </van-cell-group>
     </div>
     <van-popup v-model="showUpload" style="width: 85vw;border-radius: 6px">
@@ -55,11 +55,11 @@
       title="修改姓名"
       show-cancel-button
       @confirm="updateName"
-      @cancel="tempPatientName=patientName"
+      @cancel="tempDoctorName=doctorName"
     >
       <van-field
         name="name"
-        v-model="tempPatientName"
+        v-model="tempDoctorName"
         v-validate="'required|min:2|max:6'"
         clearable
         placeholder="请输入姓名"
@@ -113,13 +113,13 @@
 
   export default {
     created() {
-      this.getPatientInfo()
+      this.getDoctorInfo()
     },
 
     data() {
       return {
-        patientName: '',
-        tempPatientName: '',
+        doctorName: '',
+        tempDoctorName: '',
         phone: '',
         tempPhone: '',
         email: '',
@@ -141,10 +141,10 @@
         console.log("this.dynamicPics" + this.dynamicPics.length);
         this.showUpload = false;
       },
-      getPatientInfo() {
+      getDoctorInfo() {
         if (LOCWIN.Cache.get('userInfo') != null) {
-          this.patientName = LOCWIN.Cache.get('userInfo').patientName
-          this.tempPatientName = LOCWIN.Cache.get('userInfo').patientName
+          this.doctorName = LOCWIN.Cache.get('userInfo').doctorName
+          this.tempDoctorName = LOCWIN.Cache.get('userInfo').doctorName
           this.phone = LOCWIN.Cache.get('userInfo').phone
           this.tempPhone = LOCWIN.Cache.get('userInfo').phone
           this.email = LOCWIN.Cache.get('userInfo').email
@@ -178,33 +178,32 @@
         this.showUpload = false;
       },
       updateName() {
-        if (this.tempPatientName.length <= 6 && this.tempPatientName.length >= 2) {
+        if (this.tempDoctorName.length <= 6 && this.tempDoctorName.length >= 2) {
           var params = {
-            patientId:LOCWIN.Cache.get('userInfo').patientId,
-            patientName: this.tempPatientName,
+            doctorId:LOCWIN.Cache.get('userInfo').doctorId,
+            doctorName: this.tempDoctorName,
             age:LOCWIN.Cache.get('userInfo').age,
             gender: LOCWIN.Cache.get('userInfo').gender,
-            weight: LOCWIN.Cache.get('userInfo').weight,
-            illness: LOCWIN.Cache.get('userInfo').information,
+            identityCard: LOCWIN.Cache.get('userInfo').identityCard,
           }
-          allService.updatePatientBasicData(params, (isOk, data) => {
+          allService.updateDoctorBasicData(params, (isOk, data) => {
             if(isOk){
               var params = {
-                patientId: LOCWIN.Cache.get('userInfo').patientId,
+                doctorId: LOCWIN.Cache.get('userInfo').doctorId,
               }
-              allService.getPatientDetailById(params, (isOk, data) => {
+              allService.findDoctorByDoctorId(params, (isOk, data) => {
                 if(isOk){
                   LOCWIN.Cache.set('userInfo',data.data)
-                  this.getPatientInfo()
+                  this.getDoctorInfo()
                 }
               })
-              this.patientName = this.tempPatientName
+              this.doctorName = this.tempDoctorName
             }
           })
         } else {
           this.$toast.fail("用户姓名格式有误，请重填")
         }
-        console.log(this.patientName)
+        console.log(this.doctorName)
       },
       updatePhone() {
         var phoneTemp = document.getElementById('phone').value;
@@ -212,20 +211,20 @@
           this.$toast.fail("手机号码格式有误，请重填");
         } else {
           var params = {
-            patientId: LOCWIN.Cache.get('userInfo').patientId,
+            doctorId: LOCWIN.Cache.get('userInfo').doctorId,
             phone: this.tempPhone,
             email: LOCWIN.Cache.get('userInfo').email,
             locationId: LOCWIN.Cache.get('userInfo').locationId
           }
-          allService.updatePatientContact(params, (isOk, data) => {
+          allService.updateDoctorContact(params, (isOk, data) => {
             if (isOk) {
               var params = {
-                patientId: LOCWIN.Cache.get('userInfo').patientId,
+                doctorId: LOCWIN.Cache.get('userInfo').doctorId,
               }
-              allService.getPatientDetailById(params, (isOk, data) => {
+              allService.findDoctorByDoctorId(params, (isOk, data) => {
                 if (isOk) {
                   LOCWIN.Cache.set('userInfo', data.data)
-                  this.getPatientInfo()
+                  this.getDoctorInfo()
                 }
               })
             }
@@ -241,20 +240,20 @@
           this.$toast.fail("邮箱账号格式有误，请重填");
         } else {
           var params = {
-            patientId: LOCWIN.Cache.get('userInfo').patientId,
+            doctorId: LOCWIN.Cache.get('userInfo').doctorId,
             phone: LOCWIN.Cache.get('userInfo').phone,
             email: this.tempEmail,
             locationId: LOCWIN.Cache.get('userInfo').locationId
           }
-          allService.updatePatientContact(params, (isOk, data) => {
+          allService.updateDoctorContact(params, (isOk, data) => {
             if (isOk) {
               var params = {
-                patientId: LOCWIN.Cache.get('userInfo').patientId,
+                doctorId: LOCWIN.Cache.get('userInfo').doctorId,
               }
-              allService.getPatientDetailById(params, (isOk, data) => {
+              allService.findDoctorByDoctorId(params, (isOk, data) => {
                 if (isOk) {
                   LOCWIN.Cache.set('userInfo', data.data)
-                  this.getPatientInfo()
+                  this.getDoctorInfo()
                 }
               })
             }

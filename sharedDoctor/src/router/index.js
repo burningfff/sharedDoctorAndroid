@@ -6,7 +6,7 @@ const login = resolve => require(['../pages/my/login.vue'], resolve)
 const register = resolve => require(['../pages/my/register.vue'], resolve)
 const patientInfo = resolve => require(['../pages/my/patientInfo.vue'], resolve)
 const patientSetting = resolve => require(['../pages/my/patientSetting.vue'], resolve)
-const updateLocation = resolve => require(['../pages/my/updateLocation.vue'], resolve)
+const updatePatientLocation = resolve => require(['../pages/my/updatePatientLocation.vue'], resolve)
 const testdemo = resolve => require(['../pages/testdemo.vue'], resolve)
 const HelloWorld = resolve => require(['../pages/HelloWorld.vue'], resolve)
 const main = resolve => require(['../pages/main.vue'], resolve)
@@ -18,9 +18,13 @@ const reserveDoctor = resolve => require(['../pages/consult/reserveDoctor.vue'],
 const findDoctor = resolve => require(['../pages/main/findDoctor.vue'], resolve)
 const findDoctorByDepart = resolve => require(['../pages/main/findDoctorByDepart.vue'], resolve)
 const findDoctorByKeyWord = resolve => require(['../pages/main/findDoctorByKeyWord.vue'], resolve)
-const doctorInfo = resolve => require(['../pages/main/doctorInfo.vue'], resolve)
+const updateDoctorLocation = resolve => require(['../pages/doctor/updateDoctorLocation.vue'], resolve)
+const doctorDetail = resolve => require(['../pages/main/doctorDetail.vue'], resolve)
 const reportExplanation = resolve => require(['../pages/main/reportExplanation.vue'], resolve)
 const doctorMainPage = resolve => require(['../pages/doctor/doctorMainPage.vue'], resolve)
+const doctorInfo = resolve => require(['../pages/doctor/doctorInfo.vue'], resolve)
+const doctorSetting = resolve => require(['../pages/doctor/doctorSetting.vue'], resolve)
+const doctorServiceSetting = resolve => require(['../pages/doctor/doctorServiceSetting.vue'], resolve)
 
 Vue.use(Router)
 
@@ -46,9 +50,14 @@ const routes = [
     name: 'patientSetting'
   },
   {
-    path: '/updateLocation',
-    component: updateLocation,
-    name: 'updateLocation'
+    path: '/updatePatientLocation',
+    component: updatePatientLocation,
+    name: 'updatePatientLocation'
+  },
+  {
+    path: '/updateDoctorLocation',
+    component: updateDoctorLocation,
+    name: 'updateDoctorLocation'
   },
   {
     path: '/testdemo',
@@ -111,9 +120,9 @@ const routes = [
     name: 'findDoctorByKeyWord'
   },
   {
-    path: '/doctorInfo',
-    component: doctorInfo,
-    name: 'doctorInfo'
+    path: '/doctorDetail',
+    component: doctorDetail,
+    name: 'doctorDetail'
   },
   {
     path: '/reportExplanation',
@@ -124,6 +133,21 @@ const routes = [
     path: '/doctorMainPage',
     component: doctorMainPage,
     name: 'doctorMainPage'
+  },
+  {
+    path: '/doctorInfo',
+    component: doctorInfo,
+    name: 'doctorInfo'
+  },
+  {
+    path: '/doctorSetting',
+    component: doctorSetting,
+    name: 'doctorSetting'
+  },
+  {
+    path: '/doctorServiceSetting',
+    component: doctorServiceSetting,
+    name: 'doctorServiceSetting'
   },
 
   // {

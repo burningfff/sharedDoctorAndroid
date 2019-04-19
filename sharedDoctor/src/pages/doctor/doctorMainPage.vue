@@ -2,7 +2,7 @@
   <div>
     <div>
       <van-row style="background-color: #f5efec;">
-        <div @click="go('/patientSetting')">
+        <div @click="go('/doctorSetting')">
           <van-col span="4" style="margin-top: 20px;margin-bottom: 20px;margin-left: 2vw">
             <img style="width: 100%;height: 100%;border-radius: 100%;"
                  src="../../assets/picture.png"/>
@@ -20,9 +20,11 @@
       <van-cell-group style="text-align: left;">
         <van-cell style="font-size: 18px" title="我的订单" is-link to="index"/>
         <van-row style="height: 4px;background-color: #f9f3f0"></van-row>
-        <van-cell style="font-size: 18px" title="资质信息" is-link to="patientInfo"/>
+        <van-cell style="font-size: 18px" title="资质信息" is-link to="doctorInfo"/>
         <van-row style="height: 4px;background-color: #f9f3f0"></van-row>
-        <van-cell style="font-size: 18px" title="设置" is-link to="patientSetting"/>
+        <van-cell style="font-size: 18px" title="提供服务" is-link to="doctorServiceSetting"/>
+        <van-row style="height: 4px;background-color: #f9f3f0"></van-row>
+        <van-cell style="font-size: 18px" title="设置" is-link to="doctorSetting"/>
       </van-cell-group>
 
       <van-button

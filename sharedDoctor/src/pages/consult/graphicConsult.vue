@@ -123,6 +123,7 @@
         doctorName: LOCWIN.Cache.get('doctorInfo').doctorName,
         departName: LOCWIN.Cache.get('doctorInfo').depart.departName,
         positionName: LOCWIN.Cache.get('doctorInfo').qualification.position.positionName,
+        userInfo:LOCWIN.Cache.get('userInfo'),
         information: '',
         length: 0,
         dynamicPics: [],
@@ -198,7 +199,18 @@
       onClickRight() {
         if(this.length<10){
           this.$toast('请至少用十个字描述你的症状')
-        }else{
+        }else if (this.userInfo==null){
+          this.$dialog.confirm({
+            title: '需要登录',
+            message: '登陆后才可以进行后续操作？',
+            confirmButtonText: '登录',
+          }).then(() => {
+            // on confirm
+            this.$router.push('/login')
+          }).catch(() => {
+            // on cancel
+          });
+        } else{
           LOCWIN.Cache.set('information',this.information)
           LOCWIN.Cache.set('dynamicPics',this.dynamicPics)
           console.log(LOCWIN.Cache.get('information'))

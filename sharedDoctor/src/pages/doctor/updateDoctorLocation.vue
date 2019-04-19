@@ -16,7 +16,6 @@
         :area-list="areaList"
         :address-info="addressInfo"
         @save="onSave"
-        @delete="onDelete"
       />
     </div>
   </div>
@@ -36,7 +35,7 @@
         areaList: AreaList,
         addressInfo: {
           id: '',
-          name: LOCWIN.Cache.get('userInfo').patientName,
+          name: LOCWIN.Cache.get('userInfo').doctorName,
           tel: LOCWIN.Cache.get('userInfo').phone,
           province: '',
           city: '',
@@ -44,7 +43,7 @@
           addressDetail: '',
           areaCode: ''
         },
-        patientId: LOCWIN.Cache.get('userInfo').patientId,
+        doctorId: LOCWIN.Cache.get('userInfo').doctorId,
         locationId: LOCWIN.Cache.get('userInfo').locationId,
       };
     },
@@ -78,22 +77,34 @@
         }
         allService.updateLocationByLocationId(params, (isOk, data) => {
           if (isOk) {
-            this.getLocation()
-            var params = {
-              patientId: LOCWIN.Cache.get('userInfo').patientId,
-            }
-            allService.getPatientDetailById(params, (isOk, data) => {
-              if (isOk) {
-                LOCWIN.Cache.set('userInfo', data.data)
+            var phoneTemp = content.tel;
+            if (!(/^1[34578]\d{9}$/.test(phoneTemp))) {
+              this.$toast.fail("手机号码格式有误，请重填");
+            } else {
+              var params = {
+                doctorId: LOCWIN.Cache.get('userInfo').doctorId,
+                phone: phoneTemp,
+                email: LOCWIN.Cache.get('userInfo').email,
+                locationId: LOCWIN.Cache.get('userInfo').locationId
               }
-            })
+              allService.updateDoctorContact(params, (isOk, data) => {
+                if (isOk) {
+                  this.getLocation()
+                  var params = {
+                    doctorId: LOCWIN.Cache.get('userInfo').doctorId,
+                  }
+                  allService.findDoctorByDoctorId(params, (isOk, data) => {
+                    if (isOk) {
+                      LOCWIN.Cache.set('userInfo', data.data)
+                    }
+                  })
+                }
+              })
+            }
           }
         })
         this.$toast('save');
         console.log(content)
-      },
-      onDelete() {
-        this.$toast('delete');
       },
       onClickLeft() {
         this.$toast('返回');

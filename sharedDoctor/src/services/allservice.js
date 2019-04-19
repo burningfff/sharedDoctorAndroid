@@ -49,6 +49,8 @@ export default class AllService {
       addDoctor: '/doctor/addDoctor',
       deleteDoctorById: '/doctor/deleteDoctor',
       findDoctorByDoctorId: '/doctor/findDoctorByDoctorId',
+      updateDoctorBasicData: '/doctor/updateDoctorBasicData',
+      updateDoctorContact: '/doctor/updateDoctorContact',
       // getAllOrder: '/order/findAllOrder',
       // // deleteAllOrder: '',
       // deleteOrderList: '/order/deleteByList',
@@ -63,6 +65,7 @@ export default class AllService {
       findLocationByLocationId: '/location/findLocationByLocationId',
       updateLocationByLocationId: '/location/updateLocationByLocationId',
 
+      findAllByHospitalNameContaining:'/hospital/findAllByHospitalNameContaining',
 
       updateQualificationByQualificationId: '/qualification/updateQualificationByQualificationId',
     }
@@ -572,6 +575,26 @@ export default class AllService {
     }, "application/json");
   }
 
+  updateDoctorContact(params, callback) {
+    var url = this.host + this.method.updateDoctorContact;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  updateDoctorBasicData(params, callback) {
+    var url = this.host + this.method.updateDoctorBasicData;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
 //
 //   getAllOrder(params,callback){
 //     var url = this.host + this.method.getAllOrder;
@@ -653,6 +676,16 @@ export default class AllService {
   //更新地址
   updateLocationByLocationId(params, callback) {
     var url = this.host + this.method.updateLocationByLocationId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  findAllByHospitalNameContaining(params, callback) {
+    var url = this.host + this.method.findAllByHospitalNameContaining;
     var type = 'post';
     return this.bizRequest(url, params, type, function (isOk, data) {
       if (callback) {

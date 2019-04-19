@@ -73,6 +73,7 @@
               >
                 <van-card
                   v-for="doctor in doctorTable"
+                  v-if="doctor.qualification.isConfirmed==1"
                   :key="doctor.doctorId"
                   style="text-align: left"
                 >
@@ -137,6 +138,7 @@
               >
                 <van-card
                   v-for="doctor in doctorTable"
+                  v-if="doctor.qualification.isConfirmed==1"
                   :key="doctor.doctorId"
                   style="text-align: left"
                 >
@@ -201,6 +203,7 @@
               >
                 <van-card
                   v-for="doctor in doctorTable"
+                  v-if="doctor.qualification.isConfirmed==1"
                   :key="doctor.doctorId"
                   style="text-align: left"
                 >
@@ -265,6 +268,7 @@
               >
                 <van-card
                   v-for="doctor in doctorTable"
+                  v-if="doctor.qualification.isConfirmed==1"
                   :key="doctor.doctorId"
                   style="text-align: left"
                 >
@@ -329,6 +333,7 @@
               >
                 <van-card
                   v-for="doctor in doctorTable"
+                  v-if="doctor.qualification.isConfirmed==1"
                   :key="doctor.doctorId"
                   style="text-align: left"
                 >
@@ -393,6 +398,7 @@
               >
                 <van-card
                   v-for="doctor in doctorTable"
+                  v-if="doctor.qualification.isConfirmed==1"
                   :key="doctor.doctorId"
                   style="text-align: left"
                 >
@@ -469,6 +475,9 @@
           'http://img2.imgtn.bdimg.com/it/u=4091757403,1703254223&fm=200&gp=0.jpg',
           'http://img1.imgtn.bdimg.com/it/u=176315858,4073761715&fm=200&gp=0.jpg',
         ],
+        image:[
+          'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg'
+        ],
         active: 0,
         doctorTable: [],
         doctorList: [],
@@ -502,7 +511,7 @@
             LOCWIN.Cache.set('doctorInfo',data.data)
           }
         })
-        this.$router.push('/doctorInfo')
+        this.$router.push('/doctorDetail')
         console.log(doctorId)
       },
       graphicConsult(){
