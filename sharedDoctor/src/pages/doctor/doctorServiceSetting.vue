@@ -10,7 +10,330 @@
     </van-nav-bar>
     <div style="margin-top: 46px;text-align: left;">
       <van-tabs v-model="activeService" animated>
-        <van-tab title="语音问诊" style="margin-left: 4vw;width: 92vw">
+        <van-tab :title="serviceName[0]" style="margin-left: 4vw;width: 92vw;margin-right: 4vw">
+          <div>
+            <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
+              <span>
+                请输入服务价格：
+              </span>
+            </van-row>
+            <van-row style="border-bottom:1px solid #ebedf0;">
+              <van-field
+                type="number"
+                v-model="phonePrice" placeholder="请输入服务价格" />
+            </van-row>
+            <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
+              <span>
+                请选择提供服务的时间段：
+              </span>
+            </van-row>
+            <van-row style="padding: 10px 0px;">
+              <van-col span="7">
+                <span style="color: #ebedf1;text-align: left">
+                  ——————
+                </span>
+              </van-col>
+              <van-col span="10" style="text-align: center;">
+                <span style="font-size: 16px">
+                  {{this.monthTable[this.month-1]}}
+                </span>
+              </van-col>
+              <van-col span="7">
+                <span style="color: #ebedf1;text-align: right">
+                  ——————
+                </span>
+              </van-col>
+            </van-row>
+            <van-row>
+              <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[0]}}
+                </span>
+              </van-col>
+              <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[1]}}
+                </span>
+              </van-col>
+              <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[2]}}
+                </span>
+              </van-col>
+              <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[3]}}
+                </span>
+              </van-col>
+              <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[4]}}
+                </span>
+              </van-col>
+              <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[5]}}
+                </span>
+              </van-col>
+              <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[6]}}
+                </span>
+              </van-col>
+            </van-row>
+            <van-tabs v-model="activePhoneTime"
+                      swipe-threshold=7
+                      @change="currentDate=dateTable[activePhoneTime]">
+              <van-tab
+                v-for="dateIndex in 7"
+                :key="dateIndex"
+                :title="dateTable[dateIndex-1]">
+                <van-row style="border-bottom:1px solid #ebedf0;">
+                  <van-col span="6">
+                <span style="display:inline-block;vertical-align:middle;line-height: 44px;">
+                  开始时间：
+                </span>
+                  </van-col>
+                  <van-col span="18">
+                    <van-field style="padding: 10px 0px" v-model="startTime[dateIndex-1]" placeholder="请选择提供服务的开始时间"
+                               @click="chooseStartTime=true"/>
+                  </van-col>
+                </van-row>
+                <van-row style="border-bottom:1px solid #ebedf0;">
+                  <van-col span="6">
+                <span style="display:inline-block;vertical-align:middle;line-height: 44px;">
+                  结束时间：
+                </span>
+                  </van-col>
+                  <van-col span="18">
+                    <van-field style="padding: 10px 0px" v-model="endTime[dateIndex-1]" placeholder="请选择提供服务的结束时间"
+                               @click="chooseEndTime=true"/>
+                  </van-col>
+                </van-row>
+                <div v-if="phoneTimeSlotTable[dateIndex-1]!=0&&phoneTimeSlotTable[dateIndex-1]!=null">
+                  <van-row style="padding: 10px 5px;border-bottom:1px solid #ebedf0;">
+                    <span style="font-size: 16px;font-weight: bolder;">
+                      预约时间段：
+                    </span>
+                  </van-row>
+                  <div>
+                    <van-row
+                      v-for="(phoneTimeSlot,index) in phoneTimeSlotTable[dateIndex-1]"
+                      :key="phoneTimeSlot"
+                      style="padding: 10px 5px;border-bottom:1px solid #ebedf0;font-size: 16px">
+                      <van-col span="16">
+                        <span>
+                          {{phoneTimeSlot}}
+                        </span>
+                      </van-col>
+                      <van-col offset="4" span="4">
+                        <van-button size="mini" type="danger" @click="deletePhoneTimeSlot(index,dateIndex-1)" style="font-size: 16px ">
+                          删除
+                        </van-button>
+                      </van-col>
+                    </van-row>
+                  </div>
+                  <van-button style="background-color: #1989fa;color: #FFFFFF; margin-top:25px;border-radius: 6px;margin-left:3%;
+                              width: 90%;font-size: 16px"
+                              @click="savePhoneTimeSlot(dateIndex-1)">
+                    保    存
+                  </van-button>
+                </div>
+                <van-popup v-model="chooseStartTime" position="bottom"
+                           @click-overlay="setStartTime(dateIndex-1)">
+                  <van-datetime-picker
+                    title="开始时间"
+                    v-model="startTime[dateIndex-1]"
+                    type="time"
+                    :min-hour="hour+1"
+                    :max-hour="23"
+                    :min-minute="0"
+                    :max-minute="0"
+                    @confirm="setStartTime(dateIndex-1)"
+                  />
+                </van-popup>
+                <van-popup v-model="chooseEndTime" position="bottom"
+                            @click-overlay="setEndTime(dateIndex-1)">
+                  <van-datetime-picker
+                    title="结束时间"
+                    v-model="endTime[dateIndex-1]"
+                    type="time"
+                    :min-hour="tempStartTime+1"
+                    :max-hour="23"
+                    :min-minute="0"
+                    :max-minute="0"
+                    @confirm="setEndTime(dateIndex-1)"
+                  />
+                </van-popup>
+              </van-tab>
+            </van-tabs>
+          </div>
+
+        </van-tab>
+
+
+        <van-tab :title="serviceName[1]" style="margin-left: 4vw;width: 92vw;margin-right: 4vw">
+          <div>
+            <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
+              <span>
+                请输入服务价格：
+              </span>
+            </van-row>
+            <van-row style="border-bottom:1px solid #ebedf0;">
+              <van-field
+                type="number"
+                v-model="homePrice" placeholder="请输入服务价格" />
+            </van-row>
+            <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
+              <span>
+                请选择提供服务的时间段：
+              </span>
+            </van-row>
+            <van-row style="padding: 10px 0px;">
+              <van-col span="7">
+                <span style="color: #ebedf1;text-align: left">
+                  ——————
+                </span>
+              </van-col>
+              <van-col span="10" style="text-align: center;">
+                <span style="font-size: 16px">
+                  {{this.monthTable[this.month-1]}}
+                </span>
+              </van-col>
+              <van-col span="7">
+                <span style="color: #ebedf1;text-align: right">
+                  ——————
+                </span>
+              </van-col>
+            </van-row>
+            <van-row>
+              <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[0]}}
+                </span>
+              </van-col>
+              <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[1]}}
+                </span>
+              </van-col>
+              <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[2]}}
+                </span>
+              </van-col>
+              <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[3]}}
+                </span>
+              </van-col>
+              <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[4]}}
+                </span>
+              </van-col>
+              <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[5]}}
+                </span>
+              </van-col>
+              <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[6]}}
+                </span>
+              </van-col>
+            </van-row>
+            <van-tabs v-model="activeHomeTime"
+                      swipe-threshold=7
+                      @change="currentDate=dateTable[activeHomeTime]">
+              <van-tab
+                v-for="dateIndex in 7"
+                :key="dateIndex"
+                :title="dateTable[dateIndex-1]">
+                <van-row style="border-bottom:1px solid #ebedf0;">
+                  <van-col span="6">
+                <span style="display:inline-block;vertical-align:middle;line-height: 44px;">
+                  开始时间：
+                </span>
+                  </van-col>
+                  <van-col span="18">
+                    <van-field style="padding: 10px 0px" v-model="startTime[dateIndex-1]" placeholder="请选择提供服务的开始时间"
+                               @click="chooseStartTime=true"/>
+                  </van-col>
+                </van-row>
+                <van-row style="border-bottom:1px solid #ebedf0;">
+                  <van-col span="6">
+                <span style="display:inline-block;vertical-align:middle;line-height: 44px;">
+                  结束时间：
+                </span>
+                  </van-col>
+                  <van-col span="18">
+                    <van-field style="padding: 10px 0px" v-model="endTime[dateIndex-1]" placeholder="请选择提供服务的结束时间"
+                               @click="chooseEndTime=true"/>
+                  </van-col>
+                </van-row>
+                <div v-if="phoneTimeSlotTable[dateIndex-1]!=0&&phoneTimeSlotTable[dateIndex-1]!=null">
+                  <van-row style="padding: 10px 5px;border-bottom:1px solid #ebedf0;">
+                    <span style="font-size: 16px;font-weight: bolder;">
+                      预约时间段：
+                    </span>
+                  </van-row>
+                  <div>
+                    <van-row
+                      v-for="(phoneTimeSlot,index) in phoneTimeSlotTable[dateIndex-1]"
+                      :key="phoneTimeSlot"
+                      style="padding: 10px 5px;border-bottom:1px solid #ebedf0;font-size: 16px">
+                      <van-col span="16">
+                        <span>
+                          {{phoneTimeSlot}}
+                        </span>
+                      </van-col>
+                      <van-col offset="4" span="4">
+                        <van-button size="mini" type="danger" @click="deletePhoneTimeSlot(index,dateIndex-1)" style="font-size: 16px ">
+                          删除
+                        </van-button>
+                      </van-col>
+                    </van-row>
+                  </div>
+                  <van-button style="background-color: #1989fa;color: #FFFFFF; margin-top:25px;border-radius: 6px;margin-left:3%;
+                              width: 90%;font-size: 16px"
+                              @click="savePhoneTimeSlot(dateIndex-1)">
+                    保    存
+                  </van-button>
+                </div>
+                <van-popup v-model="chooseStartTime" position="bottom"
+                           @click-overlay="setStartTime(dateIndex-1)">
+                  <van-datetime-picker
+                    title="开始时间"
+                    v-model="startTime[dateIndex-1]"
+                    type="time"
+                    :min-hour="hour+1"
+                    :max-hour="23"
+                    :min-minute="0"
+                    :max-minute="0"
+                    @confirm="setStartTime(dateIndex-1)"
+                  />
+                </van-popup>
+                <van-popup v-model="chooseEndTime" position="bottom"
+                           @click-overlay="setEndTime(dateIndex-1)">
+                  <van-datetime-picker
+                    title="结束时间"
+                    v-model="endTime[dateIndex-1]"
+                    type="time"
+                    :min-hour="tempStartTime+1"
+                    :max-hour="23"
+                    :min-minute="0"
+                    :max-minute="0"
+                    @confirm="setEndTime(dateIndex-1)"
+                  />
+                </van-popup>
+              </van-tab>
+            </van-tabs>
+          </div>
+        </van-tab>
+
+
+        <van-tab :title="serviceName[2]" style="margin-left: 4vw;width: 92vw;margin-right: 4vw">
           <div>
             <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
               <span>
@@ -71,9 +394,9 @@
                 </span>
               </van-col>
             </van-row>
-            <van-tabs v-model="activeTime"
+            <van-tabs v-model="activePhoneTime"
                       swipe-threshold=7
-                      @change="currentDate=dateTable[activeTime]">
+                      @change="currentDate=dateTable[activePhoneTime]">
               <van-tab
                 v-for="dateIndex in 7"
                 :key="dateIndex"
@@ -100,7 +423,7 @@
                                @click="chooseEndTime=true"/>
                   </van-col>
                 </van-row>
-                <div v-if="phoneTimeSlotTable[dateIndex-1]!=null">
+                <div v-if="phoneTimeSlotTable[dateIndex-1]!=0&&phoneTimeSlotTable[dateIndex-1]!=null">
                   <van-row style="padding: 10px 5px;border-bottom:1px solid #ebedf0;">
                     <span style="font-size: 16px;font-weight: bolder;">
                       预约时间段：
@@ -117,7 +440,7 @@
                         </span>
                       </van-col>
                       <van-col offset="4" span="4">
-                        <van-button size="mini" type="danger" @click="deletePhoneTimeSlot(index,dateIndex-1)">
+                        <van-button size="mini" type="danger" @click="deletePhoneTimeSlot(index,dateIndex-1)" style="font-size: 16px ">
                           删除
                         </van-button>
                       </van-col>
@@ -126,7 +449,7 @@
                   <van-button style="background-color: #1989fa;color: #FFFFFF; margin-top:25px;border-radius: 6px;margin-left:3%;
                               width: 90%;font-size: 16px"
                               @click="savePhoneTimeSlot(dateIndex-1)">
-                    保存可预约时间
+                    保    存
                   </van-button>
                 </div>
                 <van-popup v-model="chooseStartTime" position="bottom"
@@ -135,7 +458,7 @@
                     title="开始时间"
                     v-model="startTime[dateIndex-1]"
                     type="time"
-                    :min-hour="0"
+                    :min-hour="hour+1"
                     :max-hour="23"
                     :min-minute="0"
                     :max-minute="0"
@@ -143,7 +466,7 @@
                   />
                 </van-popup>
                 <van-popup v-model="chooseEndTime" position="bottom"
-                            @click-overlay="setEndTime(dateIndex-1)">
+                           @click-overlay="setEndTime(dateIndex-1)">
                   <van-datetime-picker
                     title="结束时间"
                     v-model="endTime[dateIndex-1]"
@@ -158,12 +481,6 @@
               </van-tab>
             </van-tabs>
           </div>
-
-        </van-tab>
-        <van-tab title="预约上门" style="margin-left: 4vw;width: 92vw">
-
-        </van-tab>
-        <van-tab title="图文问诊" style="margin-left: 4vw;width: 92vw">
         </van-tab>
       </van-tabs>
     </div>
@@ -200,11 +517,17 @@
       this.getDate()
       this.getTime()
       this.getWeek()
+      this.getTimeslot()
     },
     data() {
       return {
         activeService: 0,
-        activeTime: 0,
+        activePhoneTime: 0,
+        serviceName:[
+          '语音问诊',
+          '预约上门',
+          '图文问诊'
+        ],
         chooseStartTime: false,
         chooseEndTime: false,
         startTime: [
@@ -254,6 +577,13 @@
           '十二月',
         ],
         phoneTimeSlotTable: [
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
         ],
         dateTable: [],
         year: '',
@@ -264,7 +594,25 @@
         minute: '',
         second: '',
         pickerVisible: '',
+        phonePrice:10,
+        homePrice:'',
       };
+    },
+    watch: {
+      'phonePrice': {
+        handler() {
+          if (this.phonePrice > 200) {
+            this.phonePrice = 200
+          }
+        }
+      },
+      'homePrice': {
+        handler() {
+          if (this.homePrice > 200) {
+            this.homePrice = 200
+          }
+        }
+      },
     },
     methods: {
       onClickLeft() {
@@ -275,7 +623,7 @@
         var ss = 24 * 60 * 60 * 1000; //一天的毫秒数86400
         var timestamp = new Date().getTime(); //获取当前时间戳
         for (var i = 0; i < 7; i++) {
-          var date1 = new Date(ss * (i + 3) + timestamp) //加上n天的国际标准日期
+          var date1 = new Date(ss * (i ) + timestamp) //加上n天的国际标准日期
           this.dateTable[i] = date1.getDate().toString()
         }
       },
@@ -286,7 +634,7 @@
         var ss = 24 * 60 * 60 * 1000; //一天的毫秒数86400
         var timestamp = new Date().getTime(); //获取当前时间戳
         for (var i = 0; i < 7; i++) {
-          var date1 = new Date(ss * (i + 3) + timestamp) //加上n天的国际标准日期
+          var date1 = new Date(ss * (i ) + timestamp) //加上n天的国际标准日期
           this.currentWeek[i] = this.weekday[date1.getDay()]
         }
         this.currentDate = this.dateTable[0]
@@ -318,16 +666,73 @@
         console.log('dateIndex '+dateIndex)
         this.phoneTimeSlotTable[dateIndex].splice(index, 1)
         console.log('phoneTimeSlotTable[dateIndex] '+this.phoneTimeSlotTable[dateIndex])
-        if(this.activeTime==0)
+        if(this.activePhoneTime==0)
         {
-          this.activeTime=1
+          this.activePhoneTime=1
         }else {
-          this.activeTime=0
+          this.activePhoneTime=0
         }
-        this.activeTime=dateIndex
+        this.activePhoneTime=dateIndex
       },
       savePhoneTimeSlot(dateIndex){
         console.log(this.phoneTimeSlotTable[dateIndex])
+        var params = {
+          price: this.phonePrice,
+          serviceName: this.serviceName[this.activeService]
+        }
+        allService.addService(params, (isOk, data) => {
+          if (isOk) {
+            var service=data.data
+            var time=Number(this.tempEndTime-this.tempStartTime)
+            console.log(time)
+            for(var i=0;i<time;i++)
+            {
+              console.log(time)
+              let tempStartDate = this.year+'-'+this.month+'-'+this.dateTable[dateIndex]+' '+(this.tempStartTime+i)+':00:00'
+              let tempEndDate = this.year+'-'+this.month+'-'+this.dateTable[dateIndex]+' '+(this.tempStartTime+i+1)+':00:00'
+              console.log(tempStartDate)
+              console.log(tempEndDate)
+              var params = {
+                doctorId:LOCWIN.Cache.get('userInfo').doctorId,
+                serviceId:service.serviceId,
+                startTime: tempStartDate,
+                endTime: tempEndDate,
+                serviceType:this.activeService,
+              }
+              allService.addTimeslot(params, (isOk, data) => {
+                if (isOk) {
+                  this.$toast.success('保存成功')
+                }
+              })
+            }
+          }
+        })
+      },
+      getTimeslot(){
+        var params = {
+          doctorId:LOCWIN.Cache.get('userInfo').doctorId,
+          serviceType:this.activeService,
+        }
+        allService.findAllByDoctorIdAndServiceType(params, (isOk, data) => {
+          if (isOk) {
+            let tempTimeTable=data.data
+            for(let i=0;i<tempTimeTable.length;i++)
+            {
+              let tableStartTime=new Date(tempTimeTable[i].startTime.substring(0,4),tempTimeTable[i].startTime.substring(5,7)-1,tempTimeTable[i].startTime.substring(8,10),tempTimeTable[i].startTime.substring(11,13))
+              console.log(tableStartTime)
+              if(tableStartTime.getTime()>=new Date().getTime())
+              {
+                let tempHour=tableStartTime.getHours()+ ':00 —— ' + (tableStartTime.getHours()+1) + ':00'
+                console.log(tempHour)
+                let tempTime=Math.ceil((tableStartTime.getTime()-new Date().getTime())/(24 * 60 * 60 * 1000))
+                console.log(tempTime)
+                // this.phoneTimeSlotTable[(tableStartTime.getTime()-new Date().getTime())/(24 * 60 * 60 * 1000)].push((tableStartTime.getHours()+ ':00 —— ' + (tableStartTime.getHours()+1) + ':00'))
+                this.phoneTimeSlotTable[tempTime].push(tempHour)
+              }
+            }
+            console.log('phoneTimeSlotTable'+this.phoneTimeSlotTable)
+          }
+        })
       }
     },
   };
