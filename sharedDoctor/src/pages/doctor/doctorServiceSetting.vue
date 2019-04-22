@@ -136,19 +136,36 @@
                       </van-col>
                     </van-row>
                   </div>
-                  <van-button style="background-color: #1989fa;color: #FFFFFF; margin-top:25px;border-radius: 6px;margin-left:3%;
-                              width: 90%;font-size: 16px"
-                              @click="savePhoneTimeSlot(dateIndex-1)">
-                    保 存
-                  </van-button>
                 </div>
-                <van-popup v-model="choosePhoneStartTime" position="bottom"
+                <van-button style="background-color: #1989fa;color: #FFFFFF; margin-top:25px;border-radius: 6px;margin-left:3%;
+                              width: 90%;font-size: 16px"
+                            @click="savePhoneTimeSlot(dateIndex-1)">
+                  保 存
+                </van-button>
+                <van-popup
+                  v-if="dateIndex==1"
+                  v-model="choosePhoneStartTime" position="bottom"
                            @click-overlay="setPhoneStartTime(dateIndex-1)">
                   <van-datetime-picker
                     title="开始时间"
                     v-model="startPhoneTime[dateIndex-1]"
                     type="time"
                     :min-hour="hour+1"
+                    :max-hour="23"
+                    :min-minute="0"
+                    :max-minute="0"
+                    @confirm="setPhoneStartTime(dateIndex-1)"
+                  />
+                </van-popup>
+                <van-popup
+                  v-else
+                  v-model="choosePhoneStartTime" position="bottom"
+                           @click-overlay="setPhoneStartTime(dateIndex-1)">
+                  <van-datetime-picker
+                    title="开始时间"
+                    v-model="startPhoneTime[dateIndex-1]"
+                    type="time"
+                    :min-hour="0"
                     :max-hour="23"
                     :min-minute="0"
                     :max-minute="0"
@@ -299,13 +316,16 @@
                       </van-col>
                     </van-row>
                   </div>
-                  <van-button style="background-color: #1989fa;color: #FFFFFF; margin-top:25px;border-radius: 6px;margin-left:3%;
-                              width: 90%;font-size: 16px"
-                              @click="saveHomeTimeSlot(dateIndex-1)">
-                    保 存
-                  </van-button>
+
                 </div>
-                <van-popup v-model="chooseHomeStartTime" position="bottom"
+                <van-button style="background-color: #1989fa;color: #FFFFFF; margin-top:25px;border-radius: 6px;margin-left:3%;
+                              width: 90%;font-size: 16px"
+                            @click="saveHomeTimeSlot(dateIndex-1)">
+                  保 存
+                </van-button>
+                <van-popup
+                  v-if="dateIndex==1"
+                  v-model="chooseHomeStartTime" position="bottom"
                            @click-overlay="setHomeStartTime(dateIndex-1)">
                   <van-datetime-picker
                     title="开始时间"
@@ -318,8 +338,23 @@
                     @confirm="setHomeStartTime(dateIndex-1)"
                   />
                 </van-popup>
+                <van-popup
+                  v-else
+                  v-model="chooseHomeStartTime" position="bottom"
+                           @click-overlay="setHomeStartTime(dateIndex-1)">
+                  <van-datetime-picker
+                    title="开始时间"
+                    v-model="startHomeTime[dateIndex-1]"
+                    type="time"
+                    :min-hour="0"
+                    :max-hour="23"
+                    :min-minute="0"
+                    :max-minute="0"
+                    @confirm="setHomeStartTime(dateIndex-1)"
+                  />
+                </van-popup>
                 <van-popup v-model="chooseHomeEndTime" position="bottom"
-                           @click-overlay="setEndTime(dateIndex-1)">
+                           @click-overlay="setHomeEndTime(dateIndex-1)">
                   <van-datetime-picker
                     title="结束时间"
                     v-model="endHomeTime[dateIndex-1]"
@@ -328,7 +363,7 @@
                     :max-hour="23"
                     :min-minute="0"
                     :max-minute="0"
-                    @confirm="setEndTime(dateIndex-1)"
+                    @confirm="setHomeEndTime(dateIndex-1)"
                   />
                 </van-popup>
               </van-tab>
@@ -567,7 +602,7 @@
       setPhoneEndTime(dateIndex) {
         this.choosePhoneEndTime = false
         console.log(this.currentDate)
-        this.tempPhoneEndTime = Number(this.endTime[dateIndex].substring(0, 2))
+        this.tempPhoneEndTime = Number(this.endPhoneTime[dateIndex].substring(0, 2))
         var tempDate = new Date(this.year, this.month - 1, this.currentDate, this.tempPhoneEndTime)
         console.log(this.tempPhoneEndTime)
         console.log(tempDate)
@@ -588,7 +623,7 @@
       setHomeEndTime(dateIndex) {
         this.chooseHomeEndTime = false
         console.log(this.currentDate)
-        this.tempPhoneEndTime = Number(this.endTime[dateIndex].substring(0, 2))
+        this.tempPhoneEndTime = Number(this.endHomeTime[dateIndex].substring(0, 2))
         var tempDate = new Date(this.year, this.month - 1, this.currentDate, this.tempPhoneEndTime)
         console.log(this.tempPhoneEndTime)
         console.log(tempDate)
@@ -624,97 +659,166 @@
       },
       savePhoneTimeSlot(dateIndex) {
         console.log(this.phoneTimeSlotTable[dateIndex])
-        var params = {
-          serviceId: this.phoneServiceId
-        }
-        allService.deleteServiceByServiceId(params, (isOk, data) => {
-          if (isOk) {
-            var params = {
-              serviceId: this.phoneServiceId
-            }
-            allService.deleteTimeslotByServiceId(params, (isOk, data) => {
-              if (isOk) {
-                var params = {
-                  price: this.phonePrice,
-                  serviceName: this.serviceName[this.activeService]
-                }
-                allService.addService(params, (isOk, data) => {
-                  if (isOk) {
-                    var service = data.data
-                    var time = Number(this.tempPhoneEndTime - this.tempPhoneStartTime)
-                    console.log(time)
-                    for (var i = 0; i < time; i++) {
+        console.log(this.phoneServiceId)
+        if(this.phoneServiceId!=''){
+          var params = {
+            serviceId: this.phoneServiceId
+          }
+          allService.deleteTimeslotByServiceId(params, (isOk, data) => {
+            if (isOk) {
+              var params = {
+                serviceId: this.phoneServiceId
+              }
+              allService.deleteServiceByServiceId(params, (isOk, data) => {
+                if (isOk) {
+                  var params = {
+                    price: this.phonePrice,
+                    serviceName: this.serviceName[this.activeService]
+                  }
+                  allService.addService(params, (isOk, data) => {
+                    if (isOk) {
+                      var service = data.data
+                      var time = Number(this.tempPhoneEndTime - this.tempPhoneStartTime)
                       console.log(time)
-                      let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempPhoneStartTime + i) + ':00:00'
-                      let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempPhoneStartTime + i + 1) + ':00:00'
-                      console.log(tempStartDate)
-                      console.log(tempEndDate)
-                      var params = {
-                        doctorId: LOCWIN.Cache.get('userInfo').doctorId,
-                        serviceId: service.serviceId,
-                        startTime: tempStartDate,
-                        endTime: tempEndDate,
-                        serviceType: this.activeService,
-                      }
-                      allService.addTimeslot(params, (isOk, data) => {
-                        if (isOk) {
-                          this.$toast.success('保存成功')
+                      for (var i = 0; i < time; i++) {
+                        console.log(time)
+                        let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempPhoneStartTime + i) + ':00:00'
+                        let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempPhoneStartTime + i + 1) + ':00:00'
+                        console.log(tempStartDate)
+                        console.log(tempEndDate)
+                        var params = {
+                          doctorId: LOCWIN.Cache.get('userInfo').doctorId,
+                          serviceId: service.serviceId,
+                          startTime: tempStartDate,
+                          endTime: tempEndDate,
+                          serviceType: this.activeService,
                         }
-                      })
+                        allService.addTimeslot(params, (isOk, data) => {
+                          if (isOk) {
+                            this.$toast.success('保存成功')
+                          }
+                        })
+                      }
                     }
+                  })
+                }
+              })
+            }
+          })
+        }else {
+          var params = {
+            price: this.phonePrice,
+            serviceName: this.serviceName[this.activeService]
+          }
+          allService.addService(params, (isOk, data) => {
+            if (isOk) {
+              var service = data.data
+              var time = Number(this.tempPhoneEndTime - this.tempPhoneStartTime)
+              console.log(time)
+              for (var i = 0; i < time; i++) {
+                console.log(time)
+                let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempPhoneStartTime + i) + ':00:00'
+                let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempPhoneStartTime + i + 1) + ':00:00'
+                console.log(tempStartDate)
+                console.log(tempEndDate)
+                var params = {
+                  doctorId: LOCWIN.Cache.get('userInfo').doctorId,
+                  serviceId: service.serviceId,
+                  startTime: tempStartDate,
+                  endTime: tempEndDate,
+                  serviceType: this.activeService,
+                }
+                allService.addTimeslot(params, (isOk, data) => {
+                  if (isOk) {
+                    this.$toast.success('保存成功')
                   }
                 })
               }
-            })
-          }
-        })
+            }
+          })
+        }
       },
       saveHomeTimeSlot(dateIndex) {
         console.log(this.homeTimeSlotTable[dateIndex])
-        var params = {
-          serviceId: this.homeServiceId
-        }
-        allService.deleteServiceByServiceId(params, (isOk, data) => {
-          if (isOk) {
-            var params = {
-              serviceId: this.homeServiceId
-            }
-            allService.deleteTimeslotByServiceId(params, (isOk, data) => {
-              if (isOk) {
-                var params = {
-                  price: this.homePrice,
-                  serviceName: this.serviceName[this.activeService]
-                }
-                allService.addService(params, (isOk, data) => {
-                  if (isOk) {
-                    var service = data.data
-                    var time = Number(this.tempPhoneEndTime - this.tempHomeStartTime)
-                    console.log(time)
-                    for (var i = 0; i < time; i++) {
+        console.log(this.homeServiceId)
+        if(this.homeServiceId!=''){
+          var params = {
+            serviceId: this.homeServiceId
+          }
+          allService.deleteServiceByServiceId(params, (isOk, data) => {
+            if (isOk) {
+              var params = {
+                serviceId: this.homeServiceId
+              }
+              allService.deleteTimeslotByServiceId(params, (isOk, data) => {
+                if (isOk) {
+                  var params = {
+                    price: this.homePrice,
+                    serviceName: this.serviceName[this.activeService]
+                  }
+                  allService.addService(params, (isOk, data) => {
+                    if (isOk) {
+                      var service = data.data
+                      var time = Number(this.tempPhoneEndTime - this.tempHomeStartTime)
                       console.log(time)
-                      let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempHomeStartTime + i) + ':00:00'
-                      let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempHomeStartTime + i + 1) + ':00:00'
-                      console.log(tempStartDate)
-                      console.log(tempEndDate)
-                      var params = {
-                        doctorId: LOCWIN.Cache.get('userInfo').doctorId,
-                        serviceId: service.serviceId,
-                        startTime: tempStartDate,
-                        endTime: tempEndDate,
-                        serviceType: this.activeService,
-                      }
-                      allService.addTimeslot(params, (isOk, data) => {
-                        if (isOk) {
-                          this.$toast.success('保存成功')
+                      for (var i = 0; i < time; i++) {
+                        console.log(time)
+                        let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempHomeStartTime + i) + ':00:00'
+                        let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempHomeStartTime + i + 1) + ':00:00'
+                        console.log(tempStartDate)
+                        console.log(tempEndDate)
+                        var params = {
+                          doctorId: LOCWIN.Cache.get('userInfo').doctorId,
+                          serviceId: service.serviceId,
+                          startTime: tempStartDate,
+                          endTime: tempEndDate,
+                          serviceType: this.activeService,
                         }
-                      })
+                        allService.addTimeslot(params, (isOk, data) => {
+                          if (isOk) {
+                            this.$toast.success('保存成功')
+                          }
+                        })
+                      }
                     }
+                  })
+                }
+              })
+            }
+          })
+        }else {
+          var params = {
+            price: this.homePrice,
+            serviceName: this.serviceName[this.activeService]
+          }
+          allService.addService(params, (isOk, data) => {
+            if (isOk) {
+              var service = data.data
+              var time = Number(this.tempPhoneEndTime - this.tempHomeStartTime)
+              console.log(time)
+              for (var i = 0; i < time; i++) {
+                console.log(time)
+                let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempHomeStartTime + i) + ':00:00'
+                let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempHomeStartTime + i + 1) + ':00:00'
+                console.log(tempStartDate)
+                console.log(tempEndDate)
+                var params = {
+                  doctorId: LOCWIN.Cache.get('userInfo').doctorId,
+                  serviceId: service.serviceId,
+                  startTime: tempStartDate,
+                  endTime: tempEndDate,
+                  serviceType: this.activeService,
+                }
+                allService.addTimeslot(params, (isOk, data) => {
+                  if (isOk) {
+                    this.$toast.success('保存成功')
                   }
                 })
               }
-            })
-          }
-        })
+            }
+          })
+        }
+
       },
       saveGraphicPrice() {
         var params = {
