@@ -13,7 +13,7 @@ export default class AllService {
       // addTimeSlot: '/timeslot/add',
       // deleteTimeSlotById: '/timeSlot/delete',
       // getDoctorTable: '/doctor/findAllDoctor',
-      // addOrder: '/order/add',
+      addOrder: '/order/addOrder',
       // addMessage: '/message/add',
       // deleteMessage: '/message/delete',
       // getDoctorByName: '/doctor/findDoctorByName',
@@ -70,10 +70,17 @@ export default class AllService {
       updateQualificationByQualificationId: '/qualification/updateQualificationByQualificationId',
 
       addService:'/service/addService',
+      deleteServiceByServiceId:'/service/deleteServiceByServiceId',
+      findServiceByServiceId:'/service/findServiceByServiceId',
+
 
       addTimeslot:'/timeslot/addTimeslot',
       findAllByDoctorIdAndServiceType:'/timeslot/findAllByDoctorIdAndServiceType',
-      deleteTimeslotByTimeId:'/timeslot/deleteTimeslotByTimeId'
+      deleteTimeslotByTimeId:'/timeslot/deleteTimeslotByTimeId',
+      deleteTimeslotByServiceId:'/timeslot/deleteTimeslotByServiceId'
+
+
+
     }
   }
 
@@ -231,15 +238,16 @@ export default class AllService {
 //       }
 //     }, "application/json");
 //   }
-//   addOrder(params,callback){
-//     var url = this.host + this.method.addOrder;
-//     var type = 'post';
-//     return this.bizRequest(url, params, type, function(isOk, data) {
-//       if (callback) {
-//         callback(isOk, data);
-//       }
-//     }, "application/json");
-//   }
+
+  addOrder(params,callback){
+    var url = this.host + this.method.addOrder;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function(isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
 //   getAllMessage(params,callback){
 //     var url = this.host + this.method.getAllMessage;
 //     var type = 'post';
@@ -721,6 +729,26 @@ export default class AllService {
     }, "application/json");
   }
 
+  findServiceByServiceId(params, callback) {
+    var url = this.host + this.method.findServiceByServiceId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  deleteServiceByServiceId(params, callback) {
+    var url = this.host + this.method.deleteServiceByServiceId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
   findAllByDoctorIdAndServiceType(params, callback) {
     var url = this.host + this.method.findAllByDoctorIdAndServiceType;
     var type = 'post';
@@ -743,6 +771,16 @@ export default class AllService {
 
   deleteTimeslotByTimeId(params, callback) {
     var url = this.host + this.method.deleteTimeslotByTimeId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  deleteTimeslotByServiceId(params, callback) {
+    var url = this.host + this.method.deleteTimeslotByServiceId;
     var type = 'post';
     return this.bizRequest(url, params, type, function (isOk, data) {
       if (callback) {

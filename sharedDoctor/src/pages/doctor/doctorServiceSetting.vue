@@ -10,6 +10,7 @@
     </van-nav-bar>
     <div style="margin-top: 46px;text-align: left;">
       <van-tabs v-model="activeService" animated>
+        <!--语音问诊-->
         <van-tab :title="serviceName[0]" style="margin-left: 4vw;width: 92vw;margin-right: 4vw">
           <div>
             <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
@@ -20,7 +21,7 @@
             <van-row style="border-bottom:1px solid #ebedf0;">
               <van-field
                 type="number"
-                v-model="phonePrice" placeholder="请输入服务价格" />
+                v-model="phonePrice" placeholder="请输入服务价格"/>
             </van-row>
             <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
               <span>
@@ -95,8 +96,9 @@
                 </span>
                   </van-col>
                   <van-col span="18">
-                    <van-field style="padding: 10px 0px" v-model="startTime[dateIndex-1]" placeholder="请选择提供服务的开始时间"
-                               @click="chooseStartTime=true"/>
+                    <van-field style="padding: 10px 0px" v-model="startPhoneTime[dateIndex-1]"
+                               placeholder="请选择提供服务的开始时间"
+                               @click="choosePhoneStartTime=true"/>
                   </van-col>
                 </van-row>
                 <van-row style="border-bottom:1px solid #ebedf0;">
@@ -106,8 +108,8 @@
                 </span>
                   </van-col>
                   <van-col span="18">
-                    <van-field style="padding: 10px 0px" v-model="endTime[dateIndex-1]" placeholder="请选择提供服务的结束时间"
-                               @click="chooseEndTime=true"/>
+                    <van-field style="padding: 10px 0px" v-model="endPhoneTime[dateIndex-1]" placeholder="请选择提供服务的结束时间"
+                               @click="choosePhoneEndTime=true"/>
                   </van-col>
                 </van-row>
                 <div v-if="phoneTimeSlotTable[dateIndex-1]!=0&&phoneTimeSlotTable[dateIndex-1]!=null">
@@ -127,7 +129,8 @@
                         </span>
                       </van-col>
                       <van-col offset="4" span="4">
-                        <van-button size="mini" type="danger" @click="deletePhoneTimeSlot(index,dateIndex-1)" style="font-size: 16px ">
+                        <van-button size="mini" type="danger" @click="deletePhoneTimeSlot(index,dateIndex-1)"
+                                    style="font-size: 16px ">
                           删除
                         </van-button>
                       </van-col>
@@ -136,33 +139,33 @@
                   <van-button style="background-color: #1989fa;color: #FFFFFF; margin-top:25px;border-radius: 6px;margin-left:3%;
                               width: 90%;font-size: 16px"
                               @click="savePhoneTimeSlot(dateIndex-1)">
-                    保    存
+                    保 存
                   </van-button>
                 </div>
-                <van-popup v-model="chooseStartTime" position="bottom"
-                           @click-overlay="setStartTime(dateIndex-1)">
+                <van-popup v-model="choosePhoneStartTime" position="bottom"
+                           @click-overlay="setPhoneStartTime(dateIndex-1)">
                   <van-datetime-picker
                     title="开始时间"
-                    v-model="startTime[dateIndex-1]"
+                    v-model="startPhoneTime[dateIndex-1]"
                     type="time"
                     :min-hour="hour+1"
                     :max-hour="23"
                     :min-minute="0"
                     :max-minute="0"
-                    @confirm="setStartTime(dateIndex-1)"
+                    @confirm="setPhoneStartTime(dateIndex-1)"
                   />
                 </van-popup>
-                <van-popup v-model="chooseEndTime" position="bottom"
-                            @click-overlay="setEndTime(dateIndex-1)">
+                <van-popup v-model="choosePhoneEndTime" position="bottom"
+                           @click-overlay="setPhoneEndTime(dateIndex-1)">
                   <van-datetime-picker
                     title="结束时间"
-                    v-model="endTime[dateIndex-1]"
+                    v-model="endPhoneTime[dateIndex-1]"
                     type="time"
-                    :min-hour="tempStartTime+1"
+                    :min-hour="tempPhoneStartTime+1"
                     :max-hour="23"
                     :min-minute="0"
                     :max-minute="0"
-                    @confirm="setEndTime(dateIndex-1)"
+                    @confirm="setPhoneEndTime(dateIndex-1)"
                   />
                 </van-popup>
               </van-tab>
@@ -171,7 +174,7 @@
 
         </van-tab>
 
-
+        <!--上门服务-->
         <van-tab :title="serviceName[1]" style="margin-left: 4vw;width: 92vw;margin-right: 4vw">
           <div>
             <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
@@ -182,7 +185,7 @@
             <van-row style="border-bottom:1px solid #ebedf0;">
               <van-field
                 type="number"
-                v-model="homePrice" placeholder="请输入服务价格" />
+                v-model="homePrice" placeholder="请输入服务价格"/>
             </van-row>
             <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
               <span>
@@ -257,8 +260,8 @@
                 </span>
                   </van-col>
                   <van-col span="18">
-                    <van-field style="padding: 10px 0px" v-model="startTime[dateIndex-1]" placeholder="请选择提供服务的开始时间"
-                               @click="chooseStartTime=true"/>
+                    <van-field style="padding: 10px 0px" v-model="startHomeTime[dateIndex-1]" placeholder="请选择提供服务的开始时间"
+                               @click="chooseHomeStartTime=true"/>
                   </van-col>
                 </van-row>
                 <van-row style="border-bottom:1px solid #ebedf0;">
@@ -268,11 +271,11 @@
                 </span>
                   </van-col>
                   <van-col span="18">
-                    <van-field style="padding: 10px 0px" v-model="endTime[dateIndex-1]" placeholder="请选择提供服务的结束时间"
-                               @click="chooseEndTime=true"/>
+                    <van-field style="padding: 10px 0px" v-model="endHomeTime[dateIndex-1]" placeholder="请选择提供服务的结束时间"
+                               @click="chooseHomeEndTime=true"/>
                   </van-col>
                 </van-row>
-                <div v-if="phoneTimeSlotTable[dateIndex-1]!=0&&phoneTimeSlotTable[dateIndex-1]!=null">
+                <div v-if="homeTimeSlotTable[dateIndex-1]!=0&&homeTimeSlotTable[dateIndex-1]!=null">
                   <van-row style="padding: 10px 5px;border-bottom:1px solid #ebedf0;">
                     <span style="font-size: 16px;font-weight: bolder;">
                       预约时间段：
@@ -280,16 +283,17 @@
                   </van-row>
                   <div>
                     <van-row
-                      v-for="(phoneTimeSlot,index) in phoneTimeSlotTable[dateIndex-1]"
-                      :key="phoneTimeSlot"
+                      v-for="(homeTimeSlot,index) in homeTimeSlotTable[dateIndex-1]"
+                      :key="homeTimeSlot"
                       style="padding: 10px 5px;border-bottom:1px solid #ebedf0;font-size: 16px">
                       <van-col span="16">
                         <span>
-                          {{phoneTimeSlot}}
+                          {{homeTimeSlot}}
                         </span>
                       </van-col>
                       <van-col offset="4" span="4">
-                        <van-button size="mini" type="danger" @click="deletePhoneTimeSlot(index,dateIndex-1)" style="font-size: 16px ">
+                        <van-button size="mini" type="danger" @click="deleteHomeTimeSlot(index,dateIndex-1)"
+                                    style="font-size: 16px ">
                           删除
                         </van-button>
                       </van-col>
@@ -297,30 +301,30 @@
                   </div>
                   <van-button style="background-color: #1989fa;color: #FFFFFF; margin-top:25px;border-radius: 6px;margin-left:3%;
                               width: 90%;font-size: 16px"
-                              @click="savePhoneTimeSlot(dateIndex-1)">
-                    保    存
+                              @click="saveHomeTimeSlot(dateIndex-1)">
+                    保 存
                   </van-button>
                 </div>
-                <van-popup v-model="chooseStartTime" position="bottom"
-                           @click-overlay="setStartTime(dateIndex-1)">
+                <van-popup v-model="chooseHomeStartTime" position="bottom"
+                           @click-overlay="setHomeStartTime(dateIndex-1)">
                   <van-datetime-picker
                     title="开始时间"
-                    v-model="startTime[dateIndex-1]"
+                    v-model="startHomeTime[dateIndex-1]"
                     type="time"
                     :min-hour="hour+1"
                     :max-hour="23"
                     :min-minute="0"
                     :max-minute="0"
-                    @confirm="setStartTime(dateIndex-1)"
+                    @confirm="setHomeStartTime(dateIndex-1)"
                   />
                 </van-popup>
-                <van-popup v-model="chooseEndTime" position="bottom"
+                <van-popup v-model="chooseHomeEndTime" position="bottom"
                            @click-overlay="setEndTime(dateIndex-1)">
                   <van-datetime-picker
                     title="结束时间"
-                    v-model="endTime[dateIndex-1]"
+                    v-model="endHomeTime[dateIndex-1]"
                     type="time"
-                    :min-hour="tempStartTime+1"
+                    :min-hour="tempHomeStartTime+1"
                     :max-hour="23"
                     :min-minute="0"
                     :max-minute="0"
@@ -337,149 +341,19 @@
           <div>
             <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
               <span>
-                请选择提供服务的时间段：
+                请输入服务价格：
               </span>
             </van-row>
-            <van-row style="padding: 10px 0px;">
-              <van-col span="7">
-                <span style="color: #ebedf1;text-align: left">
-                  ——————
-                </span>
-              </van-col>
-              <van-col span="10" style="text-align: center;">
-                <span style="font-size: 16px">
-                  {{this.monthTable[this.month-1]}}
-                </span>
-              </van-col>
-              <van-col span="7">
-                <span style="color: #ebedf1;text-align: right">
-                  ——————
-                </span>
-              </van-col>
+            <van-row style="border-bottom:1px solid #ebedf0;">
+              <van-field
+                type="number"
+                v-model="graphicPrice" placeholder="请输入服务价格"/>
             </van-row>
-            <van-row>
-              <van-col style="width: 13.14vw;text-align: center">
-                <span>
-                  {{this.currentWeek[0]}}
-                </span>
-              </van-col>
-              <van-col style="width: 13.14vw;text-align: center">
-                <span>
-                  {{this.currentWeek[1]}}
-                </span>
-              </van-col>
-              <van-col style="width: 13.14vw;text-align: center">
-                <span>
-                  {{this.currentWeek[2]}}
-                </span>
-              </van-col>
-              <van-col style="width: 13.14vw;text-align: center">
-                <span>
-                  {{this.currentWeek[3]}}
-                </span>
-              </van-col>
-              <van-col style="width: 13.14vw;text-align: center">
-                <span>
-                  {{this.currentWeek[4]}}
-                </span>
-              </van-col>
-              <van-col style="width: 13.14vw;text-align: center">
-                <span>
-                  {{this.currentWeek[5]}}
-                </span>
-              </van-col>
-              <van-col style="width: 13.14vw;text-align: center">
-                <span>
-                  {{this.currentWeek[6]}}
-                </span>
-              </van-col>
-            </van-row>
-            <van-tabs v-model="activePhoneTime"
-                      swipe-threshold=7
-                      @change="currentDate=dateTable[activePhoneTime]">
-              <van-tab
-                v-for="dateIndex in 7"
-                :key="dateIndex"
-                :title="dateTable[dateIndex-1]">
-                <van-row style="border-bottom:1px solid #ebedf0;">
-                  <van-col span="6">
-                <span style="display:inline-block;vertical-align:middle;line-height: 44px;">
-                  开始时间：
-                </span>
-                  </van-col>
-                  <van-col span="18">
-                    <van-field style="padding: 10px 0px" v-model="startTime[dateIndex-1]" placeholder="请选择提供服务的开始时间"
-                               @click="chooseStartTime=true"/>
-                  </van-col>
-                </van-row>
-                <van-row style="border-bottom:1px solid #ebedf0;">
-                  <van-col span="6">
-                <span style="display:inline-block;vertical-align:middle;line-height: 44px;">
-                  结束时间：
-                </span>
-                  </van-col>
-                  <van-col span="18">
-                    <van-field style="padding: 10px 0px" v-model="endTime[dateIndex-1]" placeholder="请选择提供服务的结束时间"
-                               @click="chooseEndTime=true"/>
-                  </van-col>
-                </van-row>
-                <div v-if="phoneTimeSlotTable[dateIndex-1]!=0&&phoneTimeSlotTable[dateIndex-1]!=null">
-                  <van-row style="padding: 10px 5px;border-bottom:1px solid #ebedf0;">
-                    <span style="font-size: 16px;font-weight: bolder;">
-                      预约时间段：
-                    </span>
-                  </van-row>
-                  <div>
-                    <van-row
-                      v-for="(phoneTimeSlot,index) in phoneTimeSlotTable[dateIndex-1]"
-                      :key="phoneTimeSlot"
-                      style="padding: 10px 5px;border-bottom:1px solid #ebedf0;font-size: 16px">
-                      <van-col span="16">
-                        <span>
-                          {{phoneTimeSlot}}
-                        </span>
-                      </van-col>
-                      <van-col offset="4" span="4">
-                        <van-button size="mini" type="danger" @click="deletePhoneTimeSlot(index,dateIndex-1)" style="font-size: 16px ">
-                          删除
-                        </van-button>
-                      </van-col>
-                    </van-row>
-                  </div>
-                  <van-button style="background-color: #1989fa;color: #FFFFFF; margin-top:25px;border-radius: 6px;margin-left:3%;
+            <van-button style="background-color: #1989fa;color: #FFFFFF; margin-top:25px;border-radius: 6px;margin-left:3%;
                               width: 90%;font-size: 16px"
-                              @click="savePhoneTimeSlot(dateIndex-1)">
-                    保    存
-                  </van-button>
-                </div>
-                <van-popup v-model="chooseStartTime" position="bottom"
-                           @click-overlay="setStartTime(dateIndex-1)">
-                  <van-datetime-picker
-                    title="开始时间"
-                    v-model="startTime[dateIndex-1]"
-                    type="time"
-                    :min-hour="hour+1"
-                    :max-hour="23"
-                    :min-minute="0"
-                    :max-minute="0"
-                    @confirm="setStartTime(dateIndex-1)"
-                  />
-                </van-popup>
-                <van-popup v-model="chooseEndTime" position="bottom"
-                           @click-overlay="setEndTime(dateIndex-1)">
-                  <van-datetime-picker
-                    title="结束时间"
-                    v-model="endTime[dateIndex-1]"
-                    type="time"
-                    :min-hour="tempStartTime+1"
-                    :max-hour="23"
-                    :min-minute="0"
-                    :max-minute="0"
-                    @confirm="setEndTime(dateIndex-1)"
-                  />
-                </van-popup>
-              </van-tab>
-            </van-tabs>
+                        @click="saveGraphicPrice">
+              保 存
+            </van-button>
           </div>
         </van-tab>
       </van-tabs>
@@ -517,20 +391,24 @@
       this.getDate()
       this.getTime()
       this.getWeek()
-      this.getTimeslot()
+      this.getPhoneTimeslot()
+      this.getHomeTimeslot()
     },
     data() {
       return {
         activeService: 0,
         activePhoneTime: 0,
-        serviceName:[
+        activeHomeTime: 0,
+        serviceName: [
           '语音问诊',
           '预约上门',
           '图文问诊'
         ],
-        chooseStartTime: false,
-        chooseEndTime: false,
-        startTime: [
+        choosePhoneStartTime: false,
+        choosePhoneEndTime: false,
+        chooseHomeStartTime: false,
+        chooseHomeEndTime: false,
+        startPhoneTime: [
           '00:00',
           '00:00',
           '00:00',
@@ -539,7 +417,7 @@
           '00:00',
           '00:00',
         ],
-        endTime: [
+        endPhoneTime: [
           '00:00',
           '00:00',
           '00:00',
@@ -548,8 +426,28 @@
           '00:00',
           '00:00',
         ],
-        tempStartTime: 0,
-        tempEndTime: 0,
+        startHomeTime: [
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+        ],
+        endHomeTime: [
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+        ],
+        tempPhoneStartTime: 0,
+        tempPhoneEndTime: 0,
+        tempHomeStartTime: 0,
+        tempHomeEndTime: 0,
         currentTime: '',
         currentDate: '',
         currentWeek: [],
@@ -585,6 +483,15 @@
           [],
           []
         ],
+        homeTimeSlotTable: [
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
         dateTable: [],
         year: '',
         month: '',
@@ -593,9 +500,11 @@
         hour: '',
         minute: '',
         second: '',
-        pickerVisible: '',
-        phonePrice:10,
-        homePrice:'',
+        phonePrice: 10,
+        homePrice: 20,
+        graphicPrice: 5,
+        phoneServiceId: '',
+        homeServiceId: '',
       };
     },
     watch: {
@@ -613,6 +522,13 @@
           }
         }
       },
+      'graphicPrice': {
+        handler() {
+          if (this.graphicPrice > 200) {
+            this.graphicPrice = 200
+          }
+        }
+      },
     },
     methods: {
       onClickLeft() {
@@ -623,7 +539,7 @@
         var ss = 24 * 60 * 60 * 1000; //一天的毫秒数86400
         var timestamp = new Date().getTime(); //获取当前时间戳
         for (var i = 0; i < 7; i++) {
-          var date1 = new Date(ss * (i ) + timestamp) //加上n天的国际标准日期
+          var date1 = new Date(ss * (i) + timestamp) //加上n天的国际标准日期
           this.dateTable[i] = date1.getDate().toString()
         }
       },
@@ -634,103 +550,234 @@
         var ss = 24 * 60 * 60 * 1000; //一天的毫秒数86400
         var timestamp = new Date().getTime(); //获取当前时间戳
         for (var i = 0; i < 7; i++) {
-          var date1 = new Date(ss * (i ) + timestamp) //加上n天的国际标准日期
+          var date1 = new Date(ss * (i) + timestamp) //加上n天的国际标准日期
           this.currentWeek[i] = this.weekday[date1.getDay()]
         }
         this.currentDate = this.dateTable[0]
         console.log(this.currentWeek)
       },
-      setStartTime(dateIndex) {
-        this.chooseStartTime = false
+      setPhoneStartTime(dateIndex) {
+        this.choosePhoneStartTime = false
         console.log(this.currentDate)
-        this.tempStartTime = Number(this.startTime[dateIndex].substring(0, 2))
-        var tempDate = new Date(this.year, this.month - 1, this.currentDate, this.tempStartTime)
-        console.log(this.tempStartTime)
+        this.tempPhoneStartTime = Number(this.startPhoneTime[dateIndex].substring(0, 2))
+        var tempDate = new Date(this.year, this.month - 1, this.currentDate, this.tempPhoneStartTime)
+        console.log(this.tempPhoneStartTime)
         console.log(tempDate)
       },
-      setEndTime(dateIndex) {
-        this.chooseEndTime = false
+      setPhoneEndTime(dateIndex) {
+        this.choosePhoneEndTime = false
         console.log(this.currentDate)
-        this.tempEndTime = Number(this.endTime[dateIndex].substring(0, 2))
-        var tempDate = new Date(this.year, this.month - 1, this.currentDate, this.tempEndTime)
-        console.log(this.tempEndTime)
+        this.tempPhoneEndTime = Number(this.endTime[dateIndex].substring(0, 2))
+        var tempDate = new Date(this.year, this.month - 1, this.currentDate, this.tempPhoneEndTime)
+        console.log(this.tempPhoneEndTime)
         console.log(tempDate)
         this.phoneTimeSlotTable[dateIndex] = []
-        for (var i = 0; i < this.tempEndTime - this.tempStartTime; i++) {
-          this.phoneTimeSlotTable[dateIndex][i] = (this.tempStartTime + i) + ':00 —— ' + (this.tempStartTime + i + 1) + ':00'
+        for (var i = 0; i < this.tempPhoneEndTime - this.tempPhoneStartTime; i++) {
+          this.phoneTimeSlotTable[dateIndex][i] = (this.tempPhoneStartTime + i) + ':00 —— ' + (this.tempPhoneStartTime + i + 1) + ':00'
         }
         console.log(this.phoneTimeSlotTable)
       },
-      deletePhoneTimeSlot(index,dateIndex){
-        console.log('index '+index)
-        console.log('dateIndex '+dateIndex)
-        this.phoneTimeSlotTable[dateIndex].splice(index, 1)
-        console.log('phoneTimeSlotTable[dateIndex] '+this.phoneTimeSlotTable[dateIndex])
-        if(this.activePhoneTime==0)
-        {
-          this.activePhoneTime=1
-        }else {
-          this.activePhoneTime=0
-        }
-        this.activePhoneTime=dateIndex
+      setHomeStartTime(dateIndex) {
+        this.chooseHomeStartTime = false
+        console.log(this.currentDate)
+        this.tempHomeStartTime = Number(this.startHomeTime[dateIndex].substring(0, 2))
+        var tempDate = new Date(this.year, this.month - 1, this.currentDate, this.tempHomeStartTime)
+        console.log(this.tempHomeStartTime)
+        console.log(tempDate)
       },
-      savePhoneTimeSlot(dateIndex){
+      setHomeEndTime(dateIndex) {
+        this.chooseHomeEndTime = false
+        console.log(this.currentDate)
+        this.tempPhoneEndTime = Number(this.endTime[dateIndex].substring(0, 2))
+        var tempDate = new Date(this.year, this.month - 1, this.currentDate, this.tempPhoneEndTime)
+        console.log(this.tempPhoneEndTime)
+        console.log(tempDate)
+        this.homeTimeSlotTable[dateIndex] = []
+        for (var i = 0; i < this.tempPhoneEndTime - this.tempHomeStartTime; i++) {
+          this.homeTimeSlotTable[dateIndex][i] = (this.tempHomeStartTime + i) + ':00 —— ' + (this.tempHomeStartTime + i + 1) + ':00'
+        }
+        console.log(this.homeTimeSlotTable)
+      },
+      deletePhoneTimeSlot(index, dateIndex) {
+        console.log('index ' + index)
+        console.log('dateIndex ' + dateIndex)
+        this.phoneTimeSlotTable[dateIndex].splice(index, 1)
+        console.log('phoneTimeSlotTable[dateIndex] ' + this.phoneTimeSlotTable[dateIndex])
+        if (this.activePhoneTime == 0) {
+          this.activePhoneTime = 1
+        } else {
+          this.activePhoneTime = 0
+        }
+        this.activePhoneTime = dateIndex
+      },
+      deleteHomeTimeSlot(index, dateIndex) {
+        console.log('index ' + index)
+        console.log('dateIndex ' + dateIndex)
+        this.homeTimeSlotTable[dateIndex].splice(index, 1)
+        console.log('homeTimeSlotTable[dateIndex] ' + this.homeTimeSlotTable[dateIndex])
+        if (this.activeHomeTime == 0) {
+          this.activeHomeTime = 1
+        } else {
+          this.activeHomeTime = 0
+        }
+        this.activeHomeTime = dateIndex
+      },
+      savePhoneTimeSlot(dateIndex) {
         console.log(this.phoneTimeSlotTable[dateIndex])
         var params = {
-          price: this.phonePrice,
+          serviceId: this.phoneServiceId
+        }
+        allService.deleteServiceByServiceId(params, (isOk, data) => {
+          if (isOk) {
+            var params = {
+              serviceId: this.phoneServiceId
+            }
+            allService.deleteTimeslotByServiceId(params, (isOk, data) => {
+              if (isOk) {
+                var params = {
+                  price: this.phonePrice,
+                  serviceName: this.serviceName[this.activeService]
+                }
+                allService.addService(params, (isOk, data) => {
+                  if (isOk) {
+                    var service = data.data
+                    var time = Number(this.tempPhoneEndTime - this.tempPhoneStartTime)
+                    console.log(time)
+                    for (var i = 0; i < time; i++) {
+                      console.log(time)
+                      let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempPhoneStartTime + i) + ':00:00'
+                      let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempPhoneStartTime + i + 1) + ':00:00'
+                      console.log(tempStartDate)
+                      console.log(tempEndDate)
+                      var params = {
+                        doctorId: LOCWIN.Cache.get('userInfo').doctorId,
+                        serviceId: service.serviceId,
+                        startTime: tempStartDate,
+                        endTime: tempEndDate,
+                        serviceType: this.activeService,
+                      }
+                      allService.addTimeslot(params, (isOk, data) => {
+                        if (isOk) {
+                          this.$toast.success('保存成功')
+                        }
+                      })
+                    }
+                  }
+                })
+              }
+            })
+          }
+        })
+      },
+      saveHomeTimeSlot(dateIndex) {
+        console.log(this.homeTimeSlotTable[dateIndex])
+        var params = {
+          serviceId: this.homeServiceId
+        }
+        allService.deleteServiceByServiceId(params, (isOk, data) => {
+          if (isOk) {
+            var params = {
+              serviceId: this.homeServiceId
+            }
+            allService.deleteTimeslotByServiceId(params, (isOk, data) => {
+              if (isOk) {
+                var params = {
+                  price: this.homePrice,
+                  serviceName: this.serviceName[this.activeService]
+                }
+                allService.addService(params, (isOk, data) => {
+                  if (isOk) {
+                    var service = data.data
+                    var time = Number(this.tempPhoneEndTime - this.tempHomeStartTime)
+                    console.log(time)
+                    for (var i = 0; i < time; i++) {
+                      console.log(time)
+                      let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempHomeStartTime + i) + ':00:00'
+                      let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempHomeStartTime + i + 1) + ':00:00'
+                      console.log(tempStartDate)
+                      console.log(tempEndDate)
+                      var params = {
+                        doctorId: LOCWIN.Cache.get('userInfo').doctorId,
+                        serviceId: service.serviceId,
+                        startTime: tempStartDate,
+                        endTime: tempEndDate,
+                        serviceType: this.activeService,
+                      }
+                      allService.addTimeslot(params, (isOk, data) => {
+                        if (isOk) {
+                          this.$toast.success('保存成功')
+                        }
+                      })
+                    }
+                  }
+                })
+              }
+            })
+          }
+        })
+      },
+      saveGraphicPrice() {
+        var params = {
+          price: this.graphicPrice,
           serviceName: this.serviceName[this.activeService]
         }
         allService.addService(params, (isOk, data) => {
           if (isOk) {
-            var service=data.data
-            var time=Number(this.tempEndTime-this.tempStartTime)
-            console.log(time)
-            for(var i=0;i<time;i++)
-            {
-              console.log(time)
-              let tempStartDate = this.year+'-'+this.month+'-'+this.dateTable[dateIndex]+' '+(this.tempStartTime+i)+':00:00'
-              let tempEndDate = this.year+'-'+this.month+'-'+this.dateTable[dateIndex]+' '+(this.tempStartTime+i+1)+':00:00'
-              console.log(tempStartDate)
-              console.log(tempEndDate)
-              var params = {
-                doctorId:LOCWIN.Cache.get('userInfo').doctorId,
-                serviceId:service.serviceId,
-                startTime: tempStartDate,
-                endTime: tempEndDate,
-                serviceType:this.activeService,
-              }
-              allService.addTimeslot(params, (isOk, data) => {
-                if (isOk) {
-                  this.$toast.success('保存成功')
-                }
-              })
-            }
+            var service = data.data
+            console.log(service)
+            this.$toast.success('保存成功')
           }
         })
-      },
-      getTimeslot(){
+      }
+      ,
+      getPhoneTimeslot() {
         var params = {
-          doctorId:LOCWIN.Cache.get('userInfo').doctorId,
-          serviceType:this.activeService,
+          doctorId: LOCWIN.Cache.get('userInfo').doctorId,
+          serviceType: 0,
         }
         allService.findAllByDoctorIdAndServiceType(params, (isOk, data) => {
           if (isOk) {
-            let tempTimeTable=data.data
-            for(let i=0;i<tempTimeTable.length;i++)
-            {
-              let tableStartTime=new Date(tempTimeTable[i].startTime.substring(0,4),tempTimeTable[i].startTime.substring(5,7)-1,tempTimeTable[i].startTime.substring(8,10),tempTimeTable[i].startTime.substring(11,13))
+            let tempTimeTable = data.data
+            for (let i = 0; i < tempTimeTable.length; i++) {
+              let tableStartTime = new Date(tempTimeTable[i].startTime.substring(0, 4), tempTimeTable[i].startTime.substring(5, 7) - 1, tempTimeTable[i].startTime.substring(8, 10), tempTimeTable[i].startTime.substring(11, 13))
               console.log(tableStartTime)
-              if(tableStartTime.getTime()>=new Date().getTime())
-              {
-                let tempHour=tableStartTime.getHours()+ ':00 —— ' + (tableStartTime.getHours()+1) + ':00'
+              if (tableStartTime.getTime() >= new Date().getTime()) {
+                let tempHour = tableStartTime.getHours() + ':00 —— ' + (tableStartTime.getHours() + 1) + ':00'
                 console.log(tempHour)
-                let tempTime=Math.ceil((tableStartTime.getTime()-new Date().getTime())/(24 * 60 * 60 * 1000))
+                let tempTime = Math.ceil((tableStartTime.getTime() - new Date().getTime()) / (24 * 60 * 60 * 1000))
                 console.log(tempTime)
                 // this.phoneTimeSlotTable[(tableStartTime.getTime()-new Date().getTime())/(24 * 60 * 60 * 1000)].push((tableStartTime.getHours()+ ':00 —— ' + (tableStartTime.getHours()+1) + ':00'))
                 this.phoneTimeSlotTable[tempTime].push(tempHour)
               }
+              this.phoneServiceId = tempTimeTable[i].serviceId
             }
-            console.log('phoneTimeSlotTable'+this.phoneTimeSlotTable)
+            console.log('phoneTimeSlotTable' + this.phoneTimeSlotTable)
+          }
+        })
+      }
+      ,
+      getHomeTimeslot() {
+        var params = {
+          doctorId: LOCWIN.Cache.get('userInfo').doctorId,
+          serviceType: 1,
+        }
+        allService.findAllByDoctorIdAndServiceType(params, (isOk, data) => {
+          if (isOk) {
+            let tempTimeTable = data.data
+            for (let i = 0; i < tempTimeTable.length; i++) {
+              let tableStartTime = new Date(tempTimeTable[i].startTime.substring(0, 4), tempTimeTable[i].startTime.substring(5, 7) - 1, tempTimeTable[i].startTime.substring(8, 10), tempTimeTable[i].startTime.substring(11, 13))
+              console.log(tableStartTime)
+              if (tableStartTime.getTime() >= new Date().getTime()) {
+                let tempHour = tableStartTime.getHours() + ':00 —— ' + (tableStartTime.getHours() + 1) + ':00'
+                console.log(tempHour)
+                let tempTime = Math.ceil((tableStartTime.getTime() - new Date().getTime()) / (24 * 60 * 60 * 1000))
+                console.log(tempTime)
+                // this.phoneTimeSlotTable[(tableStartTime.getTime()-new Date().getTime())/(24 * 60 * 60 * 1000)].push((tableStartTime.getHours()+ ':00 —— ' + (tableStartTime.getHours()+1) + ':00'))
+                this.homeTimeSlotTable[tempTime].push(tempHour)
+              }
+              this.homeServiceId = tempTimeTable[i].serviceId
+            }
+            console.log('homeTimeSlotTable' + this.homeTimeSlotTable)
           }
         })
       }

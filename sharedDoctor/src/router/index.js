@@ -14,7 +14,9 @@ const my = resolve => require(['../pages/my.vue'], resolve)
 const consult = resolve => require(['../pages/consult.vue'], resolve)
 const graphicConsult = resolve => require(['../pages/consult/graphicConsult.vue'], resolve)
 const payConsult = resolve => require(['../pages/consult/payConsult.vue'], resolve)
+const payPhone = resolve => require(['../pages/consult/payPhone.vue'], resolve)
 const reserveDoctor = resolve => require(['../pages/consult/reserveDoctor.vue'], resolve)
+const illnessDetailPhone = resolve => require(['../pages/consult/illnessDetailPhone.vue'], resolve)
 const findDoctor = resolve => require(['../pages/main/findDoctor.vue'], resolve)
 const findDoctorByDepart = resolve => require(['../pages/main/findDoctorByDepart.vue'], resolve)
 const findDoctorByKeyWord = resolve => require(['../pages/main/findDoctorByKeyWord.vue'], resolve)
@@ -100,6 +102,11 @@ const routes = [
     name: 'payConsult'
   },
   {
+    path: '/payPhone',
+    component: payPhone,
+    name: 'payPhone'
+  },
+  {
     path: '/reserveDoctor',
     component: reserveDoctor,
     name: 'reserveDoctor'
@@ -148,6 +155,11 @@ const routes = [
     path: '/doctorServiceSetting',
     component: doctorServiceSetting,
     name: 'doctorServiceSetting'
+  },
+  {
+    path: '/illnessDetailPhone',
+    component: illnessDetailPhone,
+    name: 'illnessDetailPhone'
   },
 
   // {

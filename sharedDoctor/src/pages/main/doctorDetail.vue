@@ -162,7 +162,7 @@
         <div
           style="border:1px solid rgba(205,205,205,0.46);background-color:#ffffff; box-shadow: 1px 1px  1px  #a6a6a6;
           border-radius: 3px;margin-top: 20px;margin-bottom: 20px"
-          @click="go('/graphicConsult')">
+          @click="go('/reserveDoctor')">
           <van-row style="height: 40px; padding: 15px 0px">
             <van-col span="4" style="height: 40px;">
               <van-icon style="width: 100%;height: 100%;font-size: 40px;color: #4B946A" name="service-o"/>

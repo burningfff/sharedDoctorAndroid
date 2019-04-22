@@ -8,10 +8,18 @@
                  src="../../assets/picture.png"/>
           </van-col>
           <van-col span="8" style="height:16vw;margin-top: 20px;margin-bottom: 20px;">
-            <span
-              style="display:inline-block;vertical-align:middle;line-height: 16vw;font-weight: bolder;font-size: 20px">
+            <van-row>
+              <span
+                style="display:inline-block;vertical-align:middle;line-height: 10vw;font-weight: bolder;font-size: 20px">
               {{this.userName}}
             </span>
+            </van-row>
+            <van-row>
+              <van-tag v-if="this.userInfo.qualification.isConfirmed==2" round>未认证</van-tag>
+              <van-tag v-if="this.userInfo.qualification.isConfirmed==1" type="success" round>认证通过</van-tag>
+              <van-tag v-if="this.userInfo.qualification.isConfirmed==0" type="danger" round>认证失败</van-tag>
+            </van-row>
+
           </van-col>
         </div>
       </van-row>

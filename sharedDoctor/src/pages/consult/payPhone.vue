@@ -55,18 +55,47 @@
             </van-row>
           </van-col>
           <van-col span="8">
-                <span style="color: #4B946A;text-align: right;display:inline-block;vertical-align:middle;line-height: 40px;">
+                <span
+                  style="color: #4B946A;text-align: right;display:inline-block;vertical-align:middle;line-height: 40px;">
                   ￥{{this.phonePrice}}
                 </span>
           </van-col>
         </van-row>
-        <van-row
-          style="border-top: 1px solid rgba(205,205,205,0.46);padding-top: 10px;margin-top: 10px;text-align:left">
-          <van-col span="6">
-            <span>回复时间</span>
+        <div style="width: 100%;margin-top: 5px;">
+          <van-row style="height: 5px;background-color: #f5efec"></van-row>
+        </div>
+        <van-row style="padding: 10px 0px;border-bottom:1px solid #ebedf0;">
+          <van-col span="8" style="text-align: left">
+            <van-row>
+              <span style="color: #000000;font-size: 16px;">
+                预约时间
+              </span>
+            </van-row>
+            <van-row>
+              <span style="font-size: 12px;color: #a6a6a6">
+                请保持手机畅通
+              </span>
+            </van-row>
           </van-col>
-          <van-col span="18" style="text-align: right;">
-            <span style="color: #7d7e80;font-size: 12px">预计3小时内回复，超过24小时自动退款</span>
+          <van-col span="16" style="text-align: right">
+            <van-row>
+              <span
+                style="font-size: 14px;color: #b8b8b8;display:inline-block;vertical-align:middle;line-height: 39.2px;">
+                {{reserveDate}}
+              </span>
+            </van-row>
+          </van-col>
+        </van-row>
+        <van-row style="padding: 10px 0px;border-bottom:1px solid #ebedf0;">
+          <van-col span="12" style="text-align: left">
+          <span style="font-size: 16px;color: #000000">
+            接听手机
+          </span>
+          </van-col>
+          <van-col span="12" style="text-align: right">
+          <span style="font-size: 16px;color: #b8b8b8">
+            {{phone}}
+          </span>
           </van-col>
         </van-row>
       </div>
@@ -97,12 +126,15 @@
         hospitalName: LOCWIN.Cache.get('doctorInfo').qualification.hospital.hospitalName,
         hospitalLevel: LOCWIN.Cache.get('doctorInfo').qualification.hospital.hospitalLevel,
         information: LOCWIN.Cache.get('information'),
-        phonePrice:'199.00',
+        phonePrice: '199.00',
         length: 0,
         dynamicPics: LOCWIN.Cache.get('dynamicPics'),
         viewImg: [],
         showUpload: false,
         myImage: 'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg',
+        reserveDate: LOCWIN.Cache.get('reserveDate'),
+        timeId:LOCWIN.Cache.get('timeId'),
+        phone: LOCWIN.Cache.get('userInfo').phone,
       };
     },
     watch: {
@@ -131,104 +163,27 @@
       }
     },
     methods: {
-      showUploader() {
-        this.showUpload = true;
-      },
-      cameraTakePicture() {
-        navigator.camera.getPicture(this.onSuccess, this.onFail, {
-          quality: 50,
-          destinationType: Camera.DestinationType.DATA_URL
-        });
-      },
-      onSuccess(imageData) {
-        return this.dynamicPics.push("data:image/jpeg;base64," + imageData);
-      },
 
-      onFail(message) {
-        alert('Failed because: ' + message);
-      },
-      camera() {
-        this.cameraTakePicture();
-        this.showUpload = false;
-      },
-      onRead(file) {
-        // console.log(file.content);
-        //将原图片显示为选择的图片
-        this.dynamicPics.push(file.content);
-        console.log("this.dynamicPics" + this.dynamicPics.length)
-        this.showUpload = false
-      },
-      clickImg(url) {
-        // console.log(url);
-        //获得图片的url和index，传给弹窗
-        this.viewImg[0] = url;
-        //打开弹窗
-        ImagePreview(this.viewImg)
-      },
       onClickLeft() {
         this.$toast('返回');
         this.$router.go(-1);
       },
-      onClickRight() {
-        if (this.length < 10) {
-          this.$toast('请至少用十个字描述你的症状')
-        } else {
-          LOCWIN.Cache.set('information', this.information)
-          LOCWIN.Cache.set('dynamicPics', this.dynamicPics)
-          console.log(LOCWIN.Cache.get('information'))
-          console.log(LOCWIN.Cache.get('dynamicPics'))
+      onSubmit() {
+        var params = {
+          timeId: this.timeId,
+          patientId: LOCWIN.Cache.get('userInfo').patientId,
         }
+        allService.addOrder(params, (isOk, data) => {
+          if (isOk) {
+            this.$toast.success('预约成功')
+            this.$router.push('/')
+          }
+        })
       },
-      deleteImg(index) {
-        // this.$toast(index)
-        this.dynamicPics.splice(index, 1)
-        // console.log(this.dynamicPics)
-        this.$toast('删除');
-        // this.$router.go(-1);
-      },
-    },
+    }
   };
 </script>
 
 <style>
 
-</style>
-
-<style lang="scss" scoped>
-  .imgUpload {
-    width: 100%;
-    background: #ffffff;
-    font-size: 14px;
-    overflow-x: hidden;
-
-  .dynamic-imgs {
-    box-sizing: border-box;
-    min-height: 152px;
-    width: 100%;
-    background-color: #ffffff;
-    padding: 12px 0px;
-    margin-bottom: 6.5px;
-
-  .img-title {
-    margin-bottom: 12px;
-    font-size: 14px;
-    color: #666666;
-    letter-spacing: 0.16px;
-  }
-
-  .table-list {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-
-  .img-add {
-    width: 26vw;
-    height: 26vw;
-    margin-right: 2vw;
-    margin-bottom: 2vw;
-  }
-
-  }
-  }
-  }
 </style>

@@ -18,22 +18,6 @@
       </div>
     </van-nav-bar>
     <div class="content" style="margin-left: 4%;width: 92%;margin-top: 60px">
-      <van-row style="text-align: left;padding-top: 10px">
-        <span>
-          {{this.information}}
-        </span>
-      </van-row>
-      <van-row v-if="dynamicPics!=null"
-               style="border-top: 1px solid rgba(205,205,205,0.46);padding-top: 10px;margin-top: 10px;text-align:left">
-        <div style="width:100%;
-             height: 60px;
-             overflow-x: scroll;
-             overflow-y: hidden;
-             white-space: nowrap;">
-          <img v-for="(img,index) in dynamicPics"
-               class="img-add" :src="img" style="padding: 0px 5px;height: 50px;width: 50px"/>
-        </div>
-      </van-row>
       <div style="width: 100%;margin-top: 5px;">
         <van-row style="height: 5px;background-color: #f5efec"></van-row>
       </div>
@@ -70,39 +54,130 @@
                 </span>
           </van-col>
         </van-row>
-        <van-row
-          style="border-top: 1px solid rgba(205,205,205,0.46);padding-top: 10px;margin-top: 10px;text-align:left">
-          <van-col span="6">
-            <span>回复时间</span>
+
+        <van-row style="padding: 10px 0px;">
+          <van-col span="7">
+                <span style="color: #ebedf1;text-align: left">
+                  ——————
+                </span>
           </van-col>
-          <van-col span="18" style="text-align: right;">
-            <span style="color: #7d7e80;font-size: 12px">预计3小时内回复，超过24小时自动退款</span>
+          <van-col span="10" style="text-align: center;">
+                <span style="font-size: 16px">
+                  {{this.monthTable[this.month-1]}}
+                </span>
+          </van-col>
+          <van-col span="7">
+                <span style="color: #ebedf1;text-align: right">
+                  ——————
+                </span>
           </van-col>
         </van-row>
+        <van-row>
+          <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[0]}}
+                </span>
+          </van-col>
+          <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[1]}}
+                </span>
+          </van-col>
+          <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[2]}}
+                </span>
+          </van-col>
+          <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[3]}}
+                </span>
+          </van-col>
+          <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[4]}}
+                </span>
+          </van-col>
+          <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[5]}}
+                </span>
+          </van-col>
+          <van-col style="width: 13.14vw;text-align: center">
+                <span>
+                  {{this.currentWeek[6]}}
+                </span>
+          </van-col>
+        </van-row>
+        <van-tabs v-model="activePhoneTime"
+                  swipe-threshold=7
+                  @change="currentDate=dateTable[activePhoneTime]">
+          <van-tab
+            v-for="dateIndex in 7"
+            :key="dateIndex"
+            :title="dateTable[dateIndex-1]">
+            <div>
+              <van-row style="padding: 10px 5px;border-bottom:1px solid #ebedf0;">
+                <span style="font-size: 16px;font-weight: bolder;">
+                  可预约时间段：
+                </span>
+              </van-row>
+              <div>
+                <van-row
+                  v-for="(phoneTimeSlot,index) in phoneTimeSlotTable[dateIndex-1]"
+                  :key="phoneTimeSlot"
+                  style="padding: 10px 5px;border-bottom:1px solid #ebedf0;font-size: 16px"
+                >
+                  <div @click="nextStep(phoneTimeSlot,dateIndex-1,index)">
+                    <van-col span="24">
+                    <span>
+                      {{phoneTimeSlot}}
+                    </span>
+                    </van-col>
+                  </div>
+                </van-row>
+              </div>
+            </div>
+          </van-tab>
+        </van-tabs>
+
+
       </div>
     </div>
-    <van-submit-bar
-      :price="this.phonePrice*100"
-      button-text="立即支付"
-      @submit="onSubmit"
-    />
-    <van-datetime-picker
-      v-model="currentDate"
-      type="datetime"
-      :min-date="minDate"
-      :max-date="maxDate"
-    />
   </div>
 </template>
 <script>
   import AllService from '../../services/allservice.js'
-  import {ImagePreview} from 'vant';
 
   var allService = new AllService()
 
   export default {
     created() {
-
+      // 获取当前时间   
+      this.Date = new Date();
+      // 获取当前年   
+      this.year = this.Date.getFullYear();
+      // 获取当前月   
+      this.month = this.Date.getMonth() + 1;
+      // 获取当前日   
+      this.date = this.Date.getDate();
+      // 获取当前星期几   
+      this.day = this.Date.getDay();
+      // 获取小时   
+      this.hour = this.Date.getHours();
+      // 获取分钟   
+      this.minute = this.Date.getMinutes();
+      // 获取秒   
+      this.second = this.Date.getSeconds();
+      // 自动补零   
+      this.month = (this.month < 10) ? '0' + this.month : this.month = this.month;
+      this.date = (this.date < 10) ? '0' + this.date : this.date = this.date;
+      this.minute = (this.minute < 10) ? '0' + this.minute : this.minute = this.minute;
+      this.second = (this.second < 10) ? '0' + this.second : this.second = this.second;
+      this.getDate()
+      this.getTime()
+      this.getWeek()
+      this.getTimeslot()
     },
     data() {
       return {
@@ -112,95 +187,170 @@
         positionName: LOCWIN.Cache.get('doctorInfo').qualification.position.positionName,
         hospitalName: LOCWIN.Cache.get('doctorInfo').qualification.hospital.hospitalName,
         hospitalLevel: LOCWIN.Cache.get('doctorInfo').qualification.hospital.hospitalLevel,
-        information: LOCWIN.Cache.get('information'),
         phonePrice: '199.00',
         length: 0,
         dynamicPics: LOCWIN.Cache.get('dynamicPics'),
-        viewImg: [],
-        showUpload: false,
         myImage: 'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg',
+
+        activeService: 0,
+        activePhoneTime: 0,
+        serviceName: [
+          '语音问诊',
+          '预约上门',
+          '图文问诊'
+        ],
+        chooseStartTime: false,
+        chooseEndTime: false,
+        startTime: [
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+        ],
+        endTime: [
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+          '00:00',
+        ],
+        tempStartTime: 0,
+        tempEndTime: 0,
+        currentTime: '',
+        currentDate: '',
+        currentWeek: [],
+        Date: '',
+        weekday: [
+          '日',
+          '一',
+          '二',
+          '三',
+          '四',
+          '五',
+          '六'],
+        monthTable: [
+          '一月',
+          '二月',
+          '三月',
+          '四月',
+          '五月',
+          '六月',
+          '七月',
+          '八月',
+          '九月',
+          '十月',
+          '十一月',
+          '十二月',
+        ],
+        phoneTimeSlotTable: [
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        timeIdTable: [
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+
+        dateTable: [],
+        year: '',
+        month: '',
+        date: '',
+        day: '',
+        hour: '',
+        minute: '',
+        second: '',
+
       };
     },
-    watch: {
-      'information': {
-        handler() {
-          this.length = this.information.length
-        }
-      },
 
-    },
-    computed: {
-      isAddImg() {
-        //如果已经9张了，isAddImg为false，隐藏加号
-        if (this.dynamicPics.length >= 9) {
-          return false;
-        } else {
-          return true;
-        }
-      },
-      isAddIntro() {
-        if (this.dynamicPics.length === 0) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    },
     methods: {
-      showUploader() {
-        this.showUpload = true;
-      },
-      cameraTakePicture() {
-        navigator.camera.getPicture(this.onSuccess, this.onFail, {
-          quality: 50,
-          destinationType: Camera.DestinationType.DATA_URL
-        });
-      },
-      onSuccess(imageData) {
-        return this.dynamicPics.push("data:image/jpeg;base64," + imageData);
-      },
-
-      onFail(message) {
-        alert('Failed because: ' + message);
-      },
-      camera() {
-        this.cameraTakePicture();
-        this.showUpload = false;
-      },
-      onRead(file) {
-        // console.log(file.content);
-        //将原图片显示为选择的图片
-        this.dynamicPics.push(file.content);
-        console.log("this.dynamicPics" + this.dynamicPics.length)
-        this.showUpload = false
-      },
-      clickImg(url) {
-        // console.log(url);
-        //获得图片的url和index，传给弹窗
-        this.viewImg[0] = url;
-        //打开弹窗
-        ImagePreview(this.viewImg)
-      },
       onClickLeft() {
         this.$toast('返回');
-        this.$router.go(-1);
+        this.$router.go(-1)
       },
-      onClickRight() {
-        if (this.length < 10) {
-          this.$toast('请至少用十个字描述你的症状')
-        } else {
-          LOCWIN.Cache.set('information', this.information)
-          LOCWIN.Cache.set('dynamicPics', this.dynamicPics)
-          console.log(LOCWIN.Cache.get('information'))
-          console.log(LOCWIN.Cache.get('dynamicPics'))
+      getDate() {
+        var ss = 24 * 60 * 60 * 1000; //一天的毫秒数86400
+        var timestamp = new Date().getTime(); //获取当前时间戳
+        for (var i = 0; i < 7; i++) {
+          var date1 = new Date(ss * (i) + timestamp) //加上n天的国际标准日期
+          this.dateTable[i] = date1.getDate().toString()
         }
       },
-      deleteImg(index) {
-        // this.$toast(index)
-        this.dynamicPics.splice(index, 1)
-        // console.log(this.dynamicPics)
-        this.$toast('删除');
-        // this.$router.go(-1);
+      getTime() {
+        this.currentTime = this.hour + ':' + this.minute + ':' + this.second;
+      },
+      getWeek() {
+        var ss = 24 * 60 * 60 * 1000; //一天的毫秒数86400
+        var timestamp = new Date().getTime(); //获取当前时间戳
+        for (var i = 0; i < 7; i++) {
+          var date1 = new Date(ss * (i) + timestamp) //加上n天的国际标准日期
+          this.currentWeek[i] = this.weekday[date1.getDay()]
+        }
+        this.currentDate = this.dateTable[0]
+        console.log(this.currentWeek)
+      },
+      getTimeslot() {
+        var params = {
+          doctorId: this.doctorId,
+          serviceType: 0,
+        }
+        allService.findAllByDoctorIdAndServiceType(params, (isOk, data) => {
+          if (isOk) {
+            let tempTimeTable = data.data
+            for (let i = 0; i < tempTimeTable.length; i++) {
+              let tableStartTime = new Date(tempTimeTable[i].startTime.substring(0, 4), tempTimeTable[i].startTime.substring(5, 7) - 1, tempTimeTable[i].startTime.substring(8, 10), tempTimeTable[i].startTime.substring(11, 13))
+              console.log(tableStartTime)
+              let tempTimeId=tempTimeTable[i].timeId
+              if (tableStartTime.getTime() >= new Date().getTime() && ((tableStartTime.getTime() - new Date().getTime()) / (24 * 60 * 60 * 1000)) <= 7 && tempTimeTable[i].isOrdered == 0) {
+                let tempHour = tableStartTime.getHours() + ':00 —— ' + (tableStartTime.getHours() + 1) + ':00'
+                console.log(tempHour)
+                let tempTime = Math.floor((tableStartTime.getTime() - new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 0).getTime()) / (24 * 60 * 60 * 1000))
+                console.log(tempTime)
+                // this.phoneTimeSlotTable[(tableStartTime.getTime()-new Date().getTime())/(24 * 60 * 60 * 1000)].push((tableStartTime.getHours()+ ':00 —— ' + (tableStartTime.getHours()+1) + ':00'))
+                this.phoneTimeSlotTable[tempTime].push(tempHour)
+                this.timeIdTable[tempTime].push(tempTimeId)
+              }
+            }
+            console.log('phoneTimeSlotTable' + this.phoneTimeSlotTable)
+          }
+        })
+      },
+      nextStep(phoneTimeSlot,dateIndex,index) {
+        if (LOCWIN.Cache.get('userInfo') == null) {
+          this.$dialog.confirm({
+            title: '需要登录',
+            message: '登陆后才可以进行后续操作？',
+            confirmButtonText: '登录',
+          }).then(() => {
+            // on confirm
+            this.$router.push('/login')
+          }).catch(() => {
+            // on cancel
+          });
+
+        } else {
+          LOCWIN.Cache.set('timeId',this.timeIdTable[dateIndex][index])
+          console.log(LOCWIN.Cache.get('timeId'))
+          LOCWIN.Cache.set('reserveDate', this.currentDate + '号,周' + this.weekday[this.activePhoneTime] + ',' + phoneTimeSlot)
+          console.log(LOCWIN.Cache.get('reserveDate'))
+          this.$router.push('/illnessDetailPhone')
+        }
+
       },
     },
   };
