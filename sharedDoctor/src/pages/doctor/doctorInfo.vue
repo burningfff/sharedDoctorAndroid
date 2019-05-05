@@ -84,8 +84,10 @@
           </span>
         </van-col>
         <van-col span="17">
-          <van-field style="padding: 10px 0px" v-model="departName" placeholder="请选择你的科室"
-                     @click="chooseDepart=true"/>
+          <div @click="chooseDepart=true">
+            <van-field style="padding: 10px 0px;pointer-events: none;" v-model="departName" placeholder="请选择你的科室"
+                          />
+          </div>
         </van-col>
       </van-row>
       <van-row style="border-bottom:1px solid #ebedf0;">
@@ -95,8 +97,10 @@
           </span>
         </van-col>
         <van-col span="17">
-          <van-field style="padding: 10px 0px" v-model="positionName" placeholder="请选择你的职称"
-                     @click="choosePosition=true"/>
+          <div @click="choosePosition=true">
+            <van-field style="padding: 10px 0px;pointer-events: none;" v-model="positionName" placeholder="请选择你的职称"
+            />
+          </div>
         </van-col>
       </van-row>
       <van-row style="border-bottom:1px solid #ebedf0;">
@@ -106,8 +110,10 @@
           </span>
         </van-col>
         <van-col span="17">
-          <van-field style="padding: 10px 0px" v-model="hospitalName" placeholder="请选择你的所属医院"
-                     @click="chooseHospital=true"/>
+          <div @click="chooseHospital=true">
+            <van-field style="padding: 10px 0px;pointer-events: none;" v-model="hospitalName" placeholder="请选择你的所属医院"
+            />
+          </div>
         </van-col>
       </van-row>
       <van-row style="height: 4px;background-color: #f9f3f0"></van-row>
@@ -381,7 +387,6 @@
         })
       },
       onClickLeft() {
-        this.$toast('返回');
         this.$router.go(-1)
       },
       saveInfo() {

@@ -163,11 +163,10 @@
       },
 
       onFail(message) {
-        alert('Failed because: ' + message);
+        alert('失败原因: ' + message);
       },
 
       onClickLeft() {
-        this.$toast('返回');
         this.$router.go(-1)
       },
       showUploader() {

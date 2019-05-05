@@ -6,17 +6,22 @@ const login = resolve => require(['../pages/my/login.vue'], resolve)
 const register = resolve => require(['../pages/my/register.vue'], resolve)
 const patientInfo = resolve => require(['../pages/my/patientInfo.vue'], resolve)
 const patientSetting = resolve => require(['../pages/my/patientSetting.vue'], resolve)
+const patientOrder = resolve => require(['../pages/my/patientOrder.vue'], resolve)
+const patientOrderDetail = resolve => require(['../pages/my/patientOrderDetail.vue'], resolve)
 const updatePatientLocation = resolve => require(['../pages/my/updatePatientLocation.vue'], resolve)
 const testdemo = resolve => require(['../pages/testdemo.vue'], resolve)
 const HelloWorld = resolve => require(['../pages/HelloWorld.vue'], resolve)
 const main = resolve => require(['../pages/main.vue'], resolve)
 const my = resolve => require(['../pages/my.vue'], resolve)
 const consult = resolve => require(['../pages/consult.vue'], resolve)
+const homeDoctor = resolve => require(['../pages/consult/homeDoctor.vue'], resolve)
 const graphicConsult = resolve => require(['../pages/consult/graphicConsult.vue'], resolve)
 const payConsult = resolve => require(['../pages/consult/payConsult.vue'], resolve)
 const payPhone = resolve => require(['../pages/consult/payPhone.vue'], resolve)
+const payHome = resolve => require(['../pages/consult/payHome.vue'], resolve)
 const reserveDoctor = resolve => require(['../pages/consult/reserveDoctor.vue'], resolve)
 const illnessDetailPhone = resolve => require(['../pages/consult/illnessDetailPhone.vue'], resolve)
+const illnessDetailHome = resolve => require(['../pages/consult/illnessDetailHome.vue'], resolve)
 const findDoctor = resolve => require(['../pages/main/findDoctor.vue'], resolve)
 const findDoctorByDepart = resolve => require(['../pages/main/findDoctorByDepart.vue'], resolve)
 const findDoctorByKeyWord = resolve => require(['../pages/main/findDoctorByKeyWord.vue'], resolve)
@@ -27,6 +32,7 @@ const doctorMainPage = resolve => require(['../pages/doctor/doctorMainPage.vue']
 const doctorInfo = resolve => require(['../pages/doctor/doctorInfo.vue'], resolve)
 const doctorSetting = resolve => require(['../pages/doctor/doctorSetting.vue'], resolve)
 const doctorServiceSetting = resolve => require(['../pages/doctor/doctorServiceSetting.vue'], resolve)
+const doctorOrder = resolve => require(['../pages/doctor/doctorOrder.vue'], resolve)
 
 Vue.use(Router)
 
@@ -50,6 +56,16 @@ const routes = [
     path: '/patientSetting',
     component: patientSetting,
     name: 'patientSetting'
+  },
+  {
+    path: '/patientOrder',
+    component: patientOrder,
+    name: 'patientOrder'
+  },
+  {
+    path: '/patientOrderDetail',
+    component: patientOrderDetail,
+    name: 'patientOrderDetail'
   },
   {
     path: '/updatePatientLocation',
@@ -97,6 +113,11 @@ const routes = [
     name: 'graphicConsult'
   },
   {
+    path: '/homeDoctor',
+    component: homeDoctor,
+    name: 'homeDoctor'
+  },
+  {
     path: '/payConsult',
     component: payConsult,
     name: 'payConsult'
@@ -105,6 +126,11 @@ const routes = [
     path: '/payPhone',
     component: payPhone,
     name: 'payPhone'
+  },
+  {
+    path: '/payHome',
+    component: payHome,
+    name: 'payHome'
   },
   {
     path: '/reserveDoctor',
@@ -157,9 +183,19 @@ const routes = [
     name: 'doctorServiceSetting'
   },
   {
+    path: '/doctorOrder',
+    component: doctorOrder,
+    name: 'doctorOrder'
+  },
+  {
     path: '/illnessDetailPhone',
     component: illnessDetailPhone,
     name: 'illnessDetailPhone'
+  },
+  {
+    path: '/illnessDetailHome',
+    component: illnessDetailHome,
+    name: 'illnessDetailHome'
   },
 
   // {

@@ -36,7 +36,7 @@
     </div>
     <div v-if="userName!=null">
       <van-cell-group style="text-align: left;">
-        <van-cell style="font-size: 18px" title="我的问诊" is-link to="index"/>
+        <van-cell style="font-size: 18px" title="我的问诊" is-link to="patientOrder"/>
         <van-row style="height: 4px;background-color: #f9f3f0"></van-row>
         <van-cell style="font-size: 18px" title="患者信息" is-link to="patientInfo"/>
         <van-row style="height: 4px;background-color: #f9f3f0"></van-row>

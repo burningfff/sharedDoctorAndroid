@@ -140,8 +140,6 @@
             </div>
           </van-tab>
         </van-tabs>
-
-
       </div>
     </div>
   </div>
@@ -194,11 +192,7 @@
 
         activeService: 0,
         activePhoneTime: 0,
-        serviceName: [
-          '语音问诊',
-          '预约上门',
-          '图文问诊'
-        ],
+
         chooseStartTime: false,
         chooseEndTime: false,
         startTime: [
@@ -280,7 +274,6 @@
 
     methods: {
       onClickLeft() {
-        this.$toast('返回');
         this.$router.go(-1)
       },
       getDate() {

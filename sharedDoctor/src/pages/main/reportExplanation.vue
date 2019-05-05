@@ -229,7 +229,6 @@
         this.$router.push(index);
       },
       onClickLeft() {
-        this.$toast('返回');
         this.$router.go(-1);
       },
     },

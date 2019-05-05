@@ -309,7 +309,6 @@
       onClickLeft() {
         LOCWIN.Cache.remove('departId')
         LOCWIN.Cache.remove('departName')
-        this.$toast('返回');
         this.$router.go(-1)
       },
       onClickSearchBtn() {

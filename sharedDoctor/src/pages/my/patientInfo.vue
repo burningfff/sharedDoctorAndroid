@@ -149,7 +149,6 @@
         }
       },
       onClickLeft() {
-        this.$toast('返回');
         this.$router.go(-1)
       },
       saveInfo() {
@@ -178,12 +177,12 @@
               if(isOk){
                 LOCWIN.Cache.set('userInfo',data.data)
                 this.getPatientInfo()
+                this.$toast.success('保存成功！');
+                this.$router.go(-1)
               }
             })
           }
         })
-
-        // this.$router.go(-1)
       },
     },
   };

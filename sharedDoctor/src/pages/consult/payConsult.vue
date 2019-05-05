@@ -98,93 +98,53 @@
         hospitalLevel: LOCWIN.Cache.get('doctorInfo').qualification.hospital.hospitalLevel,
         information: LOCWIN.Cache.get('information'),
         phonePrice:'199.00',
-        length: 0,
         dynamicPics: LOCWIN.Cache.get('dynamicPics'),
         viewImg: [],
-        showUpload: false,
         myImage: 'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg',
       };
     },
-    watch: {
-      'information': {
-        handler() {
-          this.length = this.information.length
-        }
-      },
 
-    },
-    computed: {
-      isAddImg() {
-        //如果已经9张了，isAddImg为false，隐藏加号
-        if (this.dynamicPics.length >= 9) {
-          return false;
-        } else {
-          return true;
-        }
-      },
-      isAddIntro() {
-        if (this.dynamicPics.length === 0) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    },
     methods: {
-      showUploader() {
-        this.showUpload = true;
-      },
-      cameraTakePicture() {
-        navigator.camera.getPicture(this.onSuccess, this.onFail, {
-          quality: 50,
-          destinationType: Camera.DestinationType.DATA_URL
-        });
-      },
-      onSuccess(imageData) {
-        return this.dynamicPics.push("data:image/jpeg;base64," + imageData);
-      },
-
-      onFail(message) {
-        alert('Failed because: ' + message);
-      },
-      camera() {
-        this.cameraTakePicture();
-        this.showUpload = false;
-      },
-      onRead(file) {
-        // console.log(file.content);
-        //将原图片显示为选择的图片
-        this.dynamicPics.push(file.content);
-        console.log("this.dynamicPics" + this.dynamicPics.length)
-        this.showUpload = false
-      },
-      clickImg(url) {
-        // console.log(url);
-        //获得图片的url和index，传给弹窗
-        this.viewImg[0] = url;
-        //打开弹窗
-        ImagePreview(this.viewImg)
-      },
       onClickLeft() {
-        this.$toast('返回');
         this.$router.go(-1);
       },
-      onClickRight() {
-        if (this.length < 10) {
-          this.$toast('请至少用十个字描述你的症状')
-        } else {
-          LOCWIN.Cache.set('information', this.information)
-          LOCWIN.Cache.set('dynamicPics', this.dynamicPics)
-          console.log(LOCWIN.Cache.get('information'))
-          console.log(LOCWIN.Cache.get('dynamicPics'))
+      onSubmit() {
+        var params = {
+          doctorId: this.doctorId,
+          patientId: LOCWIN.Cache.get('userInfo').patientId,
         }
-      },
-      deleteImg(index) {
-        // this.$toast(index)
-        this.dynamicPics.splice(index, 1)
-        // console.log(this.dynamicPics)
-        this.$toast('删除');
-        // this.$router.go(-1);
+        allService.addChat(params, (isOk, data) => {
+          if (isOk) {
+            var chatId = data.data.chatId
+            var params = {
+              chatId: chatId,
+              chatDetail: this.information,
+            }
+            allService.addChatDetail(params, (isOk, data) => {
+              if (isOk) {
+                var params = {
+                  chatId: chatId,
+                  chatDetail: this.dynamicPics.join(","),
+                }
+                allService.addChatDetail(params, (isOk, data) => {
+                  if (isOk) {
+                    var params = {
+                      // timeId: '',
+                      patientId: LOCWIN.Cache.get('userInfo').patientId,
+                      chatId: chatId
+                    }
+                    allService.addOrder(params, (isOk, data) => {
+                      if (isOk) {
+                        this.$toast.success('预约成功')
+                        this.$router.push('/')
+                      }
+                    })
+                  }
+                })
+              }
+            })
+          }
+        })
       },
     },
   };

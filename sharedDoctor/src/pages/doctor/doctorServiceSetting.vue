@@ -96,9 +96,11 @@
                 </span>
                   </van-col>
                   <van-col span="18">
-                    <van-field style="padding: 10px 0px" v-model="startPhoneTime[dateIndex-1]"
-                               placeholder="请选择提供服务的开始时间"
-                               @click="choosePhoneStartTime=true"/>
+                    <div @click="choosePhoneStartTime=true">
+                      <van-field style="padding: 10px 0px;pointer-events: none;" v-model="startPhoneTime[dateIndex-1]"
+                                 placeholder="请选择提供服务的开始时间"
+                                 />
+                    </div>
                   </van-col>
                 </van-row>
                 <van-row style="border-bottom:1px solid #ebedf0;">
@@ -108,8 +110,10 @@
                 </span>
                   </van-col>
                   <van-col span="18">
-                    <van-field style="padding: 10px 0px" v-model="endPhoneTime[dateIndex-1]" placeholder="请选择提供服务的结束时间"
-                               @click="choosePhoneEndTime=true"/>
+                    <div @click="choosePhoneEndTime=true;">
+                      <van-field style="padding: 10px 0px;pointer-events: none;" v-model="endPhoneTime[dateIndex-1]" placeholder="请选择提供服务的结束时间"
+                                 />
+                    </div>
                   </van-col>
                 </van-row>
                 <div v-if="phoneTimeSlotTable[dateIndex-1]!=0&&phoneTimeSlotTable[dateIndex-1]!=null">
@@ -277,8 +281,10 @@
                 </span>
                   </van-col>
                   <van-col span="18">
-                    <van-field style="padding: 10px 0px" v-model="startHomeTime[dateIndex-1]" placeholder="请选择提供服务的开始时间"
-                               @click="chooseHomeStartTime=true"/>
+                    <div @click="chooseHomeStartTime=true">
+                      <van-field style="padding: 10px 0px;pointer-events: none;" v-model="startHomeTime[dateIndex-1]" placeholder="请选择提供服务的开始时间"
+                                 />
+                    </div>
                   </van-col>
                 </van-row>
                 <van-row style="border-bottom:1px solid #ebedf0;">
@@ -288,8 +294,10 @@
                 </span>
                   </van-col>
                   <van-col span="18">
-                    <van-field style="padding: 10px 0px" v-model="endHomeTime[dateIndex-1]" placeholder="请选择提供服务的结束时间"
-                               @click="chooseHomeEndTime=true"/>
+                    <div @click="chooseHomeEndTime=true">
+                      <van-field style="padding: 10px 0px;pointer-events: none;" v-model="endHomeTime[dateIndex-1]" placeholder="请选择提供服务的结束时间"
+                                 />
+                    </div>
                   </van-col>
                 </van-row>
                 <div v-if="homeTimeSlotTable[dateIndex-1]!=0&&homeTimeSlotTable[dateIndex-1]!=null">
@@ -567,7 +575,6 @@
     },
     methods: {
       onClickLeft() {
-        this.$toast('返回');
         this.$router.go(-1)
       },
       getDate() {
@@ -638,6 +645,7 @@
         console.log('dateIndex ' + dateIndex)
         this.phoneTimeSlotTable[dateIndex].splice(index, 1)
         console.log('phoneTimeSlotTable[dateIndex] ' + this.phoneTimeSlotTable[dateIndex])
+        // 刷新
         if (this.activePhoneTime == 0) {
           this.activePhoneTime = 1
         } else {
@@ -678,12 +686,15 @@
                   allService.addService(params, (isOk, data) => {
                     if (isOk) {
                       var service = data.data
-                      var time = Number(this.tempPhoneEndTime - this.tempPhoneStartTime)
+                      var time =this.phoneTimeSlotTable[dateIndex].length
                       console.log(time)
                       for (var i = 0; i < time; i++) {
                         console.log(time)
-                        let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempPhoneStartTime + i) + ':00:00'
-                        let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempPhoneStartTime + i + 1) + ':00:00'
+                        var str = this.phoneTimeSlotTable[dateIndex][i]; //要截取的字符串
+                        var tempIndex = str.indexOf(":");
+                        var result = str.slice(0,tempIndex);
+                        let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + Number(result) + ':00:00'
+                        let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (Number(result) + 1) + ':00:00'
                         console.log(tempStartDate)
                         console.log(tempEndDate)
                         var params = {
@@ -695,7 +706,12 @@
                         }
                         allService.addTimeslot(params, (isOk, data) => {
                           if (isOk) {
-                            this.$toast.success('保存成功')
+                            this.$dialog.alert({
+                              message: '保存成功'
+                            }).then(() => {
+                              // on close
+                              this.getPhoneTimeslot()
+                            });
                           }
                         })
                       }
@@ -713,12 +729,15 @@
           allService.addService(params, (isOk, data) => {
             if (isOk) {
               var service = data.data
-              var time = Number(this.tempPhoneEndTime - this.tempPhoneStartTime)
+              var time =this.phoneTimeSlotTable[dateIndex].length
               console.log(time)
               for (var i = 0; i < time; i++) {
                 console.log(time)
-                let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempPhoneStartTime + i) + ':00:00'
-                let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempPhoneStartTime + i + 1) + ':00:00'
+                var str = this.phoneTimeSlotTable[dateIndex][i]; //要截取的字符串
+                var tempIndex = str.indexOf(":");
+                var result = str.slice(0,tempIndex);
+                let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + Number(result) + ':00:00'
+                let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (Number(result) + 1) + ':00:00'
                 console.log(tempStartDate)
                 console.log(tempEndDate)
                 var params = {
@@ -730,7 +749,12 @@
                 }
                 allService.addTimeslot(params, (isOk, data) => {
                   if (isOk) {
-                    this.$toast.success('保存成功')
+                    this.$dialog.alert({
+                      message: '保存成功'
+                    }).then(() => {
+                      // on close
+                      this.getPhoneTimeslot()
+                    });
                   }
                 })
               }
@@ -759,12 +783,15 @@
                   allService.addService(params, (isOk, data) => {
                     if (isOk) {
                       var service = data.data
-                      var time = Number(this.tempPhoneEndTime - this.tempHomeStartTime)
+                      var time =this.homeTimeSlotTable[dateIndex].length
                       console.log(time)
                       for (var i = 0; i < time; i++) {
                         console.log(time)
-                        let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempHomeStartTime + i) + ':00:00'
-                        let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempHomeStartTime + i + 1) + ':00:00'
+                        var str = this.homeTimeSlotTable[dateIndex][i]; //要截取的字符串
+                        var tempIndex = str.indexOf(":");
+                        var result = str.slice(0,tempIndex);
+                        let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + Number(result) + ':00:00'
+                        let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (Number(result)+ 1) + ':00:00'
                         console.log(tempStartDate)
                         console.log(tempEndDate)
                         var params = {
@@ -776,7 +803,12 @@
                         }
                         allService.addTimeslot(params, (isOk, data) => {
                           if (isOk) {
-                            this.$toast.success('保存成功')
+                            this.$dialog.alert({
+                              message: '保存成功'
+                            }).then(() => {
+                              // on close
+                              this.getHomeTimeslot()
+                            });
                           }
                         })
                       }
@@ -794,12 +826,15 @@
           allService.addService(params, (isOk, data) => {
             if (isOk) {
               var service = data.data
-              var time = Number(this.tempPhoneEndTime - this.tempHomeStartTime)
+              var time =this.homeTimeSlotTable[dateIndex].length
               console.log(time)
               for (var i = 0; i < time; i++) {
                 console.log(time)
-                let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempHomeStartTime + i) + ':00:00'
-                let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (this.tempHomeStartTime + i + 1) + ':00:00'
+                var str = this.homeTimeSlotTable[dateIndex][i]; //要截取的字符串
+                var tempIndex = str.indexOf(":");
+                var result = str.slice(0,tempIndex);
+                let tempStartDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + Number(result) + ':00:00'
+                let tempEndDate = this.year + '-' + this.month + '-' + this.dateTable[dateIndex] + ' ' + (Number(result)+ 1) + ':00:00'
                 console.log(tempStartDate)
                 console.log(tempEndDate)
                 var params = {
@@ -811,14 +846,18 @@
                 }
                 allService.addTimeslot(params, (isOk, data) => {
                   if (isOk) {
-                    this.$toast.success('保存成功')
+                    this.$dialog.alert({
+                      message: '保存成功'
+                    }).then(() => {
+                      // on close
+                      this.getHomeTimeslot()
+                    });
                   }
                 })
               }
             }
           })
         }
-
       },
       saveGraphicPrice() {
         var params = {
@@ -835,6 +874,7 @@
       }
       ,
       getPhoneTimeslot() {
+        this.phoneTimeSlotTable=[[], [], [], [], [], [], []];
         var params = {
           doctorId: LOCWIN.Cache.get('userInfo').doctorId,
           serviceType: 0,
@@ -848,7 +888,7 @@
               if (tableStartTime.getTime() >= new Date().getTime()) {
                 let tempHour = tableStartTime.getHours() + ':00 —— ' + (tableStartTime.getHours() + 1) + ':00'
                 console.log(tempHour)
-                let tempTime = Math.ceil((tableStartTime.getTime() - new Date().getTime()) / (24 * 60 * 60 * 1000))
+                let tempTime = Math.ceil((new Date(tableStartTime.getFullYear(),tableStartTime.getMonth(),tableStartTime.getDate(),0).getTime() - new Date().getTime()) / (24 * 60 * 60 * 1000))
                 console.log(tempTime)
                 // this.phoneTimeSlotTable[(tableStartTime.getTime()-new Date().getTime())/(24 * 60 * 60 * 1000)].push((tableStartTime.getHours()+ ':00 —— ' + (tableStartTime.getHours()+1) + ':00'))
                 this.phoneTimeSlotTable[tempTime].push(tempHour)
@@ -861,6 +901,7 @@
       }
       ,
       getHomeTimeslot() {
+        this.homeTimeSlotTable=[[], [], [], [], [], [], []];
         var params = {
           doctorId: LOCWIN.Cache.get('userInfo').doctorId,
           serviceType: 1,
@@ -874,7 +915,7 @@
               if (tableStartTime.getTime() >= new Date().getTime()) {
                 let tempHour = tableStartTime.getHours() + ':00 —— ' + (tableStartTime.getHours() + 1) + ':00'
                 console.log(tempHour)
-                let tempTime = Math.ceil((tableStartTime.getTime() - new Date().getTime()) / (24 * 60 * 60 * 1000))
+                let tempTime = Math.ceil((new Date(tableStartTime.getFullYear(),tableStartTime.getMonth(),tableStartTime.getDate(),0).getTime() - new Date().getTime()) / (24 * 60 * 60 * 1000))
                 console.log(tempTime)
                 // this.phoneTimeSlotTable[(tableStartTime.getTime()-new Date().getTime())/(24 * 60 * 60 * 1000)].push((tableStartTime.getHours()+ ':00 —— ' + (tableStartTime.getHours()+1) + ':00'))
                 this.homeTimeSlotTable[tempTime].push(tempHour)

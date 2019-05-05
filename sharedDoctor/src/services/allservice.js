@@ -14,6 +14,11 @@ export default class AllService {
       // deleteTimeSlotById: '/timeSlot/delete',
       // getDoctorTable: '/doctor/findAllDoctor',
       addOrder: '/order/addOrder',
+      findAllOrderByPatientId:'/order/findAllByPatientId',
+      deleteOrderByOrderId:'/order/deleteOrderByOrderId',
+      findOrderByOrderId:'/order/findOrderByOrderId',
+      findOrderFormByTimeId:'/order/findOrderFormByTimeId',
+      findOrderFormByChatId:'/order/findOrderFormByChatId',
       // addMessage: '/message/add',
       // deleteMessage: '/message/delete',
       // getDoctorByName: '/doctor/findDoctorByName',
@@ -77,8 +82,13 @@ export default class AllService {
       addTimeslot:'/timeslot/addTimeslot',
       findAllByDoctorIdAndServiceType:'/timeslot/findAllByDoctorIdAndServiceType',
       deleteTimeslotByTimeId:'/timeslot/deleteTimeslotByTimeId',
-      deleteTimeslotByServiceId:'/timeslot/deleteTimeslotByServiceId'
+      deleteTimeslotByServiceId:'/timeslot/deleteTimeslotByServiceId',
 
+      addChat:'/chat/addChat',
+      findAllChatByDoctorId:'/chat/findAllByDoctorId',
+
+
+      addChatDetail:'/chatDetail/addChatDetail',
 
 
     }
@@ -248,6 +258,58 @@ export default class AllService {
       }
     }, "application/json");
   }
+
+  findAllOrderByPatientId(params,callback){
+    var url = this.host + this.method.findAllOrderByPatientId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function(isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  deleteOrderByOrderId(params,callback){
+    var url = this.host + this.method.deleteOrderByOrderId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function(isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  findOrderByOrderId(params,callback){
+    var url = this.host + this.method.findOrderByOrderId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function(isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  findOrderFormByTimeId(params,callback){
+    var url = this.host + this.method.findOrderFormByTimeId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function(isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  findOrderFormByChatId(params,callback){
+    var url = this.host + this.method.findOrderFormByChatId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function(isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+
 //   getAllMessage(params,callback){
 //     var url = this.host + this.method.getAllMessage;
 //     var type = 'post';
@@ -781,6 +843,36 @@ export default class AllService {
 
   deleteTimeslotByServiceId(params, callback) {
     var url = this.host + this.method.deleteTimeslotByServiceId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  addChat(params, callback) {
+    var url = this.host + this.method.addChat;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  findAllChatByDoctorId(params, callback) {
+    var url = this.host + this.method.findAllChatByDoctorId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  addChatDetail(params, callback) {
+    var url = this.host + this.method.addChatDetail;
     var type = 'post';
     return this.bizRequest(url, params, type, function (isOk, data) {
       if (callback) {

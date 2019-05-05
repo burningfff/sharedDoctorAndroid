@@ -63,7 +63,7 @@
           </van-col>
         </van-row>
         <van-tabs v-model="active" sticky animated swipeable @change="getDoctorTable" @click="getDoctorTable">
-          <van-tab title="骨科" >
+          <van-tab title="骨科">
             <div class="doctor" style="margin-top: 10px">
               <van-list
                 v-model="loading"
@@ -78,7 +78,7 @@
                   style="text-align: left"
                 >
                   <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
-                    <img :src="image" />
+                    <img :src="image"/>
                   </div>
                   <div slot="title" @click="doctorInfo(doctor.doctorId)">
                     <van-row>
@@ -143,7 +143,7 @@
                   style="text-align: left"
                 >
                   <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
-                    <img :src="image" />
+                    <img :src="image"/>
                   </div>
                   <div slot="title" @click="doctorInfo(doctor.doctorId)">
                     <van-row>
@@ -208,7 +208,7 @@
                   style="text-align: left"
                 >
                   <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
-                    <img :src="image" />
+                    <img :src="image"/>
                   </div>
                   <div slot="title" @click="doctorInfo(doctor.doctorId)">
                     <van-row>
@@ -273,7 +273,7 @@
                   style="text-align: left"
                 >
                   <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
-                    <img :src="image" />
+                    <img :src="image"/>
                   </div>
                   <div slot="title" @click="doctorInfo(doctor.doctorId)">
                     <van-row>
@@ -338,7 +338,7 @@
                   style="text-align: left"
                 >
                   <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
-                    <img :src="image" />
+                    <img :src="image"/>
                   </div>
                   <div slot="title" @click="doctorInfo(doctor.doctorId)">
                     <van-row>
@@ -403,17 +403,17 @@
                   style="text-align: left"
                 >
                   <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
-                    <img :src="image" />
+                    <img :src="image"/>
                   </div>
                   <div slot="title" @click="doctorInfo(doctor.doctorId)">
                     <van-row>
                       <van-col>
-                <span style="font-size: 16px;font-weight: bolder">
-                  {{doctor.doctorName}}
-                </span>
+                        <span style="font-size: 16px;font-weight: bolder">
+                          {{doctor.doctorName}}
+                        </span>
                         <span>
-                  {{doctor.qualification.position.positionName}}
-                </span>
+                          {{doctor.qualification.position.positionName}}
+                        </span>
                       </van-col>
                     </van-row>
                   </div>
@@ -422,9 +422,9 @@
                       {{doctor.depart.departName}} {{doctor.qualification.hospital.hospitalName}}
                     </van-row>
                     <van-row style="margin-top: 5px">
-              <span>
-              擅长：{{doctor.introduction|ellipsis14}}
-            </span>
+                      <span>
+                        擅长：{{doctor.introduction|ellipsis14}}
+                      </span>
                     </van-row>
                     <van-row style="margin-top: 5px">
                       <van-col span="2">
@@ -475,7 +475,7 @@
           'http://img2.imgtn.bdimg.com/it/u=4091757403,1703254223&fm=200&gp=0.jpg',
           'http://img1.imgtn.bdimg.com/it/u=176315858,4073761715&fm=200&gp=0.jpg',
         ],
-        image:[
+        image: [
           'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg'
         ],
         active: 0,
@@ -508,13 +508,13 @@
         }
         allService.findDoctorByDoctorId(params, (isOk, data) => {
           if (isOk) {
-            LOCWIN.Cache.set('doctorInfo',data.data)
+            LOCWIN.Cache.set('doctorInfo', data.data)
           }
         })
         this.$router.push('/doctorDetail')
         console.log(doctorId)
       },
-      graphicConsult(){
+      graphicConsult() {
         this.$router.push('/graphicConsult')
 
       },
@@ -593,6 +593,7 @@
     max-height: 100%;
     max-width: 100%;
   }
+
   .van-tab, .van-tag--large {
     font-size: 16px;
   }

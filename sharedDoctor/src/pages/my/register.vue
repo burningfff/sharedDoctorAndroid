@@ -97,7 +97,6 @@
         this.$router.push('/login')
       },
       goBack() {
-        // this.$toast('返回');
         this.$router.go(-1);
       },
       register() {

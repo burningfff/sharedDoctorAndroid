@@ -92,7 +92,7 @@
           </van-col>
         </van-row>
       </div>
-      <div style="" @click="showConsult=true">
+      <div style="" @click="go('/homeDoctor')">
         <van-row style="padding: 10px 0px;border-top: 1px solid rgba(205,205,205,0.46);">
           <van-col span="6">
             <span style="font-size: 16px;font-weight: bolder">
@@ -243,7 +243,6 @@
       },
 
       onClickLeft() {
-        this.$toast('返回');
         this.$router.go(-1);
       },
     },

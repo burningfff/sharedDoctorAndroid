@@ -96,6 +96,7 @@
                   allService.getPatientDetailById(params, (isOk, data) => {
                     if (isOk) {
                       LOCWIN.Cache.set('userInfo', data.data)
+                      this.$toast.success('保存成功！');
                     }
                   })
                 }
@@ -103,11 +104,8 @@
             }
           }
         })
-        this.$toast('save');
-        console.log(content)
       },
       onClickLeft() {
-        this.$toast('返回');
         this.$router.go(-1);
       },
     },

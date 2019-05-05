@@ -167,7 +167,6 @@
       },
 
       onClickLeft() {
-        this.$toast('返回');
         this.$router.go(-1)
       },
       showUploader() {

@@ -103,11 +103,10 @@
             }
           }
         })
-        this.$toast('save');
+        this.$toast('保存成功！');
         console.log(content)
       },
       onClickLeft() {
-        this.$toast('返回');
         this.$router.go(-1);
       },
     },

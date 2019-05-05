@@ -15,6 +15,7 @@ Vue.use(VeeValidate, {
       messages: {
         email: () => '请输入正确的邮箱',
         phone: () => '请输入正确的手机号',
+        identityCard: () => '请输入正确的身份证号',
         confirmed: ()=>'两次输入不一致',
         required: ( field )=> "请输入" + field,
         max: (field, [length]) => ` ${field}不能大于${length}字符.`,
@@ -23,9 +24,11 @@ Vue.use(VeeValidate, {
       attributes:{
         email:'邮箱',
         password:'密码',
-        name: '账号',
+        userName: '账号',
+        name: '姓名',
         phone: '手机号',
-        checkPassword:'确认密码'
+        checkPassword:'确认密码',
+        identityCard:'身份证号'
       }
     }
   }
@@ -36,6 +39,15 @@ Validator.extend('phone', {
   },
   validate: value => {
     return value.length === 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)
+  }
+})
+Validator.extend('identityCard', {
+  messages: {
+
+  },
+  validate: value => {
+
+    return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value);
   }
 })
 
