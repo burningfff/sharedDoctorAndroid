@@ -40,7 +40,7 @@
             <!--<input type="file" name="file"  capture="camera">-->
             拍照
           </van-cell>
-          <van-cell @click="photo">
+          <van-cell>
             <van-uploader class="img-add" :after-read="onRead" accept="image/*"
                           type="file"
                           capture="camera">
@@ -135,11 +135,25 @@
     },
     methods: {
       onRead(file) {
-        // console.log(file.content);
-        //将原图片显示为选择的图片
-        this.myImage = file.content;
-        console.log("this.dynamicPics" + this.dynamicPics.length);
-        this.showUpload = false;
+        let params = new FormData(); //创建form对象
+        params.append("file", file.file); //通过append向form对象添加数据//第一个参数字符串可以填任意命名，第二个根据对象属性来找到file
+        let config = {
+          headers: { //添加请求头
+            Authorization:
+              "Bearer " + window.localStorage.getItem("managementToken"),
+            "Content-Type": "multipart/form-data"
+          }
+        };
+        let url = "http://localhost:2800/file/upload";
+        this.$ajax.post(url, params, config).then(res => {
+          console.log(res);
+          console.log(res.data.data);
+          this.showUpload = false;
+          this.myImage = 'http://'+res.data.data;
+        }).catch(err => {
+          console.log(err)
+          this.showUpload = false;
+        });
       },
       getPatientInfo() {
         if (LOCWIN.Cache.get('userInfo') != null) {
@@ -149,7 +163,7 @@
           this.tempPhone = LOCWIN.Cache.get('userInfo').phone
           this.email = LOCWIN.Cache.get('userInfo').email
           this.tempEmail = LOCWIN.Cache.get('userInfo').email
-          this.location = LOCWIN.Cache.get('userInfo').location.city+ LOCWIN.Cache.get('userInfo').location.area
+          this.location = LOCWIN.Cache.get('userInfo').location.city + LOCWIN.Cache.get('userInfo').location.area
         }
       },
       cameraTakePicture() {
@@ -179,21 +193,21 @@
       updateName() {
         if (this.tempPatientName.length <= 6 && this.tempPatientName.length >= 2) {
           var params = {
-            patientId:LOCWIN.Cache.get('userInfo').patientId,
+            patientId: LOCWIN.Cache.get('userInfo').patientId,
             patientName: this.tempPatientName,
-            age:LOCWIN.Cache.get('userInfo').age,
+            age: LOCWIN.Cache.get('userInfo').age,
             gender: LOCWIN.Cache.get('userInfo').gender,
             weight: LOCWIN.Cache.get('userInfo').weight,
             illness: LOCWIN.Cache.get('userInfo').information,
           }
           allService.updatePatientBasicData(params, (isOk, data) => {
-            if(isOk){
+            if (isOk) {
               var params = {
                 patientId: LOCWIN.Cache.get('userInfo').patientId,
               }
               allService.getPatientDetailById(params, (isOk, data) => {
-                if(isOk){
-                  LOCWIN.Cache.set('userInfo',data.data)
+                if (isOk) {
+                  LOCWIN.Cache.set('userInfo', data.data)
                   this.getPatientInfo()
                 }
               })

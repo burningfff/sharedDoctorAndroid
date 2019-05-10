@@ -158,7 +158,6 @@
         hospitalName: LOCWIN.Cache.get('orderInfo').chat.doctor.qualification.hospital.hospitalName,
         hospitalLevel: LOCWIN.Cache.get('orderInfo').chat.doctor.qualification.hospital.hospitalLevel,
         information: LOCWIN.Cache.get('orderInfo').chat.chatDetails[0].chatDetail,
-        phonePrice: '199.00',
         dynamicPics: LOCWIN.Cache.get('orderInfo').chat.chatDetails[1].chatDetail,
         viewImg: [],
         myImage: 'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg',
@@ -179,10 +178,42 @@
 
     methods: {
       cancelOrder() {
-
+        this.$dialog.confirm({
+          title: '取消预约',
+          message: '你确定要取消预约吗？'
+        }).then(() => {
+          // on confirm
+          var params = {
+            orderId:LOCWIN.Cache.get('orderInfo').orderId
+          }
+          allService.deleteOrderByOrderId(params, (isOk, data) => {
+            if (isOk) {
+              this.$toast.success('取消成功！')
+              this.$router.go(-1)
+            }
+          })
+        }).catch(() => {
+          // on cancel
+        });
       },
       confirmOrder() {
-
+        this.$dialog.confirm({
+          title: '预约完成',
+          message: '你确认预约了完成吗？'
+        }).then(() => {
+          // on confirm
+          var params = {
+            orderId:LOCWIN.Cache.get('orderInfo').orderId
+          }
+          allService.confirmOrderByOrderId(params, (isOk, data) => {
+            if (isOk) {
+              this.$toast.success('预约完成！')
+              this.$router.push('/')
+            }
+          })
+        }).catch(() => {
+          // on cancel
+        });
       },
       onClickLeft() {
         this.$router.go(-1);

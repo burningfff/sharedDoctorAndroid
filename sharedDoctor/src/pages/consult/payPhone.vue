@@ -126,7 +126,7 @@
         hospitalName: LOCWIN.Cache.get('doctorInfo').qualification.hospital.hospitalName,
         hospitalLevel: LOCWIN.Cache.get('doctorInfo').qualification.hospital.hospitalLevel,
         information: LOCWIN.Cache.get('information'),
-        phonePrice: '199.00',
+        phonePrice: LOCWIN.Cache.get('service').price+'.00',
         dynamicPics: LOCWIN.Cache.get('dynamicPics'),
         viewImg: [],
         showUpload: false,
@@ -168,8 +168,16 @@
                     }
                     allService.addOrder(params, (isOk, data) => {
                       if (isOk) {
-                        this.$toast.success('预约成功')
-                        this.$router.push('/')
+                        var params = {
+                          orderId: data.data.orderId,
+                          serviceId: LOCWIN.Cache.get('service').serviceId,
+                        }
+                        allService.addThirdparty(params, (isOk, data) => {
+                          if (isOk) {
+                            this.$toast.success('预约成功')
+                            this.$router.push('/')
+                          }
+                        })
                       }
                     })
                   }

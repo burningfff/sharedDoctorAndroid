@@ -78,7 +78,7 @@
             图文
             </span>
             <span style="color: #4B946A">
-            ￥{{this.picturePrice}}
+            {{this.picturePrice}}
           </span>
           </van-col>
           <van-col span="8" style="font-size: 14px;text-align: right">
@@ -86,13 +86,13 @@
             电话
           </span>
             <span style="color: #4B946A;width: 100%">
-            ￥{{this.phonePrice}}
+            {{this.phonePrice}}
           </span>
             <van-icon style="color: #7d7e80" name="arrow"/>
           </van-col>
         </van-row>
       </div>
-      <div style="" @click="go('/homeDoctor')">
+      <div style="" @click="homeDoctor">
         <van-row style="padding: 10px 0px;border-top: 1px solid rgba(205,205,205,0.46);">
           <van-col span="6">
             <span style="font-size: 16px;font-weight: bolder">
@@ -104,7 +104,7 @@
             上门服务
             </span>
             <span style="color: #4B946A">
-            ￥{{this.offlinePrice}}
+            {{this.homePrice}}
           </span>
             <van-icon style="color: #7d7e80" name="arrow"/>
           </van-col>
@@ -124,7 +124,7 @@
 
         <div
           style="border:1px solid rgba(205,205,205,0.46);background-color:#ffffff; box-shadow: 1px 1px  1px  #a6a6a6;border-radius: 3px;margin-top: 20px"
-          @click="go('/graphicConsult')">
+          @click="graphicConsult">
           <van-row style="height: 40px; padding: 15px 0px">
             <van-col span="4" style="height: 40px;">
               <van-icon style="width: 100%;height: 100%;font-size: 40px;color: #4B946A" name="service-o"/>
@@ -135,7 +135,7 @@
               </van-row>
               <van-row style="font-size: 12px;margin-top: 5px;">
                 <span style="color: #4B946A">
-                  ￥{{this.picturePrice}}
+                  {{this.picturePrice}}
                 </span>
               </van-row>
             </van-col>
@@ -162,7 +162,7 @@
         <div
           style="border:1px solid rgba(205,205,205,0.46);background-color:#ffffff; box-shadow: 1px 1px  1px  #a6a6a6;
           border-radius: 3px;margin-top: 20px;margin-bottom: 20px"
-          @click="go('/reserveDoctor')">
+          @click="reserveDoctor">
           <van-row style="height: 40px; padding: 15px 0px">
             <van-col span="4" style="height: 40px;">
               <van-icon style="width: 100%;height: 100%;font-size: 40px;color: #4B946A" name="service-o"/>
@@ -173,7 +173,7 @@
               </van-row>
               <van-row style="font-size: 12px;margin-top: 5px;">
                 <span style="color: #4B946A">
-                  ￥{{this.phonePrice}}
+                  {{this.phonePrice}}
                 </span>
               </van-row>
             </van-col>
@@ -208,7 +208,30 @@
 
   export default {
     created() {
-
+      var params = {
+        doctorId: this.doctorId,
+      }
+      allService.findAllServiceByDoctorId(params, (isOk, data) => {
+        if (isOk) {
+          let serviceTable=data.data
+          // console.log(serviceTable)
+          // console.log(serviceTable.length)
+          for(let i=0;i<serviceTable.length;i++){
+            if(serviceTable[i].serviceName=='语音问诊'){
+              this.phonePrice='￥'+serviceTable[i].price+'.00'
+              this.phoneService=serviceTable[i]
+            }else if(serviceTable[i].serviceName=='预约上门'){
+              this.homePrice='￥'+serviceTable[i].price+'.00'
+              this.homeService=serviceTable[i]
+            }else {
+              this.picturePrice='￥'+serviceTable[i].price+'.00'
+              this.pictureService=serviceTable[i]
+            }
+            // console.log('serviceTable[i]')
+            // console.log(serviceTable[i])
+          }
+        }
+      })
     },
     data() {
       return {
@@ -219,29 +242,63 @@
         hospitalName: LOCWIN.Cache.get('doctorInfo').qualification.hospital.hospitalName,
         hospitalLevel: LOCWIN.Cache.get('doctorInfo').qualification.hospital.hospitalLevel,
         evaluation: 4.4,
-        replyTimes: '801',
-        myImage: ['http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg'],
-        picturePrice: '199.00',
-        phonePrice: '199.00',
-        offlinePrice: '199.00',
+        replyTimes: LOCWIN.Cache.get('doctorInfo').replyTimes,
+        myImage: ['http://106.14.137.163:4396/group1/M00/00/00/rBA-JVzU1eWAKdQIAAAU-qsO3GA330.png'],
+        picturePrice: '暂不提供',
+        pictureService: '',
+        phonePrice: '暂不提供',
+        phoneService: '',
+        homePrice: '暂不提供',
+        homeService: '',
         introduction: LOCWIN.Cache.get('doctorInfo').introduction,
         showConsult: false,
       };
     },
     methods: {
-
-      // showConsult(){
-      //   this.$toast('gg')
-      // },
-
+      getServicePrice(){
+        console.log(this.pictureService)
+        console.log(this.phoneService)
+        console.log(this.homeService)
+      },
       swiperImgClick() {
         ImagePreview(this.myImage)
       },
-
-      go(index) {
-        this.$router.push(index);
+      reserveDoctor(){
+        if(this.phonePrice!='暂不提供'){
+          LOCWIN.Cache.set('service',this.phoneService)
+          this.$router.push('/reserveDoctor');
+        }else{
+          this.$dialog.alert({
+            message: '该医生暂不提供此项服务'
+          }).then(() => {
+            // on close
+          });
+        }
       },
-
+      graphicConsult(){
+        if(this.picturePrice!='暂不提供'){
+          LOCWIN.Cache.set('service',this.pictureService)
+          this.$router.push('/graphicConsult');
+        }else{
+          this.$dialog.alert({
+            message: '该医生暂不提供此项服务'
+          }).then(() => {
+            // on close
+          });
+        }
+      },
+      homeDoctor(){
+        if(this.homePrice!='暂不提供'){
+          LOCWIN.Cache.set('service',this.homeService)
+          this.$router.push('/homeDoctor');
+        }else{
+          this.$dialog.alert({
+            message: '该医生暂不提供此项服务'
+          }).then(() => {
+            // on close
+          });
+        }
+      },
       onClickLeft() {
         this.$router.go(-1);
       },

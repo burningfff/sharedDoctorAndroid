@@ -19,6 +19,7 @@ export default class AllService {
       findOrderByOrderId:'/order/findOrderByOrderId',
       findOrderFormByTimeId:'/order/findOrderFormByTimeId',
       findOrderFormByChatId:'/order/findOrderFormByChatId',
+      confirmOrderByOrderId:'/order/confirmOrderByOrderId',
       // addMessage: '/message/add',
       // deleteMessage: '/message/delete',
       // getDoctorByName: '/doctor/findDoctorByName',
@@ -77,6 +78,7 @@ export default class AllService {
       addService:'/service/addService',
       deleteServiceByServiceId:'/service/deleteServiceByServiceId',
       findServiceByServiceId:'/service/findServiceByServiceId',
+      findAllServiceByDoctorId :'/service/findAllByDoctorId',
 
 
       addTimeslot:'/timeslot/addTimeslot',
@@ -90,7 +92,7 @@ export default class AllService {
 
       addChatDetail:'/chatDetail/addChatDetail',
 
-
+      addThirdparty:'/thirdparty/addThirdparty'
     }
   }
 
@@ -301,6 +303,16 @@ export default class AllService {
 
   findOrderFormByChatId(params,callback){
     var url = this.host + this.method.findOrderFormByChatId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function(isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  confirmOrderByOrderId(params,callback){
+    var url = this.host + this.method.confirmOrderByOrderId;
     var type = 'post';
     return this.bizRequest(url, params, type, function(isOk, data) {
       if (callback) {
@@ -801,6 +813,16 @@ export default class AllService {
     }, "application/json");
   }
 
+  findAllServiceByDoctorId(params, callback) {
+    var url = this.host + this.method.findAllServiceByDoctorId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
   deleteServiceByServiceId(params, callback) {
     var url = this.host + this.method.deleteServiceByServiceId;
     var type = 'post';
@@ -873,6 +895,16 @@ export default class AllService {
 
   addChatDetail(params, callback) {
     var url = this.host + this.method.addChatDetail;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  addThirdparty(params, callback) {
+    var url = this.host + this.method.addThirdparty;
     var type = 'post';
     return this.bizRequest(url, params, type, function (isOk, data) {
       if (callback) {

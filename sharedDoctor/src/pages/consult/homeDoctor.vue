@@ -185,7 +185,7 @@
         positionName: LOCWIN.Cache.get('doctorInfo').qualification.position.positionName,
         hospitalName: LOCWIN.Cache.get('doctorInfo').qualification.hospital.hospitalName,
         hospitalLevel: LOCWIN.Cache.get('doctorInfo').qualification.hospital.hospitalLevel,
-        homePrice: '199.00',
+        homePrice: LOCWIN.Cache.get('service').price+'.00',
         length: 0,
         dynamicPics: LOCWIN.Cache.get('dynamicPics'),
         myImage: 'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg',

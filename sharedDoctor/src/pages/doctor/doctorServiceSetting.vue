@@ -680,6 +680,7 @@
               allService.deleteServiceByServiceId(params, (isOk, data) => {
                 if (isOk) {
                   var params = {
+                    doctorId:LOCWIN.Cache.get('userInfo').doctorId,
                     price: this.phonePrice,
                     serviceName: this.serviceName[this.activeService]
                   }
@@ -723,6 +724,7 @@
           })
         }else {
           var params = {
+            doctorId:LOCWIN.Cache.get('userInfo').doctorId,
             price: this.phonePrice,
             serviceName: this.serviceName[this.activeService]
           }
@@ -777,6 +779,7 @@
               allService.deleteTimeslotByServiceId(params, (isOk, data) => {
                 if (isOk) {
                   var params = {
+                    doctorId:LOCWIN.Cache.get('userInfo').doctorId,
                     price: this.homePrice,
                     serviceName: this.serviceName[this.activeService]
                   }
@@ -820,6 +823,7 @@
           })
         }else {
           var params = {
+            doctorId:LOCWIN.Cache.get('userInfo').doctorId,
             price: this.homePrice,
             serviceName: this.serviceName[this.activeService]
           }
@@ -861,6 +865,7 @@
       },
       saveGraphicPrice() {
         var params = {
+          doctorId:LOCWIN.Cache.get('userInfo').doctorId,
           price: this.graphicPrice,
           serviceName: this.serviceName[this.activeService]
         }
@@ -871,8 +876,7 @@
             this.$toast.success('保存成功')
           }
         })
-      }
-      ,
+      },
       getPhoneTimeslot() {
         this.phoneTimeSlotTable=[[], [], [], [], [], [], []];
         var params = {
