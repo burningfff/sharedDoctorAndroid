@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import axios from 'axios'
+const API_PROXY = 'https://bird.ioliu.cn/v1/?url='; //代理
+
 Vue.use(Vuex);
 
 const state = {
@@ -19,7 +22,6 @@ const mutations = {
   setIdentity(state,value){
     state.identity=value;
   },
-
 }
 
 const actions = {

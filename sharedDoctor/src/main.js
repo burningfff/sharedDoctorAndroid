@@ -17,8 +17,36 @@ import VDistpicker from 'v-distpicker'
 // Vue.use(Mint);
 
 
-require("./common/locwin");
+import websdk from 'easemob-websdk'
+let webIM = window.WebIM = websdk
+Vue.prototype.$WebIM = webIM
+const conn = new webIM.connection({
+  isMultiLoginSessions: webIM.config.isMultiLoginSessions,
+  https: typeof webIM.config.https === 'boolean' ? webIM.config.https : location.protocol === 'https:',
+  url: webIM.config.xmppURL,
+  isAutoLogin: true,
+  heartBeatWait: webIM.config.heartBeatWait,
+  autoReconnectNumMax: webIM.config.autoReconnectNumMax,
+  autoReconnectInterval: webIM.config.autoReconnectInterval,
+  apiUrl: webIM.config.apiURL
+})
+const options = {
+  apiUrl: WebIM.config.apiURL,
+  user: 'a00001',
+  pwd: 'a00001',
+  appKey: WebIM.config.appkey,
+  success:function (re) {
+    console.log('链接服务器正常')
+  },
+  error:function (err) {
+    alert(err)
+  }
+}
+Vue.prototype.$imconn = conn
+Vue.prototype.$imoption = options
 
+
+require("./common/locwin");
 // options 为可选参数，无则不传
 // Vue.use(Lazyload, options);
 Vue.prototype.$echarts = echarts

@@ -16,6 +16,7 @@ const my = resolve => require(['../pages/my.vue'], resolve)
 const consult = resolve => require(['../pages/consult.vue'], resolve)
 const homeDoctor = resolve => require(['../pages/consult/homeDoctor.vue'], resolve)
 const graphicConsult = resolve => require(['../pages/consult/graphicConsult.vue'], resolve)
+const onlineConsult = resolve => require(['../pages/consult/onlineConsult.vue'], resolve)
 const payConsult = resolve => require(['../pages/consult/payConsult.vue'], resolve)
 const payPhone = resolve => require(['../pages/consult/payPhone.vue'], resolve)
 const payHome = resolve => require(['../pages/consult/payHome.vue'], resolve)
@@ -111,6 +112,11 @@ const routes = [
     path: '/graphicConsult',
     component: graphicConsult,
     name: 'graphicConsult'
+  },
+  {
+    path: '/onlineConsult',
+    component: onlineConsult,
+    name: 'onlineConsult'
   },
   {
     path: '/homeDoctor',
