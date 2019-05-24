@@ -25,10 +25,12 @@
                 <div @click="orderDetail(order)">
                   <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
                     <img style="height: 24px;width:24px;border-radius: 100%;"
-                         :src="myImage"/>
+                         :src="order.chat.doctor.imageUrl"/>
                     <span style="margin-left: 5px;">
                     {{order.timeslot.doctor.doctorName}}  {{order.timeslot.doctor.depart.departName}}
                   </span>
+                    <van-tag style="float: right"  v-if="order.orderState==0" round>待完成</van-tag>
+                    <van-tag style="float: right" v-if="order.orderState==1" type="success" round>已完成</van-tag>
                   </van-row>
                   <van-row style="padding: 10px 0px">
                   <span
@@ -55,10 +57,12 @@
                 <div @click="orderDetail(order)">
                   <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
                     <img style="height: 24px;width:24px;border-radius: 100%;"
-                         :src="myImage"/>
+                         :src="order.chat.doctor.imageUrl"/>
                     <span style="margin-left: 5px;">
                     {{order.timeslot.doctor.doctorName}}  {{order.timeslot.doctor.depart.departName}}
                   </span>
+                    <van-tag style="float: right"  v-if="order.orderState==0" round>待完成</van-tag>
+                    <van-tag style="float: right" v-if="order.orderState==1" type="success" round>已完成</van-tag>
                   </van-row>
                   <van-row style="padding: 10px 0px">
                   <span
@@ -85,10 +89,12 @@
                 <div @click="orderDetail(order)">
                   <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
                     <img style="height: 24px;width:24px;border-radius: 100%;"
-                         :src="myImage"/>
+                         :src="order.chat.doctor.imageUrl"/>
                     <span style="margin-left: 5px;">
                     {{order.chat.doctor.doctorName}}  {{order.chat.doctor.depart.departName}}
                   </span>
+                    <van-tag style="float: right"  v-if="order.orderState==0" round>待完成</van-tag>
+                    <van-tag style="float: right" v-if="order.orderState==1" type="success" round>已完成</van-tag>
                   </van-row>
                   <van-row style="padding: 10px 0px">
                   <span
@@ -133,7 +139,6 @@
         graphicOrderList:[],
         loading: false,
         finished: false,
-        myImage: 'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg',
 
       };
     },

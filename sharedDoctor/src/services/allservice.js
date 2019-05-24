@@ -24,11 +24,12 @@ export default class AllService {
       // deleteMessage: '/message/delete',
       // getDoctorByName: '/doctor/findDoctorByName',
       getAllDepart: '/depart/findAll',
-      // getAllMessage: '/message/findAll',
+      updatePatientImageUrl:'/patient/updatePatientImageUrl',
       updatePatientAllData: '/patient/updatePatientAllData',
       updatePatientBasicData: '/patient/updatePatientBasicData',
       updatePatientContact: '/patient/updatePatientContact',
       updateDoctorAllData: '/doctor/updateDoctorAllData',
+      updateDoctorImageUrl: '/doctor/updateDoctorImageUrl',
       // updatePassword:'/user/changePassword',
       // getUserInfo:'/user/findByUserId',
       getPatientDetailByName: '/patient/findPatientByName',
@@ -360,8 +361,28 @@ export default class AllService {
     }, "application/json");
   }
 
+  updateDoctorImageUrl(params, callback) {
+    var url = this.host + this.method.updateDoctorImageUrl;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
   updatePatientAllData(params, callback) {
     var url = this.host + this.method.updatePatientAllData;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  updatePatientImageUrl(params, callback) {
+    var url = this.host + this.method.updatePatientImageUrl;
     var type = 'post';
     return this.bizRequest(url, params, type, function (isOk, data) {
       if (callback) {

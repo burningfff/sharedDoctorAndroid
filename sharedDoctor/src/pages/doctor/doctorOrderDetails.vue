@@ -24,18 +24,9 @@
             <van-row>
               <van-col>
                 <span style="font-size: 18px;font-weight: bolder">
-                  {{this.doctorName}}
-                </span>
-                <span style="font-size: 14px;font-weight: bolder">
-                  {{this.positionName}}
+                  {{this.patientName}}
                 </span>
               </van-col>
-            </van-row>
-            <van-row
-              style="font-size: 12px;margin-top: 5px;color: #3f3f3f;border-radius: 3px">
-                <span>
-                {{this.hospitalName}}  {{this.departName}}
-              </span>
             </van-row>
           </van-col>
         </van-row>
@@ -127,12 +118,21 @@
       v-if="orderState==0"
       style="position: fixed;bottom: 0;width: 100vw;padding: 10px 0px;background-color: white">
       <van-row>
-        <van-col span="8" offset="8">
-          <van-button round type="warning" @click="cancelOrder">取消预约</van-button>
-        </van-col>
-        <van-col span="8">
-          <van-button round type="primary" @click="confirmOrder">预约完成</van-button>
-        </van-col>
+        <div
+          v-if="serviceType==0">
+          <van-col span="8" offset="8">
+            <van-button round type="warning" @click="cancelOrder">取消预约</van-button>
+          </van-col>
+          <van-col span="8">
+            <van-button round type="primary" @click="provideService">开始问诊</van-button>
+          </van-col>
+        </div>
+        <div
+          v-if="serviceType==1">
+          <van-col span="8" offset="16">
+            <van-button round type="warning" @click="cancelOrder">取消预约</van-button>
+          </van-col>
+        </div>
       </van-row>
     </div>
   </div>
@@ -146,26 +146,21 @@
   export default {
     created() {
       if (LOCWIN.Cache.get('orderInfo').timeslot.startTime != null) {
+        this.serviceType=1
         let tempStartTime = new Date(LOCWIN.Cache.get('orderInfo').timeslot.startTime.substring(0, 4), LOCWIN.Cache.get('orderInfo').timeslot.startTime.substring(5, 7) - 1, LOCWIN.Cache.get('orderInfo').timeslot.startTime.substring(8, 10), LOCWIN.Cache.get('orderInfo').timeslot.startTime.substring(11, 13))
         console.log(tempStartTime)
         this.reserveDate = tempStartTime.getMonth() + 1 + '月' + tempStartTime.getDate() + '号,周' + this.weekday[tempStartTime.getDay()] + ',' + tempStartTime.getHours() + ':00-' + (Number(tempStartTime.getHours()) + 1) + ':00'
       }
-      // this.dynamicPics=
       console.log(this.dynamicPics)
     },
     data() {
       return {
-        doctorId: LOCWIN.Cache.get('orderInfo').chat.doctorId,
-        doctorName: LOCWIN.Cache.get('orderInfo').chat.doctor.doctorName,
-        departName: LOCWIN.Cache.get('orderInfo').chat.doctor.depart.departName,
-        positionName: LOCWIN.Cache.get('orderInfo').chat.doctor.qualification.position.positionName,
-        hospitalName: LOCWIN.Cache.get('orderInfo').chat.doctor.qualification.hospital.hospitalName,
-        hospitalLevel: LOCWIN.Cache.get('orderInfo').chat.doctor.qualification.hospital.hospitalLevel,
+        patientId: LOCWIN.Cache.get('orderInfo').patientId,
+        patientName: LOCWIN.Cache.get('orderInfo').patient.patientName,
         information: LOCWIN.Cache.get('orderInfo').chat.chatDetails[0].chatDetail,
         dynamicPics: LOCWIN.Cache.get('orderInfo').chat.chatDetails[1].chatDetail.split(","),
-        orderState:LOCWIN.Cache.get('orderInfo').orderState,
         viewImg: [],
-        myImage: LOCWIN.Cache.get('userInfo').imageUrl,
+        myImage: LOCWIN.Cache.get('orderInfo').patient.imageUrl,
         reserveDate: '',
         weekday: [
           '日',
@@ -175,9 +170,11 @@
           '四',
           '五',
           '六'],
-        phone: LOCWIN.Cache.get('userInfo').phone,
-        location: LOCWIN.Cache.get('userInfo').location.province + LOCWIN.Cache.get('userInfo').location.city + LOCWIN.Cache.get('userInfo').location.area,
-        locationDetail: LOCWIN.Cache.get('userInfo').location.locationDetail
+        phone: LOCWIN.Cache.get('orderInfo').patient.phone,
+        location: LOCWIN.Cache.get('orderInfo').patient.location.province + LOCWIN.Cache.get('orderInfo').patient.location.city + LOCWIN.Cache.get('orderInfo').patient.location.area,
+        locationDetail: LOCWIN.Cache.get('orderInfo').patient.location.locationDetail,
+        orderState:LOCWIN.Cache.get('orderInfo').orderState,
+        serviceType:0
       };
     },
 
@@ -201,24 +198,12 @@
           // on cancel
         });
       },
-      confirmOrder() {
-        this.$dialog.confirm({
-          title: '预约完成',
-          message: '你确认预约了完成吗？'
-        }).then(() => {
-          // on confirm
-          var params = {
-            orderId:LOCWIN.Cache.get('orderInfo').orderId
-          }
-          allService.confirmOrderByOrderId(params, (isOk, data) => {
-            if (isOk) {
-              this.$toast.success('预约完成！')
-              this.$router.push('/')
-            }
-          })
-        }).catch(() => {
-          // on cancel
-        });
+      provideService() {
+        LOCWIN.Cache.set('toUserInfo', LOCWIN.Cache.get('orderInfo').patient)
+        LOCWIN.Cache.set('chatId',LOCWIN.Cache.get('orderInfo').chatId)
+        console.log('toUserInfo:')
+        console.log(LOCWIN.Cache.get('toUserInfo'))
+        this.$router.push('/onlineConsult')
       },
       clickImg(url) {
         // console.log(url);

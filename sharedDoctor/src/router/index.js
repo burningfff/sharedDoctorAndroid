@@ -34,6 +34,7 @@ const doctorInfo = resolve => require(['../pages/doctor/doctorInfo.vue'], resolv
 const doctorSetting = resolve => require(['../pages/doctor/doctorSetting.vue'], resolve)
 const doctorServiceSetting = resolve => require(['../pages/doctor/doctorServiceSetting.vue'], resolve)
 const doctorOrder = resolve => require(['../pages/doctor/doctorOrder.vue'], resolve)
+const doctorOrderDetails = resolve => require(['../pages/doctor/doctorOrderDetails.vue'], resolve)
 
 Vue.use(Router)
 
@@ -192,6 +193,11 @@ const routes = [
     path: '/doctorOrder',
     component: doctorOrder,
     name: 'doctorOrder'
+  },
+  {
+    path: '/doctorOrderDetails',
+    component: doctorOrderDetails,
+    name: 'doctorOrderDetails'
   },
   {
     path: '/illnessDetailPhone',

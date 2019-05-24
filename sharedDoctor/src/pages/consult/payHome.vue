@@ -148,7 +148,7 @@
         phonePrice: LOCWIN.Cache.get('service').price+'.00',
         dynamicPics: LOCWIN.Cache.get('dynamicPics'),
         viewImg: [],
-        myImage: 'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg',
+        myImage: LOCWIN.Cache.get('doctorInfo').imageUrl,
         reserveDate: LOCWIN.Cache.get('reserveDate'),
         timeId:LOCWIN.Cache.get('timeId'),
         phone: LOCWIN.Cache.get('userInfo').phone,
@@ -173,12 +173,14 @@
             var params = {
               chatId: chatId,
               chatDetail: this.information,
+              chatFrom:LOCWIN.Cache.get('userInfo').patientId
             }
             allService.addChatDetail(params, (isOk, data) => {
               if (isOk) {
                 var params = {
                   chatId: chatId,
                   chatDetail: this.dynamicPics.join(","),
+                  chatFrom:LOCWIN.Cache.get('userInfo').patientId
                 }
                 allService.addChatDetail(params, (isOk, data) => {
                   if (isOk) {

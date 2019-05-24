@@ -111,7 +111,11 @@
             if (data.status == "false") {
               this.$toast.fail(data.data);
             } else {
-              this.$toast.success("注册成功！");
+              this.$imoption.username = this.userName;
+              this.$imoption.password = this.userName;
+              this.$imoption.nickname=this.userName;
+              this.$imconn.registerUser(this.$imoption)
+              this.$toast.success("注册成功！")
               this.$router.push('/login')
             }
           } else {

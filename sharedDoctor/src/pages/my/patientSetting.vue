@@ -103,7 +103,6 @@
         :error-message="errors.first('email')"
       />
     </van-dialog>
-
   </div>
 </template>
 <script>
@@ -125,7 +124,7 @@
         email: '',
         tempEmail: '',
         location: '',
-        myImage: 'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg',
+        myImage: LOCWIN.Cache.get('userInfo').imageUrl,
         showUpload: false,
         showUpdateName: false,
         showUpdatePhone: false,
@@ -136,6 +135,8 @@
     methods: {
       onRead(file) {
         let params = new FormData(); //创建form对象
+        console.log(file)
+        console.log(file.file)
         params.append("file", file.file); //通过append向form对象添加数据//第一个参数字符串可以填任意命名，第二个根据对象属性来找到file
         let config = {
           headers: { //添加请求头
@@ -144,12 +145,33 @@
             "Content-Type": "multipart/form-data"
           }
         };
-        let url = "http://localhost:2800/file/upload";
+        let url = "http://106.14.137.163:2800/file/upload";
         this.$ajax.post(url, params, config).then(res => {
           console.log(res);
           console.log(res.data.data);
           this.showUpload = false;
-          this.myImage = 'http://'+res.data.data;
+          this.myImage = 'http://' + res.data.data;
+          var params = {
+            patientId: LOCWIN.Cache.get('userInfo').patientId,
+            imageUrl: 'http://' + res.data.data
+          }
+          allService.updatePatientImageUrl(params, (isOk, data) => {
+            if (isOk) {
+              this.$toast.success({
+                message: '上传成功',
+                duration: 1000
+              })
+              var params = {
+                patientId: LOCWIN.Cache.get('userInfo').patientId,
+              }
+              allService.getPatientDetailById(params, (isOk, data) => {
+                if (isOk) {
+                  LOCWIN.Cache.set('userInfo', data.data)
+                  this.getPatientInfo()
+                }
+              })
+            }
+          })
         }).catch(err => {
           console.log(err)
           this.showUpload = false;
@@ -164,18 +186,79 @@
           this.email = LOCWIN.Cache.get('userInfo').email
           this.tempEmail = LOCWIN.Cache.get('userInfo').email
           this.location = LOCWIN.Cache.get('userInfo').location.city + LOCWIN.Cache.get('userInfo').location.area
+          this.myImage = LOCWIN.Cache.get('userInfo').imageUrl
         }
       },
       cameraTakePicture() {
         navigator.camera.getPicture(this.onSuccess, this.onFail, {
           quality: 50,
-          destinationType: Camera.DestinationType.FILE_URI
+          destinationType: Camera.DestinationType.DATA_URL,
+          // saveToPhotoAlbum:true
+        });
+      },
+      dataURItoBlob(base64Data) {
+        let byteString;
+        if (base64Data.split(',')[0].indexOf('base64') >= 0)
+          byteString = atob(base64Data.split(',')[1]);
+        else
+          byteString = unescape(base64Data.split(',')[1]);
+        let mimeString = base64Data.split(',')[0].split(':')[1].split(';')[0];
+        let ia = new Uint8Array(byteString.length);
+        for (let i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ia], {type: mimeString});
+      },
+      updateImg(imageData) {
+        let canvas = document.createElement('canvas');
+        let dataURL = canvas.toDataURL('image/jpeg', 0.5);
+        let params = new FormData(document.forms[0]);
+        params.append("file", this.dataURItoBlob(imageData), 'image.png');
+        let config = {
+          headers: { //添加请求头
+            Authorization:
+              "Bearer " + window.localStorage.getItem("managementToken"),
+            "Content-Type": "multipart/form-data"
+          }
+        };
+        let url = "http://106.14.137.163:2800/file/upload";
+        this.$ajax.post(url, params, config).then(res => {
+          console.log(res);
+          console.log(res.data.data);
+          this.showUpload = false;
+          this.myImage = 'http://' + res.data.data;
+          var params = {
+            patientId: LOCWIN.Cache.get('userInfo').patientId,
+            imageUrl: 'http://' + res.data.data
+          }
+          allService.updatePatientImageUrl(params, (isOk, data) => {
+            if (isOk) {
+              this.$toast.success({
+                message: '上传成功',
+                duration: 1000
+              })
+              var params = {
+                patientId: LOCWIN.Cache.get('userInfo').patientId,
+              }
+              allService.getPatientDetailById(params, (isOk, data) => {
+                if (isOk) {
+                  LOCWIN.Cache.set('userInfo', data.data)
+                  this.getPatientInfo()
+                }
+              })
+            }
+          })
+        }).catch(err => {
+          this.$dialog.alert({
+            message: err
+          }).then(() => {
+            this.showUpload = false;
+          });
         });
       },
       onSuccess(imageData) {
-        return this.myImage = imageData
+        this.updateImg("data:image/jpeg;base64," + imageData)
       },
-
       onFail(message) {
         alert('失败原因: ' + message);
       },

@@ -21,14 +21,16 @@
             >
               <div v-for="order in orderTable[0]"
                    :key="order.orderId">
-                <div
-                  style="margin-left: 4vw;width: 92vw;margin-right: 4vw">
+                <div @click="orderDetail(order)"
+                     style="margin-left: 4vw;width: 92vw;margin-right: 4vw">
                   <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
                     <img style="height: 24px;width:24px;border-radius: 100%;"
-                         :src="myImage"/>
+                         :src="order.patient.imageUrl"/>
                     <span style="margin-left: 5px;">
                     {{order.patient.patientName}}
                   </span>
+                      <van-tag style="float: right" v-if="order.orderState==0" round>待完成</van-tag>
+                      <van-tag style="float: right" v-if="order.orderState==1" type="success" round>已完成</van-tag>
                   </van-row>
                   <van-row style="padding: 10px 0px">
                   <span
@@ -42,7 +44,7 @@
             </van-list>
           </div>
         </van-tab>
-        <van-tab :title="serviceName[1]" style="margin-left: 4vw;width: 92vw;margin-right: 4vw">
+        <van-tab :title="serviceName[1]" >
           <div>
             <van-list
               v-model="loading"
@@ -52,14 +54,16 @@
             >
               <div v-for="order in orderTable[1]"
                    :key="order.orderId">
-                <div
-                  style="margin-left: 4vw;width: 92vw;margin-right: 4vw">
+                <div @click="orderDetail(order)"
+                     style="margin-left: 4vw;width: 92vw;margin-right: 4vw">
                   <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
                     <img style="height: 24px;width:24px;border-radius: 100%;"
-                         :src="myImage"/>
+                         :src="order.patient.imageUrl"/>
                     <span style="margin-left: 5px;">
-                    {{order.patient.patientName}}
-                  </span>
+                      {{order.patient.patientName}}
+                    </span>
+                    <van-tag style="float: right" v-if="order.orderState==0" round>待完成</van-tag>
+                    <van-tag style="float: right" v-if="order.orderState==1" type="success" round>已完成</van-tag>
                   </van-row>
                   <van-row style="padding: 10px 0px">
                   <span
@@ -73,7 +77,7 @@
             </van-list>
           </div>
         </van-tab>
-        <van-tab :title="serviceName[2]" style="margin-left: 4vw;width: 92vw;margin-right: 4vw">
+        <van-tab :title="serviceName[2]" >
           <div>
             <van-list
               v-model="loading"
@@ -83,14 +87,16 @@
             >
               <div v-for="order in orderTable[2]"
                    :key="order.orderId">
-                <div
-                  style="margin-left: 4vw;width: 92vw;margin-right: 4vw">
+                <div @click="orderDetail(order)"
+                     style="margin-left: 4vw;width: 92vw;margin-right: 4vw">
                   <van-row style="border-bottom:1px solid #ebedf0;padding: 10px 0px">
                     <img style="height: 24px;width:24px;border-radius: 100%;"
-                         :src="myImage"/>
+                         :src="order.patient.imageUrl"/>
                     <span style="margin-left: 5px;">
                     {{order.patient.patientName}}
                   </span>
+                    <van-tag style="float: right"  v-if="order.orderState==0" round>待完成</van-tag>
+                    <van-tag style="float: right" v-if="order.orderState==1" type="success" round>已完成</van-tag>
                   </van-row>
                   <van-row style="padding: 10px 0px">
                   <span
@@ -135,13 +141,18 @@
         graphicOrderList: [],
         loading: false,
         finished: false,
-        myImage: 'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg',
 
       };
     },
     methods: {
       onClickLeft() {
         this.$router.go(-1)
+      },
+      orderDetail(order) {
+        LOCWIN.Cache.set('orderInfo', order)
+        console.log('orderInfo:')
+        console.log(LOCWIN.Cache.get('orderInfo'))
+        this.$router.push('/doctorOrderDetails')
       },
       getOrder() {
         let tempOrderTable = []

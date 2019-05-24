@@ -93,7 +93,7 @@
               <van-cell @click="camera">
                 拍照
               </van-cell>
-              <van-cell @click="photo">
+              <van-cell>
                 <van-uploader class="img-add" :after-read="onRead" accept="image/*"
                               type="file"
                               capture="camera">
@@ -167,8 +167,51 @@
           destinationType: Camera.DestinationType.DATA_URL
         });
       },
+      dataURItoBlob(base64Data) {
+        let byteString;
+        if (base64Data.split(',')[0].indexOf('base64') >= 0)
+          byteString = atob(base64Data.split(',')[1]);
+        else
+          byteString = unescape(base64Data.split(',')[1]);
+        let mimeString = base64Data.split(',')[0].split(':')[1].split(';')[0];
+        let ia = new Uint8Array(byteString.length);
+        for (let i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ia], {type: mimeString});
+      },
+      updateImg(imageData) {
+        let canvas = document.createElement('canvas');
+        let dataURL = canvas.toDataURL('image/jpeg', 0.5);
+        let params = new FormData(document.forms[0]);
+        params.append("file", this.dataURItoBlob(imageData), 'image.png');
+        let config = {
+          headers: { //添加请求头
+            Authorization:
+              "Bearer " + window.localStorage.getItem("managementToken"),
+            "Content-Type": "multipart/form-data"
+          }
+        };
+        let url = "http://106.14.137.163:2800/file/upload";
+        this.$ajax.post(url, params, config).then(res => {
+          console.log(res);
+          console.log(res.data.data);
+          this.showUpload = false;
+          this.dynamicPics.push('http://' + res.data.data);
+          this.$toast.success({
+            message:'上传成功',
+            duration:1000
+          })
+        }).catch(err => {
+          this.$dialog.alert({
+            message: err
+          }).then(() => {
+            this.showUpload = false;
+          });
+        });
+      },
       onSuccess(imageData) {
-        return this.dynamicPics.push("data:image/jpeg;base64," + imageData);
+        this.updateImg("data:image/jpeg;base64," + imageData)
       },
 
       onFail(message) {
@@ -176,14 +219,32 @@
       },
       camera() {
         this.cameraTakePicture();
-        this.showUpload = false;
       },
       onRead(file) {
-        // console.log(file.content);
-        //将原图片显示为选择的图片
-        this.dynamicPics.push(file.content);
-        console.log("this.dynamicPics" + this.dynamicPics.length)
-        this.showUpload = false
+        // this.dynamicPics.push(file.content);
+        let params = new FormData(); //创建form对象
+        params.append("file", file.file); //通过append向form对象添加数据//第一个参数字符串可以填任意命名，第二个根据对象属性来找到file
+        let config = {
+          headers: { //添加请求头
+            Authorization:
+              "Bearer " + window.localStorage.getItem("managementToken"),
+            "Content-Type": "multipart/form-data"
+          }
+        };
+        let url = "http://106.14.137.163:2800/file/upload";
+        this.$ajax.post(url, params, config).then(res => {
+          console.log(res);
+          console.log(res.data.data);
+          this.showUpload = false;
+          this.dynamicPics.push('http://'+res.data.data);
+          this.$toast.success({
+            message:'上传成功',
+            duration:1000
+          })
+        }).catch(err => {
+          console.log(err)
+          this.showUpload = false;
+        });
       },
       clickImg(url) {
         // console.log(url);

@@ -4,8 +4,8 @@
       <van-row style="background-color: #f5efec;">
         <div @click="go('/doctorSetting')">
           <van-col span="4" style="margin-top: 20px;margin-bottom: 20px;margin-left: 2vw">
-            <img style="width: 100%;height: 100%;border-radius: 100%;"
-                 src="../../assets/picture.png"/>
+            <img style="width: 16vw;height: 16vw;border-radius: 100%;"
+                 :src="myImage"/>
           </van-col>
           <van-col span="8" style="height:16vw;margin-top: 20px;margin-bottom: 20px;">
             <van-row>
@@ -55,7 +55,7 @@
         // showUnSignIn: true,
         userName: LOCWIN.Cache.get('userInfo').doctorName,
         userInfo: LOCWIN.Cache.get('userInfo'),
-
+        myImage: LOCWIN.Cache.get('userInfo').imageUrl,
       };
     },
     methods: {

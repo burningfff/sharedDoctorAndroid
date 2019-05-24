@@ -6,7 +6,7 @@
       v-show="isShow"
       fixed>
       <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="chat">问诊</van-tabbar-item>
+      <van-tabbar-item icon="chat">消息</van-tabbar-item>
       <van-tabbar-item icon="user-o">我的</van-tabbar-item>
     </van-tabbar>
   </div>
