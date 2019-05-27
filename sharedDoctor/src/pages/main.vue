@@ -3,49 +3,49 @@
     <header-bar class="header-bar"></header-bar>
     <div class="content" style="margin-left: 2%;width: 96%">
       <van-row>
-        <van-col span="8">
+        <van-col span="12">
           <div @click="go('/findDoctor')" style="text-align: center">
             <van-row>
               <img
-                style="width: 50%"
+                style="width: 90%"
                 src="../assets/consult.png"/>
             </van-row>
-            <van-row style="margin-top: 2px;margin-bottom: 2px">
-              <span style="font-size: 18px;font-weight: bolder">问医生</span>
-            </van-row>
-            <van-row>
-              <span style="color: #414244;font-size: 13px">按科室找医生</span>
-            </van-row>
+            <!--<van-row style="margin-top: 2px;margin-bottom: 2px">-->
+              <!--<span style="font-size: 18px;font-weight: bolder">问医生</span>-->
+            <!--</van-row>-->
+            <!--<van-row>-->
+              <!--<span style="color: #414244;font-size: 13px">按科室找医生</span>-->
+            <!--</van-row>-->
           </div>
         </van-col>
-        <van-col span="8">
-          <div @click="go('/graphicConsult')" style="text-align: center">
-            <van-row>
-              <img
-                style="width: 50%"
-                src="../assets/consult.png"/>
-            </van-row>
-            <van-row style="margin-top: 2px;margin-bottom: 2px">
-              <span style="font-size: 18px;font-weight: bolder">预约上门</span>
-            </van-row>
-            <van-row>
-              <span style="color: #414244;font-size: 13px">医生上门诊治</span>
-            </van-row>
-          </div>
-        </van-col>
-        <van-col span="8">
+        <!--<van-col span="8">-->
+          <!--<div @click="go('/graphicConsult')" style="text-align: center">-->
+            <!--<van-row>-->
+              <!--<img-->
+                <!--style="width: 50%"-->
+                <!--src="../assets/consult.png"/>-->
+            <!--</van-row>-->
+            <!--&lt;!&ndash;<van-row style="margin-top: 2px;margin-bottom: 2px">&ndash;&gt;-->
+              <!--&lt;!&ndash;<span style="font-size: 18px;font-weight: bolder">预约上门</span>&ndash;&gt;-->
+            <!--&lt;!&ndash;</van-row>&ndash;&gt;-->
+            <!--&lt;!&ndash;<van-row>&ndash;&gt;-->
+              <!--&lt;!&ndash;<span style="color: #414244;font-size: 13px">医生上门诊治</span>&ndash;&gt;-->
+            <!--&lt;!&ndash;</van-row>&ndash;&gt;-->
+          <!--</div>-->
+        <!--</van-col>-->
+        <van-col span="12">
           <div @click="go('/reportExplanation')" style="text-align: center">
             <van-row>
               <img
-                style="width: 50%"
-                src="../assets/consult.png"/>
+                style="width: 90%"
+                src="../assets/inform.png"/>
             </van-row>
-            <van-row style="margin-top: 2px;margin-bottom: 2px">
-              <span style="font-size: 18px;font-weight: bolder;">报告解读</span>
-            </van-row>
-            <van-row>
-              <span style="color: #414244;font-size: 13px">在线解读报告</span>
-            </van-row>
+            <!--<van-row style="margin-top: 2px;margin-bottom: 2px">-->
+              <!--<span style="font-size: 18px;font-weight: bolder;">报告解读</span>-->
+            <!--</van-row>-->
+            <!--<van-row>-->
+              <!--<span style="color: #414244;font-size: 13px">在线解读报告</span>-->
+            <!--</van-row>-->
           </div>
         </van-col>
       </van-row>
@@ -78,7 +78,7 @@
                   style="text-align: left"
                 >
                   <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
-                    <img :src="image"/>
+                    <img :src="doctor.imageUrl"/>
                   </div>
                   <div slot="title" @click="doctorInfo(doctor.doctorId)">
                     <van-row>
@@ -143,7 +143,7 @@
                   style="text-align: left"
                 >
                   <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
-                    <img :src="image"/>
+                    <img :src="doctor.imageUrl"/>
                   </div>
                   <div slot="title" @click="doctorInfo(doctor.doctorId)">
                     <van-row>
@@ -208,7 +208,7 @@
                   style="text-align: left"
                 >
                   <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
-                    <img :src="image"/>
+                    <img :src="doctor.imageUrl"/>
                   </div>
                   <div slot="title" @click="doctorInfo(doctor.doctorId)">
                     <van-row>
@@ -273,7 +273,7 @@
                   style="text-align: left"
                 >
                   <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
-                    <img :src="image"/>
+                    <img :src="doctor.imageUrl"/>
                   </div>
                   <div slot="title" @click="doctorInfo(doctor.doctorId)">
                     <van-row>
@@ -338,7 +338,7 @@
                   style="text-align: left"
                 >
                   <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
-                    <img :src="image"/>
+                    <img :src="doctor.imageUrl"/>
                   </div>
                   <div slot="title" @click="doctorInfo(doctor.doctorId)">
                     <van-row>
@@ -403,7 +403,7 @@
                   style="text-align: left"
                 >
                   <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
-                    <img :src="image"/>
+                    <img :src="doctor.imageUrl"/>
                   </div>
                   <div slot="title" @click="doctorInfo(doctor.doctorId)">
                     <van-row>
@@ -474,9 +474,6 @@
         images: [
           'http://img2.imgtn.bdimg.com/it/u=4091757403,1703254223&fm=200&gp=0.jpg',
           'http://img1.imgtn.bdimg.com/it/u=176315858,4073761715&fm=200&gp=0.jpg',
-        ],
-        image: [
-          'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg'
         ],
         active: 0,
         doctorTable: [],

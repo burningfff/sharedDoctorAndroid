@@ -29,24 +29,24 @@
     <div class="menu" v-clickoutside="handleClose">
       <van-collapse v-model="activeName" accordion>
         <van-row style="align-content: center; ">
-          <van-col span="6">
+          <van-col span="12">
             <van-collapse-item :title="sort" name="1">
               <div slot="title">{{sort|ellipsis}}</div>
             </van-collapse-item>
           </van-col>
-          <van-col span="6">
+          <van-col span="12">
             <van-collapse-item :title="city" name="2">
               <div slot="title">{{city|ellipsis}}</div>
             </van-collapse-item>
           </van-col>
-          <van-col span="6">
-            <van-collapse-item :title="illness" name="3">
-              <div slot="title">{{illness|ellipsis}}</div>
-            </van-collapse-item>
-          </van-col>
-          <van-col span="6">
-            <van-collapse-item title="筛选" name="4"/>
-          </van-col>
+          <!--<van-col span="6">-->
+            <!--<van-collapse-item :title="illness" name="3">-->
+              <!--<div slot="title">{{illness|ellipsis}}</div>-->
+            <!--</van-collapse-item>-->
+          <!--</van-col>-->
+          <!--<van-col span="6">-->
+            <!--<van-collapse-item title="筛选" name="4"/>-->
+          <!--</van-col>-->
         </van-row>
 
       </van-collapse>
@@ -56,8 +56,8 @@
             <van-cell-group>
               <van-button size="large" @click="clickSort(1)">综合排序</van-button>
               <van-button size="large" @click="clickSort(2)">星级评分</van-button>
-              <van-button size="large" @click="clickSort(3)">价格从高到低</van-button>
-              <van-button size="large" @click="clickSort(4)">价格从低到高</van-button>
+              <!--<van-button size="large" @click="clickSort(3)">价格从高到低</van-button>-->
+              <!--<van-button size="large" @click="clickSort(4)">价格从低到高</van-button>-->
             </van-cell-group>
           </div>
           </van-panel>
@@ -70,37 +70,37 @@
           </div>
         </transition>
       </div>
-      <div class="chooseIllness">
-        <transition name="my-trans">
-          <div class="dropdownIllness" v-show="showIllness"
-               style="margin: 5px 5px;text-align:left">
-            <van-row>
-              <van-col>
-                <van-button
-                  v-for="(doctor,index) in doctorTable"
-                  :key="doctor.doctorId"
-                  v-if="index==index_illness"
-                  style="align-items: flex-start;margin: 3px 3px;
-                  background-color: #35a95d;color: white;border-radius: 6px;"
-                  size="small"
-                  @click="clickIllness(index)"
-                >
-                  {{doctor.doctorName}}
-                </van-button>
-                <van-button
-                  v-else
-                  style="align-items: flex-start;margin: 2px 3px;
-                  background-color: #e4e5e8;color: #7d7e80;border-radius: 6px;"
-                  size="small"
-                  @click="clickIllness(index)"
-                >
-                  {{doctor.doctorName}}
-                </van-button>
-              </van-col>
-            </van-row>
-          </div>
-        </transition>
-      </div>
+      <!--<div class="chooseIllness">-->
+        <!--<transition name="my-trans">-->
+          <!--<div class="dropdownIllness" v-show="showIllness"-->
+               <!--style="margin: 5px 5px;text-align:left">-->
+            <!--<van-row>-->
+              <!--<van-col>-->
+                <!--<van-button-->
+                  <!--v-for="(doctor,index) in doctorTable"-->
+                  <!--:key="doctor.doctorId"-->
+                  <!--v-if="index==index_illness"-->
+                  <!--style="align-items: flex-start;margin: 3px 3px;-->
+                  <!--background-color: #35a95d;color: white;border-radius: 6px;"-->
+                  <!--size="small"-->
+                  <!--@click="clickIllness(index)"-->
+                <!--&gt;-->
+                  <!--{{doctor.doctorName}}-->
+                <!--</van-button>-->
+                <!--<van-button-->
+                  <!--v-else-->
+                  <!--style="align-items: flex-start;margin: 2px 3px;-->
+                  <!--background-color: #e4e5e8;color: #7d7e80;border-radius: 6px;"-->
+                  <!--size="small"-->
+                  <!--@click="clickIllness(index)"-->
+                <!--&gt;-->
+                  <!--{{doctor.doctorName}}-->
+                <!--</van-button>-->
+              <!--</van-col>-->
+            <!--</van-row>-->
+          <!--</div>-->
+        <!--</transition>-->
+      <!--</div>-->
     </div>
     <div class="doctor" style="margin-top: 10px">
       <van-list
@@ -116,7 +116,7 @@
           style="text-align: left"
         >
           <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
-            <img :src="image" />
+            <img :src="doctor.imageUrl" />
           </div>
           <div slot="title" @click="doctorInfo(doctor.doctorId)">
             <van-row>
@@ -199,15 +199,14 @@
         showIllness: false,
         searchKey: '',
         areaList: AreaList,
-        image:"https://img.yzcdn.cn/upload_files/2017/07/02/af5b9f44deaeb68000d7e4a711160c53.jpg"
 
       };
     },
     filters: {
       ellipsis(value) {
         if (!value) return ''
-        if (value.length > 4) {
-          return value.slice(0, 4) + '..'
+        if (value.length > 6) {
+          return value.slice(0, 6) + '..'
         }
         return value
       },
@@ -273,21 +272,44 @@
       clickSort(val) {
         if (val == 1) {
           this.sort = "综合排序"
+          var t;
+          for(var i=0;i<this.doctorTable.length;i++){
+            for(var j=i+1;j<this.doctorTable.length;j++){
+              if((this.doctorTable[i].evaluation+Math.log(this.doctorTable[i].replyTimes))<(this.doctorTable[j].evaluation+Math.log(this.doctorTable[j].replyTimes)))              {
+                t=this.doctorTable[i];
+                this.doctorTable[i]=this.doctorTable[j];
+                this.doctorTable[j]=t;
+              }
+            }
+          }
+          console.log(this.doctorTable)
         } else if (val == 2) {
           this.sort = "星级评分"
-        } else if (val == 3) {
-          this.sort = "价格从高到低"
-        } else if (val == 4) {
-          this.sort = "价格从低到高"
+          var t;
+          for(var i=0;i<this.doctorTable.length;i++){
+            for(j=i+1;j<this.doctorTable.length;j++){
+              if(this.doctorTable[i].evaluation<this.doctorTable[j].evaluation){
+                t=this.doctorTable[i];
+                this.doctorTable[i]=this.doctorTable[j];
+                this.doctorTable[j]=t;
+              }
+            }
+          }
+          console.log(this.doctorTable)
         }
+        // } else if (val == 3) {
+        //   this.sort = "价格从高到低"
+        // } else if (val == 4) {
+        //   this.sort = "价格从低到高"
+        // }
         this.handleClose()
       },
-      clickIllness(val) {
-        this.index_illness = val
-        this.illness = this.doctorTable[val].doctorName
-        console.log("index:" + val)
-        this.handleClose()
-      },
+      // clickIllness(val) {
+      //   this.index_illness = val
+      //   this.illness = this.doctorTable[val].doctorName
+      //   console.log("index:" + val)
+      //   this.handleClose()
+      // },
       handleClose() {
         this.showSort = false;
         this.showCity = false;
@@ -312,14 +334,33 @@
         this.$router.go(-1)
       },
       onClickSearchBtn() {
-        this.$router.push('/search');
+        this.$router.push('/findDoctorByKeyWord');
       },
-      onSelected(data) {
-        this.$toast(data.province.value + ' | ' + data.city.value);
-        this.city = data.city.value;
-        console.log(data)
-        this.showCity = false;
-        this.activeName = ''
+      onSelected(location) {
+        var params = {
+          departId: this.departId
+        }
+        allService.findAllDoctorByDepartId(params, (isOk, data) => {
+          if (isOk) {
+            this.doctorTable = data.data
+            console.log(this.doctorTable)
+            this.$toast(location.province.value + ' | ' + location.city.value);
+            this.city = location.city.value;
+            console.log(location)
+            this.showCity = false;
+            this.activeName = ''
+            let tempLength=this.doctorTable.length
+            let tempDoctorTable=[]
+            for (let i=0;i<tempLength;i++) {
+              console.log(this.doctorTable[i].location)
+              if(this.doctorTable[i].location.city==this.city&&this.doctorTable[i].location.city!=null) {
+                tempDoctorTable.push(this.doctorTable[i])
+              }
+            }
+            this.doctorTable=tempDoctorTable
+            console.log(this.doctorTable)
+          }
+        })
       },
       onLoad() {
         var k = 1;

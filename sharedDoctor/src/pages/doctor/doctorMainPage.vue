@@ -28,6 +28,8 @@
       <van-cell-group style="text-align: left;">
         <van-cell style="font-size: 18px" title="我的订单" is-link to="doctorOrder"/>
         <van-row style="height: 4px;background-color: #f9f3f0"></van-row>
+        <van-cell style="font-size: 18px" title="我的钱包" is-link to="doctorBalance"/>
+        <van-row style="height: 4px;background-color: #f9f3f0"></van-row>
         <van-cell style="font-size: 18px" title="资质信息" is-link to="doctorInfo"/>
         <van-row style="height: 4px;background-color: #f9f3f0"></van-row>
         <van-cell style="font-size: 18px" title="提供服务" is-link to="doctorServiceSetting"/>

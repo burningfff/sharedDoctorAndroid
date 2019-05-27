@@ -135,6 +135,21 @@
         </van-col>
       </van-row>
     </div>
+    <div>
+      <van-dialog
+        v-model="showDialog"
+        title="评分"
+        show-cancel-button
+        @confirm="evaluate"
+        @cancel="evaluate">
+        <van-rate
+          v-model="value"
+          allow-half
+          void-icon="star"
+          void-color="#eee"
+        />
+      </van-dialog>
+    </div>
   </div>
 </template>
 <script>
@@ -163,7 +178,7 @@
         hospitalLevel: LOCWIN.Cache.get('orderInfo').chat.doctor.qualification.hospital.hospitalLevel,
         information: LOCWIN.Cache.get('orderInfo').chat.chatDetails[0].chatDetail,
         dynamicPics: LOCWIN.Cache.get('orderInfo').chat.chatDetails[1].chatDetail.split(","),
-        orderState:LOCWIN.Cache.get('orderInfo').orderState,
+        orderState: LOCWIN.Cache.get('orderInfo').orderState,
         viewImg: [],
         myImage: LOCWIN.Cache.get('userInfo').imageUrl,
         reserveDate: '',
@@ -177,7 +192,9 @@
           '六'],
         phone: LOCWIN.Cache.get('userInfo').phone,
         location: LOCWIN.Cache.get('userInfo').location.province + LOCWIN.Cache.get('userInfo').location.city + LOCWIN.Cache.get('userInfo').location.area,
-        locationDetail: LOCWIN.Cache.get('userInfo').location.locationDetail
+        locationDetail: LOCWIN.Cache.get('userInfo').location.locationDetail,
+        showDialog: false,
+        value: 5.0,
       };
     },
 
@@ -189,7 +206,7 @@
         }).then(() => {
           // on confirm
           var params = {
-            orderId:LOCWIN.Cache.get('orderInfo').orderId
+            orderId: LOCWIN.Cache.get('orderInfo').orderId
           }
           allService.deleteOrderByOrderId(params, (isOk, data) => {
             if (isOk) {
@@ -208,17 +225,28 @@
         }).then(() => {
           // on confirm
           var params = {
-            orderId:LOCWIN.Cache.get('orderInfo').orderId
+            orderId: LOCWIN.Cache.get('orderInfo').orderId
           }
           allService.confirmOrderByOrderId(params, (isOk, data) => {
             if (isOk) {
               this.$toast.success('预约完成！')
-              this.$router.push('/')
+              this.showDialog = true
             }
           })
         }).catch(() => {
           // on cancel
         });
+      },
+      evaluate(){
+        var params = {
+          doctorId: this.doctorId,
+          evaluation: this.value
+        }
+        allService.updateDoctorEvaluation(params, (isOk, data) => {
+          if (isOk) {
+            this.$router.push('/')
+          }
+        })
       },
       clickImg(url) {
         // console.log(url);

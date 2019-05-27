@@ -82,6 +82,8 @@
       orderDetail(order) {
         LOCWIN.Cache.set('toUserInfo', order.chat.doctor)
         LOCWIN.Cache.set('chatId',order.chatId)
+        LOCWIN.Cache.set('chatHistory',order.chat.chatDetails)
+        LOCWIN.Cache.set('orderState',order.orderState)
         console.log('toUserInfo:')
         console.log(LOCWIN.Cache.get('toUserInfo'))
         this.$router.push('/onlineConsult')

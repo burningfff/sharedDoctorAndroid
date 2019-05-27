@@ -129,7 +129,7 @@
         dynamicPics: [],
         viewImg: [],
         showUpload: false,
-        myImage: 'http://5b0988e595225.cdn.sohucs.com/images/20171227/73c20b0dab774591b5fa70f6d755dd5f.jpeg',
+        myImage: LOCWIN.Cache.get('doctorInfo').imageUrl,
       };
     },
     watch: {

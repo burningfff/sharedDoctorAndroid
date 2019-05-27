@@ -27,19 +27,19 @@
       <div class="menu" v-clickoutside="handleClose">
         <van-collapse v-model="activeName" accordion>
           <van-row style="align-content: center; ">
-            <van-col span="8">
+            <van-col span="12">
               <van-collapse-item :title="sort" name="1">
                 <div slot="title">{{sort|ellipsis}}</div>
               </van-collapse-item>
             </van-col>
-            <van-col span="8">
+            <van-col span="12">
               <van-collapse-item :title="city" name="2">
                 <div slot="title">{{city|ellipsis}}</div>
               </van-collapse-item>
             </van-col>
-            <van-col span="8">
-              <van-collapse-item title="筛选" name="3"/>
-            </van-col>
+            <!--<van-col span="8">-->
+              <!--<van-collapse-item title="筛选" name="3"/>-->
+            <!--</van-col>-->
           </van-row>
 
         </van-collapse>
@@ -49,8 +49,8 @@
               <van-cell-group>
                 <van-button size="large" @click="clickSort(1)">综合排序</van-button>
                 <van-button size="large" @click="clickSort(2)">星级评分</van-button>
-                <van-button size="large" @click="clickSort(3)">价格从高到低</van-button>
-                <van-button size="large" @click="clickSort(4)">价格从低到高</van-button>
+                <!--<van-button size="large" @click="clickSort(3)">价格从高到低</van-button>-->
+                <!--<van-button size="large" @click="clickSort(4)">价格从低到高</van-button>-->
               </van-cell-group>
             </div>
             </van-panel>
@@ -78,7 +78,7 @@
             style="text-align: left"
           >
             <div slot="thumb" @click="doctorInfo(doctor.doctorId)">
-              <img :src="image" />
+              <img :src="doctor.imageUrl" />
             </div>
             <div slot="title" @click="doctorInfo(doctor.doctorId)">
               <van-row>
@@ -178,8 +178,8 @@
     filters: {
       ellipsis(value) {
         if (!value) return ''
-        if (value.length > 4) {
-          return value.slice(0, 4) + '..'
+        if (value.length > 6) {
+          return value.slice(0, 6) + '..'
         }
         return value
       },
@@ -245,13 +245,36 @@
       clickSort(val) {
         if (val == 1) {
           this.sort = "综合排序"
+          var t;
+          for(var i=0;i<this.doctorTable.length;i++){
+            for(var j=i+1;j<this.doctorTable.length;j++){
+              if((this.doctorTable[i].evaluation+Math.log(this.doctorTable[i].replyTimes))<(this.doctorTable[j].evaluation+Math.log(this.doctorTable[j].replyTimes)))              {
+                t=this.doctorTable[i];
+                this.doctorTable[i]=this.doctorTable[j];
+                this.doctorTable[j]=t;
+              }
+            }
+          }
+          console.log(this.doctorTable)
         } else if (val == 2) {
           this.sort = "星级评分"
-        } else if (val == 3) {
-          this.sort = "价格从高到低"
-        } else if (val == 4) {
-          this.sort = "价格从低到高"
+          var t;
+          for(var i=0;i<this.doctorTable.length;i++){
+            for(j=i+1;j<this.doctorTable.length;j++){
+              if(this.doctorTable[i].evaluation<this.doctorTable[j].evaluation){
+                t=this.doctorTable[i];
+                this.doctorTable[i]=this.doctorTable[j];
+                this.doctorTable[j]=t;
+              }
+            }
+          }
+          console.log(this.doctorTable)
         }
+        // else if (val == 3) {
+        //   this.sort = "价格从高到低"
+        // } else if (val == 4) {
+        //   this.sort = "价格从低到高"
+        // }
         this.handleClose()
       },
       handleClose() {
@@ -268,7 +291,7 @@
           allService.findAllDoctorByIllness(params, (isOk, data) => {
             if (isOk) {
               this.doctorTable = data.data
-              this.$toast('illnessName');
+              // this.$toast('illnessName');
               console.log(this.doctorTable)
               if (this.doctorTable.length==0)
               {
@@ -279,7 +302,7 @@
                 allService.findAllByDoctorName(params, (isOk, data) => {
                   if (isOk) {
                     this.doctorTable = data.data
-                    this.$toast('doctorName');
+                    // this.$toast('doctorName');
                     console.log(this.doctorTable)
                     if (this.doctorTable.length==0)
                     {
@@ -290,7 +313,7 @@
                       allService.findAllDoctorByDepartName(params, (isOk, data) => {
                         if (isOk) {
                           this.doctorTable = data.data
-                          this.$toast('departName');
+                          // this.$toast('departName');
                           if (this.doctorTable.length==0)
                           {
                             var params = {
@@ -299,7 +322,20 @@
                             allService.findAllByHospitalName(params, (isOk, data) => {
                               if (isOk) {
                                 this.doctorTable = data.data
-                                this.$toast('hospitalName');
+                                // this.$toast('hospitalName');
+                                console.log(this.doctorTable)
+                                var t;
+                                for(var i=0;i<this.doctorTable.length;i++){
+                                  for(var j=i+1;j<this.doctorTable.length;j++){
+                                    if((this.doctorTable[i].evaluation+Math.log(this.doctorTable[i].replyTimes))<(this.doctorTable[j].evaluation+Math.log(this.doctorTable[j].replyTimes)))              {
+                                      t=this.doctorTable[i];
+                                      this.doctorTable[i]=this.doctorTable[j];
+                                      this.doctorTable[j]=t;
+                                    }
+                                  }
+                                }
+                                this.city='全国'
+                                console.log(this.doctorTable)
                               }
                             })
                           }
@@ -316,12 +352,73 @@
       onClickLeft() {
         this.$router.go(-1);
       },
-      onSelected(data) {
-        this.$toast(data.province.value + ' | ' + data.city.value);
-        this.city = data.city.value;
-        console.log(data)
-        this.showCity = false;
-        this.activeName = ''
+      onSelected(location) {
+        var params = {
+          illnessName: this.searchKey,
+        }
+        allService.findAllDoctorByIllness(params, (isOk, data) => {
+          if (isOk) {
+            this.doctorTable = data.data
+            // this.$toast('illnessName');
+            console.log(this.doctorTable)
+            if (this.doctorTable.length==0)
+            {
+              console.log(this.doctorTable)
+              var params = {
+                doctorName: this.searchKey,
+              }
+              allService.findAllByDoctorName(params, (isOk, data) => {
+                if (isOk) {
+                  this.doctorTable = data.data
+                  // this.$toast('doctorName');
+                  console.log(this.doctorTable)
+                  if (this.doctorTable.length==0)
+                  {
+                    console.log(this.doctorTable)
+                    var params = {
+                      departName: this.searchKey,
+                    }
+                    allService.findAllDoctorByDepartName(params, (isOk, data) => {
+                      if (isOk) {
+                        this.doctorTable = data.data
+                        // this.$toast('departName');
+                        if (this.doctorTable.length==0)
+                        {
+                          var params = {
+                            hospitalName: this.searchKey,
+                          }
+                          allService.findAllByHospitalName(params, (isOk, data) => {
+                            if (isOk) {
+                              this.doctorTable = data.data
+                              // this.$toast('hospitalName');
+                              console.log(this.doctorTable)
+
+                              this.$toast(location.province.value + ' | ' + location.city.value);
+                              this.city = location.city.value;
+                              console.log(location)
+                              this.showCity = false;
+                              this.activeName = ''
+                              let tempLength=this.doctorTable.length
+                              let tempDoctorTable=[]
+                              for (let i=0;i<tempLength;i++) {
+                                console.log(this.doctorTable[i].location)
+                                if(this.doctorTable[i].location.city==this.city&&this.doctorTable[i].location.city!=null) {
+                                  tempDoctorTable.push(this.doctorTable[i])
+                                }
+                              }
+                              this.doctorTable=tempDoctorTable
+                              console.log(this.doctorTable)
+                            }
+                          })
+                        }
+                      }
+                    })
+                  }
+                }
+              })
+            }
+          }
+        })
       },
       onLoad() {
         var k = 1;

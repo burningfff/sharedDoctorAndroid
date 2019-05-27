@@ -150,6 +150,7 @@
       },
       orderDetail(order) {
         LOCWIN.Cache.set('orderInfo', order)
+        LOCWIN.Cache.set('orderState',order.orderState)
         console.log('orderInfo:')
         console.log(LOCWIN.Cache.get('orderInfo'))
         this.$router.push('/doctorOrderDetails')

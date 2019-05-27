@@ -243,7 +243,7 @@
         hospitalLevel: LOCWIN.Cache.get('doctorInfo').qualification.hospital.hospitalLevel,
         evaluation: 4.4,
         replyTimes: LOCWIN.Cache.get('doctorInfo').replyTimes,
-        myImage: ['http://106.14.137.163:4396/group1/M00/00/00/rBA-JVzU1eWAKdQIAAAU-qsO3GA330.png'],
+        myImage: LOCWIN.Cache.get('doctorInfo').imageUrl,
         picturePrice: '暂不提供',
         pictureService: '',
         phonePrice: '暂不提供',

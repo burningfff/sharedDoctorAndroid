@@ -201,6 +201,7 @@
       provideService() {
         LOCWIN.Cache.set('toUserInfo', LOCWIN.Cache.get('orderInfo').patient)
         LOCWIN.Cache.set('chatId',LOCWIN.Cache.get('orderInfo').chatId)
+        LOCWIN.Cache.set('chatHistory',LOCWIN.Cache.get('orderInfo').chat.chatDetails)
         console.log('toUserInfo:')
         console.log(LOCWIN.Cache.get('toUserInfo'))
         this.$router.push('/onlineConsult')
@@ -214,44 +215,6 @@
       },
       onClickLeft() {
         this.$router.go(-1);
-      },
-      onSubmit() {
-        var params = {
-          doctorId: this.doctorId,
-          patientId: LOCWIN.Cache.get('userInfo').patientId,
-        }
-        allService.addChat(params, (isOk, data) => {
-          if (isOk) {
-            var chatId = data.data.chatId
-            var params = {
-              chatId: chatId,
-              chatDetail: this.information,
-            }
-            allService.addChatDetail(params, (isOk, data) => {
-              if (isOk) {
-                var params = {
-                  chatId: chatId,
-                  chatDetail: this.dynamicPics.join(","),
-                }
-                allService.addChatDetail(params, (isOk, data) => {
-                  if (isOk) {
-                    var params = {
-                      timeId: this.timeId,
-                      patientId: LOCWIN.Cache.get('userInfo').patientId,
-                      chatId: chatId
-                    }
-                    allService.addOrder(params, (isOk, data) => {
-                      if (isOk) {
-                        this.$toast.success('预约成功')
-                        this.$router.push('/')
-                      }
-                    })
-                  }
-                })
-              }
-            })
-          }
-        })
       },
     }
   };

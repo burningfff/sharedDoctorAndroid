@@ -9,18 +9,20 @@
     />
     <div style="margin-top: 46px">
       <div class="talk_show" id="words">
-        <div class="atalk">
-          <img style="width: 22px;height: 22px;border-radius: 100%;text-align: left;"
-          :src="hisImage"/>
-          <span id="asay">吃饭了吗吃饭了吗吃饭了吗吃饭了吗吃饭了吗吃饭了吗吃饭了吗吃饭了吗吃饭了吗吃饭了吗？</span>
-        </div>
-        <div class="btalk">
-          <span id="bsay">还没呢，你呢？</span>
-          <img style="width: 22px;height: 22px;border-radius: 100%;text-align: right;"
-               :src="myImage"/>
-        </div>
+        <!--<div class="atalk">-->
+          <!--&lt;!&ndash;<img style="width: 22px;height: 22px;border-radius: 100%;text-align: left;"&ndash;&gt;-->
+          <!--&lt;!&ndash;:src="hisImage"/>&ndash;&gt;-->
+          <!--&lt;!&ndash;<span id="asay">吃饭了吗吃饭了吗吃饭了吗吃饭了吗吃饭了吗吃饭了吗吃饭了吗吃饭了吗吃饭了吗吃饭了吗？</span>&ndash;&gt;-->
+        <!--</div>-->
+        <!--<div class="btalk">-->
+          <!--&lt;!&ndash;<span id="bsay">还没呢，你呢？</span>&ndash;&gt;-->
+          <!--&lt;!&ndash;<img style="width: 22px;height: 22px;border-radius: 100%;text-align: right;"&ndash;&gt;-->
+               <!--&lt;!&ndash;:src="myImage"/>&ndash;&gt;-->
+        <!--</div>-->
       </div>
-      <div class="talk_input">
+      <div
+        v-if="orderState==0"
+        class="talk_input">
         <van-field v-model="message" style=" width:70%; float:left;" type="textarea"  rows="1" placeholder="请输入聊天内容"></van-field>
         <van-button style="width:26%;float:right;border-radius: 6px" @click="sendMessage" type="primary">发送</van-button>
       </div>
@@ -29,29 +31,31 @@
 </template>
 <script>
   import AllService from '../../services/allservice.js'
-  import {ImagePreview} from 'vant';
 
   var allService = new AllService()
 
   export default {
     created() {
+      this.showChatHistory();
       // this.$imconn = conn;
       // this.$imoption = options;
       this.loginWebIM();
     },
     data() {
       return {
+        userId:LOCWIN.Cache.get('userInfo').user.userId,
         userName: LOCWIN.Cache.get('userName'),
         password: LOCWIN.Cache.get('userName'),
         toUserName:LOCWIN.Cache.get('toUserInfo').user.userName,
         message:'',
         hisImage:LOCWIN.Cache.get('toUserInfo').imageUrl,
-        myImage:LOCWIN.Cache.get('userInfo').imageUrl
-
+        myImage:LOCWIN.Cache.get('userInfo').imageUrl,
+        orderState:LOCWIN.Cache.get('orderState')
       };
     },
 
     methods: {
+
       loginWebIM () {
         // 这儿是测试用的账号和密码，这个账号密码是通过环信后台生成的
         this.$imoption.user = this.userName;
@@ -92,6 +96,36 @@
           }
         })
       },
+      showChatHistory(){
+        var params = {
+          chatId: LOCWIN.Cache.get('chatId'),
+        }
+        allService.findChatDetailByChatId(params, (isOk, data) => {
+          if (isOk) {
+            console.log(data.data)
+            let tempChatHistory=data.data
+            for(let i=2;i<tempChatHistory.length;i++)
+            {
+              if(tempChatHistory[i].chatFrom==this.userId){
+                var Words = document.getElementById("words");
+                var str = '<div class="btalk"><span id="bsay" style="margin: 5px">' + tempChatHistory[i].chatDetail +'</span>' +
+                  '<img style="width: 22px;height: 22px;border-radius: 100%;text-align: right;" src="'+this.myImage+'"/>' +
+                  '</div>';
+                console.log(str)
+                Words.innerHTML = Words.innerHTML + str;
+                Words.scrollTop=Words.scrollHeight;
+              }else{
+                var Words = document.getElementById("words");
+                var str = '<div class="atalk"><img style="width: 22px;height: 22px;border-radius: 100%;text-align: left;"' +
+                  'src="'+this.hisImage+'"/><span id="asay" style="margin: 5px">' + tempChatHistory[i].chatDetail +'</span></div>';
+                Words.innerHTML = Words.innerHTML + str;
+                Words.scrollTop=Words.scrollHeight
+              }
+            }
+          }
+        })
+
+      },
       sendMessage(){
         if(this.message==''){
           this.$toast('请填写聊天内容!');
@@ -114,10 +148,11 @@
                 '</div>';
               console.log(str)
               Words.innerHTML = Words.innerHTML + str;
-              Words.scrollTop=Words.scrollHeight
-              var params = {
+              Words.scrollTop=Words.scrollHeight;
+
+              let params = {
                 chatId: LOCWIN.Cache.get('chatId'),
-                chatDetail: this.information,
+                chatDetail: tempMessage,
                 chatFrom:LOCWIN.Cache.get('userInfo').user.userId
               }
               allService.addChatDetail(params, (isOk, data) => {

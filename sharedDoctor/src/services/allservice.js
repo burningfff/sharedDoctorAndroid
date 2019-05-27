@@ -58,6 +58,7 @@ export default class AllService {
       findDoctorByDoctorId: '/doctor/findDoctorByDoctorId',
       updateDoctorBasicData: '/doctor/updateDoctorBasicData',
       updateDoctorContact: '/doctor/updateDoctorContact',
+      updateDoctorEvaluation: '/doctor/updateDoctorEvaluation',
       // getAllOrder: '/order/findAllOrder',
       // // deleteAllOrder: '',
       // deleteOrderList: '/order/deleteByList',
@@ -92,8 +93,10 @@ export default class AllService {
 
 
       addChatDetail:'/chatDetail/addChatDetail',
+      findChatDetailByChatId:'/chatDetail/findAllByChatId',
 
-      addThirdparty:'/thirdparty/addThirdparty'
+      addThirdparty:'/thirdparty/addThirdparty',
+      updateBalanceByBalanceId:'/balance/updateBalanceByBalanceId'
     }
   }
 
@@ -694,6 +697,16 @@ export default class AllService {
     }, "application/json");
   }
 
+  updateDoctorEvaluation(params, callback) {
+    var url = this.host + this.method.updateDoctorEvaluation;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
   updateDoctorBasicData(params, callback) {
     var url = this.host + this.method.updateDoctorBasicData;
     var type = 'post';
@@ -924,8 +937,28 @@ export default class AllService {
     }, "application/json");
   }
 
+  findChatDetailByChatId(params, callback) {
+    var url = this.host + this.method.findChatDetailByChatId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
   addThirdparty(params, callback) {
     var url = this.host + this.method.addThirdparty;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  updateBalanceByBalanceId(params, callback) {
+    var url = this.host + this.method.updateBalanceByBalanceId;
     var type = 'post';
     return this.bizRequest(url, params, type, function (isOk, data) {
       if (callback) {
