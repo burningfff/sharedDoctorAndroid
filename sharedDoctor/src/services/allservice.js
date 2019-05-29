@@ -59,6 +59,8 @@ export default class AllService {
       updateDoctorBasicData: '/doctor/updateDoctorBasicData',
       updateDoctorContact: '/doctor/updateDoctorContact',
       updateDoctorEvaluation: '/doctor/updateDoctorEvaluation',
+      updateDoctorIntroduction: '/doctor/updateDoctorIntroduction',
+      updateDoctorDepart: '/doctor/updateDoctorDepart',
       // getAllOrder: '/order/findAllOrder',
       // // deleteAllOrder: '',
       // deleteOrderList: '/order/deleteByList',
@@ -76,6 +78,7 @@ export default class AllService {
       findAllByHospitalNameContaining:'/hospital/findAllByHospitalNameContaining',
 
       updateQualificationByQualificationId: '/qualification/updateQualificationByQualificationId',
+      updateQualificationInfoByQualificationId: '/qualification/updateQualificationInfoByQualificationId',
 
       addService:'/service/addService',
       deleteServiceByServiceId:'/service/deleteServiceByServiceId',
@@ -707,6 +710,26 @@ export default class AllService {
     }, "application/json");
   }
 
+  updateDoctorIntroduction(params, callback) {
+    var url = this.host + this.method.updateDoctorIntroduction;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  updateDoctorDepart(params, callback) {
+    var url = this.host + this.method.updateDoctorDepart;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
   updateDoctorBasicData(params, callback) {
     var url = this.host + this.method.updateDoctorBasicData;
     var type = 'post';
@@ -819,6 +842,16 @@ export default class AllService {
   //更新认证状态
   updateQualificationByQualificationId(params, callback) {
     var url = this.host + this.method.updateQualificationByQualificationId;
+    var type = 'post';
+    return this.bizRequest(url, params, type, function (isOk, data) {
+      if (callback) {
+        callback(isOk, data);
+      }
+    }, "application/json");
+  }
+
+  updateQualificationInfoByQualificationId(params, callback) {
+    var url = this.host + this.method.updateQualificationInfoByQualificationId;
     var type = 'post';
     return this.bizRequest(url, params, type, function (isOk, data) {
       if (callback) {
