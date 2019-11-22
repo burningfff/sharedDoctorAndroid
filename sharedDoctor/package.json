@@ -22,7 +22,7 @@
     "strophe.js": "^1.2.16",
     "underscore": "^1.9.1",
     "v-distpicker": "^1.1.0",
-    "vant": "^1.5.9",
+    "vant": "^2.1.8",
     "vee-validate": "^2.1.7",
     "vue": "^2.5.2",
     "vue-i18n": "^8.9.0",
